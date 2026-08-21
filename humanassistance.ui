@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>HumanAssistance</class>
+ <widget class="QDialog" name="HumanAssistance">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>280</width>
+    <height>304</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>280</width>
+    <height>200</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>HumanAssistance</string>
+  </property>
+  <widget class="QComboBox" name="CMB_LIST">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>89</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>注射针</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GLI</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>吸持针</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>卵细胞</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>体细胞</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>追踪点</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QPushButton" name="BTN_SELECT">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>20</y>
+     <width>61</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>选点</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="BTN_MODIFY">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>20</y>
+     <width>61</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>修改</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>90</y>
+     <width>151</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>卵细胞大致直径(um)</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>110</y>
+     <width>151</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>体细胞大致直径(um)</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>130</y>
+     <width>151</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>吸持针大致直径(um)</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>150</y>
+     <width>151</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>注射针大致直径(um)</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>170</y>
+     <width>151</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>透明带大致厚度(um)</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="EDIT_OOCYTE_DIA_UM">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>90</y>
+     <width>50</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="minimum">
+    <number>3</number>
+   </property>
+   <property name="maximum">
+    <number>1000</number>
+   </property>
+   <property name="value">
+    <number>80</number>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="EDIT_ZP_UM">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>170</y>
+     <width>50</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="minimum">
+    <number>3</number>
+   </property>
+   <property name="maximum">
+    <number>1000</number>
+   </property>
+   <property name="value">
+    <number>20</number>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="EDIT_INJ_DIA_UM">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>150</y>
+     <width>50</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="minimum">
+    <number>3</number>
+   </property>
+   <property name="maximum">
+    <number>1000</number>
+   </property>
+   <property name="value">
+    <number>30</number>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="EDIT_HOLD_DIA_UM">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>130</y>
+     <width>50</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="minimum">
+    <number>3</number>
+   </property>
+   <property name="maximum">
+    <number>1000</number>
+   </property>
+   <property name="value">
+    <number>150</number>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="EDIT_SOMA_DIA_UM">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>110</y>
+     <width>50</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="minimum">
+    <number>3</number>
+   </property>
+   <property name="maximum">
+    <number>1000</number>
+   </property>
+   <property name="value">
+    <number>20</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>200</y>
+     <width>151</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>吸持压(Pa)</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>220</y>
+     <width>151</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>吸持平衡压(Pa)</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_8">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>240</y>
+     <width>151</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>注射压(Pa)</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_9">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>260</y>
+     <width>151</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>注射平衡压(Pa)</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="EDIT_HOLD_P">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>200</y>
+     <width>61</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="minimum">
+    <number>-3000</number>
+   </property>
+   <property name="maximum">
+    <number>0</number>
+   </property>
+   <property name="singleStep">
+    <number>100</number>
+   </property>
+   <property name="value">
+    <number>-2000</number>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="EDIT_HOLD_BP">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>220</y>
+     <width>61</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="minimum">
+    <number>0</number>
+   </property>
+   <property name="maximum">
+    <number>10000</number>
+   </property>
+   <property name="singleStep">
+    <number>100</number>
+   </property>
+   <property name="value">
+    <number>4000</number>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="EDIT_INJ_P">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>240</y>
+     <width>61</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="minimum">
+    <number>0</number>
+   </property>
+   <property name="maximum">
+    <number>20000</number>
+   </property>
+   <property name="singleStep">
+    <number>100</number>
+   </property>
+   <property name="value">
+    <number>12000</number>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="EDIT_INJ_BP">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>260</y>
+     <width>61</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="minimum">
+    <number>0</number>
+   </property>
+   <property name="maximum">
+    <number>10000</number>
+   </property>
+   <property name="singleStep">
+    <number>100</number>
+   </property>
+   <property name="value">
+    <number>2000</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_10">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>280</y>
+     <width>151</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>吸持旋转压强(Pa)</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="EDIT_HOLD_RP">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>280</y>
+     <width>61</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="minimum">
+    <number>-1000</number>
+   </property>
+   <property name="maximum">
+    <number>500</number>
+   </property>
+   <property name="singleStep">
+    <number>10</number>
+   </property>
+   <property name="value">
+    <number>-300</number>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="EDIT_STAGE_HEIGHT">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>60</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="minimum">
+    <number>3</number>
+   </property>
+   <property name="maximum">
+    <number>100000</number>
+   </property>
+   <property name="singleStep">
+    <number>100</number>
+   </property>
+   <property name="value">
+    <number>250</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_11">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>60</y>
+     <width>151</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>抬升高度(um)</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
