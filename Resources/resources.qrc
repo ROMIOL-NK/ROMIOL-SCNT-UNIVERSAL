@@ -1,0 +1,45 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>LED_RED.jpg</file>
+        <file>LED_GREEN.jpg</file>
+        <file>demo.jpg</file>
+        <file>Capture.png</file>
+        <file>Pause.png</file>
+        <file>Start.png</file>
+        <file>Stop.png</file>
+        <file>Video.png</file>
+        <file>PauseRed.png</file>
+        <file>VideoRed.png</file>
+        <file>StartRed.png</file>
+        <file>CurOocyte.png</file>
+        <file>CurSoma.png</file>
+        <file>InjectPipette.png</file>
+        <file>Oocytes.png</file>
+        <file>Somas.png</file>
+        <file>HoldPipette.png</file>
+        <file>GlobalMap.png</file>
+        <file>NK.ico</file>
+        <file>SetOrigin.png</file>
+        <file>ScaleBar.png</file>
+        <file>mind.jpg</file>
+        <file>Scientist.jpg</file>
+        <file>Colorful.png</file>
+        <file>Gray.png</file>
+        <file>Reset.png</file>
+        <file>Running.png</file>
+        <file>Restart.png</file>
+        <file>Auto.png</file>
+    </qresource>
+    <qresource prefix="/config">
+        <file>GTS800.cfg</file>
+        <file>viz.py</file>
+        <file>yolov8n.onnx</file>
+        <file>polarbody.onnx</file>
+        <file>model20241209.onnx</file>
+        <file>yolov8n-2023.onnx</file>
+        <file>controller_paras.json</file>
+        <file>polar_body.pt</file>
+        <file>SCNT-detect-20250518.pt</file>
+    </qresource>
+    <qresource prefix="/"/>
+</RCC>

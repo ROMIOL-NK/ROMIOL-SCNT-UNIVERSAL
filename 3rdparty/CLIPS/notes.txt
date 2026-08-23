@@ -1,0 +1,6 @@
+1. 将slots替换为Slots（关键字冲突）
+2. prntutil.c中
+	CLIPSLexeme* tmp = ImplodeMultifield(theEnv,theDO);
+	theString = tmp->contents;
+3. prntutil.h中
+	#include "3rdparty/CLIPS/envrnmnt.h"

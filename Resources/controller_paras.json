@@ -1,0 +1,70 @@
+{
+    "injP_Controller_PID_spd":
+    {
+        "uM": [0.3],
+        "um": [-0.3],
+        "kp": 5e-5,
+        "kd": 1e-5,
+        "ki": 1e-8,
+        "delta_t": 0.1
+    },
+    "injP_Controller_PNEUMATIC_spd":
+    {
+        "uM": [0.3],
+        "um": [-0.3],
+        "p0": 101300.0,
+        "V0": 2000.0,
+        "kx": 600.0,
+        "k":  2.0,
+        "xm0":-1.0978,
+        "xp": 3000.0,
+        "delta": 10000.0,
+        "delta_t": 0.1, 
+        "b": 0.0
+    },
+    "holdP_Controller_PNEUMATIC_spd":
+    {
+        "uM": [0.1],
+        "um": [-0.1],
+        "p0": 101300.0,
+        "V0": 1000.0,
+        "kx": 3000.0,
+        "k":  0.2,
+        "xm0":0.2,
+        "xp": 7000.0,
+        "delta": 10000.0,
+        "delta_t": 0.1, 
+        "b": 0.006
+    },
+    "holdP_Controller_PID":
+    {
+        "uM": [0.2],
+        "um": [-0.2],
+        "kp": 1e-5,
+        "kd": 9e-6,
+        "ki": 0,
+        "delta_t": 0.1
+    },
+    "servo_pHoldController_PID":
+    {
+        "uM": [0.2],
+        "um": [-0.2],
+        "kp": 1e-5,
+        "kd": 9e-6,
+        "ki": 0,
+        "delta_t": 0.1
+    },
+    "enuController_PID":
+    {
+        
+    },
+    "injGLI_Controller_PID_spd":
+    {
+        "uM": [0.2],
+        "um": [-0.2],
+        "kp": 6e-4,
+        "kd": 4e-5,
+        "ki": 1e-6,
+        "delta_t": 0.1
+    }
+}
