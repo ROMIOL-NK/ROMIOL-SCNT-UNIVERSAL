@@ -1375,9 +1375,9 @@ void RomiolSCNT::scopeUpdateImage()
     contours.push_back(currentOocyte->contour);
     contours.push_back(holdPipette->contour);
     contours.push_back(injectPipette->contour);
-    for(int i=0; i<oocytesInView->total_num; ++i)
+    for(int i=0; i<oocytesInView->oocytes.size(); ++i)
         contours.push_back(oocytesInView->oocytes[i].contour);
-    for(int i=0; i<allSomas->total_num; ++i)
+    for(int i=0; i<allSomas->oocytes.size(); ++i)
         contours.push_back(allSomas->somas[i].contour);
     if(ui->BTN_CUR_OOCYTE->isChecked() && currentOocyte->isDetected)
     {
@@ -1410,13 +1410,13 @@ void RomiolSCNT::scopeUpdateImage()
         line(Image, Point(injectPipette->xGLI, injectPipette->ym), Point(injectPipette->xGLI, injectPipette->yM), Scalar(128, 128, 128), 2);
     }
     if(ui->BTN_OOCYTES->isChecked())
-        for(int i=4; i<4+oocytesInView->total_num; ++i)
+        for(int i=4; i<4+oocytesInView->oocytes.size(); ++i)
             if(contours[i].empty())
                 continue;
             else
                 drawContours(Image, contours, i, Scalar(0, 0, 255), 1);
     if(ui->BTN_SOMAS->isChecked())
-        for(int i=4+oocytesInView->total_num; i<contours.size(); ++i)
+        for(int i=4+oocytesInView->oocytes.size(); i<contours.size(); ++i)
             if(contours[i].empty())
                 continue;
             else

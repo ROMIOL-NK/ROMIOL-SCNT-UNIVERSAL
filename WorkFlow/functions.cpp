@@ -198,7 +198,7 @@ void Functions::adjInjP(float tarP)
 }
 void Functions::withdrawInj()
 {
-    moveInjWait(180, 0, 0, 500);
+    moveInjWait(180, 0, 0, 250);
     emit finish("WITHDRAW_INJ");
 }
 void Functions::co_up()
@@ -215,13 +215,12 @@ void Functions::co_down()
 }
 void Functions::nextOocyte()
 {
-    if(allOocytes->total_num==0)
+    if(allOocytes->somas.empty())
     {
         emit finish("NEXT_OOCYTE");
         return;
     }
     emit gotoArea(allOocytes->oocytes.back().centerUm);
-    allOocytes->total_num--;
     allOocytes->oocytes.pop_back();
     emit finish("NEXT_OOCYTE");
 }

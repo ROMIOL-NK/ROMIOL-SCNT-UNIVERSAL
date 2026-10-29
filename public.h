@@ -32,6 +32,7 @@
 
 // float.h, limits.h 中定义了 int, float, double 的最大值
 #include <algorithm>
+#include <atomic>
 #include <cmath>
 #include <direct.h>
 #include <float.h>

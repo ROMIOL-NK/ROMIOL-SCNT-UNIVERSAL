@@ -12,7 +12,6 @@ WORKSTEP StepFetchOocyteForSoma::run()
     // 取完体细胞并重新构建地图后，强制使用新地图中最下面的卵作为注核首卵。
     if(firstOocytePending)
     {
-        allOocytes->total_num = static_cast<int>(allOocytes->oocytes.size());
         if(allOocytes->oocytes.empty())
         {
             DEAL_FAULT("地图中没有可操作卵细胞，请重新构建地图或人工移动");
@@ -127,7 +126,6 @@ WORKSTEP StepFetchOocyteForSoma::run()
         // 当前最下面的卵已经进入操作流程，从地图剩余列表移除；下一次换卵继续取新的 back()。
         if(!allOocytes->oocytes.empty())
             allOocytes->oocytes.pop_back();
-        allOocytes->total_num = static_cast<int>(allOocytes->oocytes.size());
         firstOocytePending = false;
         nextStep = PENETRATEFORSOMA;
         isWorking = false;
@@ -153,7 +151,6 @@ WORKSTEP StepFetchOocyteForSoma::run()
 
     // 优先寻找当前视野中的下一颗卵；没有时再利用重建地图移动到剩余卵附近。
     bool isNextOocyteFound = moveToNextOocyteInView();
-    allOocytes->total_num = static_cast<int>(allOocytes->oocytes.size());
     if(!isNextOocyteFound && allOocytes->oocytes.empty())
     {
         DEAL_FAULT("地图中没有可操作卵细胞，请重新构建地图或人工移动");
@@ -202,7 +199,6 @@ WORKSTEP StepFetchOocyteForSoma::run()
 
     if(!allOocytes->oocytes.empty())
         allOocytes->oocytes.pop_back();
-    allOocytes->total_num = static_cast<int>(allOocytes->oocytes.size());
 
     // 以下 Y+260、X+400 是换卵时把当前细胞拨下的轨迹，不属于后续极体拨动步骤。
     float left_dist = (currentOocyte->xMZP-injectPipette->tip.x)*Pixel2Um+100;
@@ -238,7 +234,6 @@ bool StepFetchOocyteForSoma::moveToNextOocyteInView()
     Point tar_pos;
     oocytesInView->find(CurrentBGR);
     int oocyteCount = static_cast<int>(oocytesInView->oocytes.size());
-    oocytesInView->total_num = oocyteCount;
     for(int i=oocyteCount-1; i>=0; --i)
     {
         intersection = oocytesInView->oocytes[i].rectZP & currentOocyte->rectZP;

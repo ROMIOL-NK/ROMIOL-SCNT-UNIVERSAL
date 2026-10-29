@@ -13,8 +13,7 @@ public:
     Somas();
 
     bool isDetected;                    //是否已经被检测到
-    int total_num;                  // 总数
-    std::vector<Soma> somas;             //
+    std::vector<Soma> somas;            //体细胞列表
 signals:
     void finishFind();
 public slots:

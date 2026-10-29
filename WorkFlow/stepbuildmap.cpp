@@ -1043,7 +1043,6 @@ WORKSTEP StepBuildMap::run()
         allOocytes->oocytes.push_back(oocyte);
     }
 
-    allOocytes->total_num = static_cast<int>(allOocytes->oocytes.size());
     std::sort(allOocytes->oocytes.begin(), allOocytes->oocytes.end(),
               [](const Oocyte& left, const Oocyte& right)
               {

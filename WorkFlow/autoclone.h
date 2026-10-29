@@ -22,7 +22,7 @@ class AutoClone: public QObject
 public:
     AutoClone();
 
-    bool ON;
+    std::atomic_bool ON;
 
 public slots:
     bool run(WORKSTEP arg_nextStep=BUILDMAP);

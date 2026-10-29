@@ -43,7 +43,6 @@ WORKSTEP StepFetchOocyte::run()
         }
         float injectOriginalY = injectPipette->tip.y;
 
-        allOocytes->total_num = static_cast<int>(allOocytes->oocytes.size());
         if(allOocytes->oocytes.empty())
         {
             DEAL_FAULT("地图中没有可操作卵细胞，请重新构建地图或人工移动");
@@ -428,7 +427,6 @@ bool StepFetchOocyte::moveToNextOocyteInView()
     Point tar_pos(currentOocyte->centerZP.x, currentOocyte->centerZP.y-150/Pixel2Um);
     oocytesInView->find(CurrentBGR);
     int oocyteCount = static_cast<int>(oocytesInView->oocytes.size());
-    oocytesInView->total_num = oocyteCount;
     for(int i=oocyteCount-1; i>=0; --i)
     {
         intersection = oocytesInView->oocytes[i].rectZP & currentOocyte->rectZP;
@@ -458,7 +456,6 @@ bool StepFetchOocyte::selectNextOocyteCandidateInRegion(Oocyte& candidate)
 {
     oocytesInView->find(CurrentBGR);
     int oocyteCount = static_cast<int>(oocytesInView->oocytes.size());
-    oocytesInView->total_num = oocyteCount;
     if(oocyteCount<=0)
         return false;
 
@@ -626,7 +623,6 @@ void StepFetchOocyte::removeNearestMapOocyte(const cv::Point2f& centerUm)
 {
     if(allOocytes->oocytes.empty())
     {
-        allOocytes->total_num = 0;
         return;
     }
 
@@ -646,13 +642,11 @@ void StepFetchOocyte::removeNearestMapOocyte(const cv::Point2f& centerUm)
     float maxDist = std::max(150.0f, 2.0f*OOCYTE_DIA*Pixel2Um);
     if(bestIndex>=0 && bestDist2<=maxDist*maxDist)
         allOocytes->oocytes.erase(allOocytes->oocytes.begin()+bestIndex);
-    allOocytes->total_num = static_cast<int>(allOocytes->oocytes.size());
 }
 
 bool StepFetchOocyte::moveToNextMappedRegion()
 {
     lastMappedRegionFailure.clear();
-    allOocytes->total_num = static_cast<int>(allOocytes->oocytes.size());
     if(allOocytes->oocytes.empty())
     {
         lastMappedRegionFailure = "map oocytes empty";

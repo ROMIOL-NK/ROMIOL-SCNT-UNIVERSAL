@@ -12,7 +12,7 @@ public:
     Functions();
     ~Functions();
 
-    bool ON;
+    std::atomic_bool ON;
     Controller* injGLI_Controller;
     Controller* holdP_Controller;
     Controller* injP_Controller;

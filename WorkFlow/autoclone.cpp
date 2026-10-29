@@ -1,6 +1,6 @@
 #include "autoclone.h"
 
-AutoClone::AutoClone()
+AutoClone::AutoClone(): ON(false)
 {
 
 }
@@ -33,6 +33,12 @@ bool AutoClone::run(WORKSTEP arg_nextStep)
             break;
         case FETCHSOMA:
             arg_nextStep = stepFetchSoma->run();
+            if(arg_nextStep == BUILDMAP)
+            {
+                // 鍘绘牳鎹㈠嵉浼氬皢缁嗚優鎷ㄥ悜Y姝ｆ柟鍚戯紝娉ㄦ牳鍓嶉噸寤哄湴鍥炬椂鍚戜笅澶氭壂鎻忎竴涓閲庛€�
+                GMAP_HEIGHT_UM += HEIGHT*Pixel2Um;
+                stepFetchOocyteForSoma->prepareFirstOocyte();
+            }
             break;
         case FETCHOOCYTEFORSOMA:
             arg_nextStep = stepFetchOocyteForSoma->run();

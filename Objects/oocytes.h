@@ -13,7 +13,6 @@ public:
     Oocytes();
 
     bool isDetected;                                //是否已经被检测到
-    int total_num;                                  //总数
     std::vector<Oocyte> oocytes;                    //卵细胞列表
 signals:
     void finishFind();

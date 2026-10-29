@@ -5,7 +5,7 @@ using namespace std;
 Oocytes::Oocytes()
 {
     isDetected = false;
-    total_num = 0;
+    oocytes.clear();
 }
 //void Oocytes::find(Mat src, Point2f left_top_um)
 //{
@@ -100,7 +100,6 @@ void Oocytes::find(Mat src, vector<Rect> oocytesRects, bool firstDetection)
 
         oocyte.set(contourZP, cv::Point2f(microscope->getRelX(), microscope->getRelY()));
         oocytes.push_back(oocyte);
-        total_num++;
     }
     sort(oocytes.begin(), oocytes.end(), [](Oocyte o1, Oocyte o2)
          { return o1.center.y < o2.center.y; });
@@ -197,12 +196,10 @@ void Oocytes::find(Mat src, Point2f left_top_um)
 
             oocyte.set(contour, left_top_um);
             oocytes.push_back(oocyte);
-            total_num++;
             for(int i=0; i<oocytes.size()-1; i++)
                 if(pointPolygonTest(oocytes[i].contour, oocyte.center, false)>0)
                 {
                     oocytes.pop_back();
-                    total_num--;
                 }
         }
     }
@@ -219,5 +216,4 @@ void Oocytes::reset()
 {
     isDetected = false;
     oocytes.clear();
-    total_num = 0;
 }
