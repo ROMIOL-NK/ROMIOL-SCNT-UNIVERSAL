@@ -33,9 +33,6 @@ signals:
     void sgnStopTrackPB();
     void sgnStopTrackOocyte();
 
-    void sgnStartPServo();
-    void sgnStopPServo();
-
     void sgnStartCompare(cv::Mat, cv::Rect);
     void sgnCompareAndCalHoldP(cv::Mat);
 };

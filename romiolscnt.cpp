@@ -1377,7 +1377,7 @@ void RomiolSCNT::scopeUpdateImage()
     contours.push_back(injectPipette->contour);
     for(int i=0; i<oocytesInView->oocytes.size(); ++i)
         contours.push_back(oocytesInView->oocytes[i].contour);
-    for(int i=0; i<allSomas->oocytes.size(); ++i)
+    for(int i=0; i<allSomas->somas.size(); ++i)
         contours.push_back(allSomas->somas[i].contour);
     if(ui->BTN_CUR_OOCYTE->isChecked() && currentOocyte->isDetected)
     {

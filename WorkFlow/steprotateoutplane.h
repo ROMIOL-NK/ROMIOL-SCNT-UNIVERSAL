@@ -40,8 +40,6 @@ public:
 public slots:
     WORKSTEP run();
 signals:
-    void sgnStartPServo();
-    void sgnStopPServo();
     void sgnInitTrackerOocyte(cv::Mat, cv::Rect);
     void sgnStopTrackOocyte();
     void sgnStartCompare(cv::Mat, cv::Rect);

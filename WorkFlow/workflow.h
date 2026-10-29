@@ -17,6 +17,7 @@ protected:
     bool moveInjWait(float x, float y, float z, float v);
     bool moveStageWait(float x, float y, float v);
     bool moveFocusWait(float z, float v);
+    bool holdBlowWait(float x, float v, bool b);
 signals:
     void finish();
     void sgnFault(QString);
@@ -34,6 +35,7 @@ signals:
     void stopHoldSyringe();
     void stopInjSyringe();
 
+    void sgnStartPServo();
     void sgnStopPServo();
 
     void setLManipSpeed(float);                     //设置左操作臂运动速度 (um/s)
@@ -47,6 +49,9 @@ signals:
     void funcAdjHoldP(float);
     void funcHoldOocyte();                      //指派 functions 完成 holdOocyte 功能
 
+    void moveHoldX(float, float, bool);
+    void moveHoldY(float, float, bool);
+    void moveHoldZ(float, float, bool);
     void moveInjX(float, float, bool);
     void moveInjY(float, float, bool);
     void moveInjZ(float, float, bool);
