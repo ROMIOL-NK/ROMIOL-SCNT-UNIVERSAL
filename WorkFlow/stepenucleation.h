@@ -2,9 +2,6 @@
 #define STEPENUCLEATION_H
 #include "workflow.h"
 #include "Controllers/controllers.h"
-#undef slots
-#include <Python.h>
-#define slots Q_SLOTS
 
 class StepEnucleation: public WorkFlow
 {

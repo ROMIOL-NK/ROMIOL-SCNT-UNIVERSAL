@@ -91,13 +91,13 @@
      <bool>false</bool>
     </property>
     <property name="focusPolicy">
-     <enum>Qt::NoFocus</enum>
+     <enum>Qt::FocusPolicy::NoFocus</enum>
     </property>
     <property name="tabPosition">
-     <enum>QTabWidget::North</enum>
+     <enum>QTabWidget::TabPosition::North</enum>
     </property>
     <property name="tabShape">
-     <enum>QTabWidget::Rounded</enum>
+     <enum>QTabWidget::TabShape::Rounded</enum>
     </property>
     <property name="currentIndex">
      <number>0</number>
@@ -122,7 +122,7 @@
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>录像</string>
@@ -151,7 +151,7 @@
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>暂停录像</string>
@@ -177,7 +177,7 @@
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>连接相机</string>
@@ -206,7 +206,7 @@
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>抓拍</string>
@@ -229,7 +229,7 @@
        </rect>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>选择保存路径</string>
@@ -248,13 +248,13 @@
        </rect>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>选择图像源</string>
       </property>
       <property name="layoutDirection">
-       <enum>Qt::LeftToRight</enum>
+       <enum>Qt::LayoutDirection::LeftToRight</enum>
       </property>
       <property name="editable">
        <bool>false</bool>
@@ -285,7 +285,7 @@
        </rect>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>选择图像源文件</string>
@@ -307,7 +307,7 @@
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>Off</string>
@@ -335,7 +335,7 @@
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>Off</string>
@@ -357,7 +357,7 @@
        </rect>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>下一帧</string>
@@ -376,10 +376,10 @@
        </rect>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="buttonSymbols">
-       <enum>QAbstractSpinBox::NoButtons</enum>
+       <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
       </property>
       <property name="minimum">
        <number>1</number>
@@ -404,7 +404,7 @@
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>全部卵细胞</string>
@@ -470,7 +470,7 @@ QToolButton:hover {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>当前卵细胞</string>
@@ -527,7 +527,7 @@ QToolButton:hover {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>全部体细胞</string>
@@ -584,7 +584,7 @@ QToolButton:hover {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>所有物体</string>
@@ -637,7 +637,7 @@ QToolButton:hover {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>吸持针</string>
@@ -694,7 +694,7 @@ QToolButton:hover {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>注射针</string>
@@ -751,7 +751,7 @@ QToolButton:hover {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>当前体细胞</string>
@@ -808,7 +808,7 @@ QToolButton:hover {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>比例尺: On</string>
@@ -871,7 +871,7 @@ QToolButton:hover {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>设置原点</string>
@@ -915,7 +915,7 @@ QToolButton:hover {
        <bool>true</bool>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>彩色</string>
@@ -964,7 +964,7 @@ QToolButton:hover {
      <cursorShape>OpenHandCursor</cursorShape>
     </property>
     <property name="focusPolicy">
-     <enum>Qt::NoFocus</enum>
+     <enum>Qt::FocusPolicy::NoFocus</enum>
     </property>
     <property name="toolTip">
      <string notr="true">急停</string>
@@ -999,7 +999,7 @@ QToolButton:hover {
      <cursorShape>OpenHandCursor</cursorShape>
     </property>
     <property name="focusPolicy">
-     <enum>Qt::NoFocus</enum>
+     <enum>Qt::FocusPolicy::NoFocus</enum>
     </property>
     <property name="toolTip">
      <string>自动化:Off</string>
@@ -1068,7 +1068,7 @@ QToolButton:hover {
      </rect>
     </property>
     <property name="focusPolicy">
-     <enum>Qt::NoFocus</enum>
+     <enum>Qt::FocusPolicy::NoFocus</enum>
     </property>
     <property name="currentIndex">
      <number>0</number>
@@ -1098,7 +1098,7 @@ QToolButton:hover {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
@@ -1148,7 +1148,7 @@ QPushButton:checked {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>15000 μm</string>
@@ -1201,7 +1201,7 @@ QPushButton:checked {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>15000 μm</string>
@@ -1254,7 +1254,7 @@ QPushButton:checked {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
@@ -1304,7 +1304,7 @@ QPushButton:checked {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
@@ -1354,7 +1354,7 @@ QPushButton:checked {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
@@ -1401,7 +1401,7 @@ QPushButton:checked {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
@@ -1443,7 +1443,7 @@ QPushButton:checked {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
@@ -1482,7 +1482,7 @@ Function</string>
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>Off</string>
@@ -1536,7 +1536,7 @@ QPushButton:checked {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
@@ -1575,7 +1575,7 @@ QPushButton:checked {
        </rect>
       </property>
       <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
+       <enum>QFrame::Shape::NoFrame</enum>
       </property>
       <widget class="QPushButton" name="BTN_CFG_CONTROL_PARAS">
        <property name="geometry">
@@ -1598,7 +1598,7 @@ QPushButton:checked {
         <cursorShape>OpenHandCursor</cursorShape>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::FocusPolicy::NoFocus</enum>
        </property>
        <property name="styleSheet">
         <string notr="true">border: 1px solid gray;
@@ -1634,7 +1634,7 @@ font: bold;</string>
         <cursorShape>ArrowCursor</cursorShape>
        </property>
        <property name="layoutDirection">
-        <enum>Qt::LeftToRight</enum>
+        <enum>Qt::LayoutDirection::LeftToRight</enum>
        </property>
        <property name="styleSheet">
         <string notr="true">border: 1px solid gray;
@@ -1665,13 +1665,13 @@ color: black;</string>
         </font>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::FocusPolicy::NoFocus</enum>
        </property>
        <property name="contextMenuPolicy">
-        <enum>Qt::NoContextMenu</enum>
+        <enum>Qt::ContextMenuPolicy::NoContextMenu</enum>
        </property>
        <property name="layoutDirection">
-        <enum>Qt::LeftToRight</enum>
+        <enum>Qt::LayoutDirection::LeftToRight</enum>
        </property>
        <property name="autoFillBackground">
         <bool>false</bool>
@@ -1758,7 +1758,7 @@ font: bold;
         <cursorShape>ArrowCursor</cursorShape>
        </property>
        <property name="layoutDirection">
-        <enum>Qt::LeftToRight</enum>
+        <enum>Qt::LayoutDirection::LeftToRight</enum>
        </property>
        <property name="styleSheet">
         <string notr="true">border: 1px solid gray;
@@ -1791,7 +1791,7 @@ color: black;</string>
         <cursorShape>OpenHandCursor</cursorShape>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::FocusPolicy::NoFocus</enum>
        </property>
        <property name="styleSheet">
         <string notr="true">border: 1px solid gray;
@@ -1827,7 +1827,7 @@ font: bold;</string>
         <cursorShape>OpenHandCursor</cursorShape>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::FocusPolicy::NoFocus</enum>
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
@@ -1861,7 +1861,7 @@ font: bold;</string>
        </rect>
       </property>
       <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
+       <enum>QFrame::Shape::NoFrame</enum>
       </property>
       <widget class="QLabel" name="label_41">
        <property name="geometry">
@@ -1902,7 +1902,7 @@ font: bold;</string>
         <cursorShape>OpenHandCursor</cursorShape>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::FocusPolicy::NoFocus</enum>
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
@@ -1946,10 +1946,10 @@ QPushButton:checked {
         </font>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::ClickFocus</enum>
+        <enum>Qt::FocusPolicy::ClickFocus</enum>
        </property>
        <property name="buttonSymbols">
-        <enum>QAbstractSpinBox::NoButtons</enum>
+        <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
        </property>
        <property name="decimals">
         <number>0</number>
@@ -1978,7 +1978,7 @@ QPushButton:checked {
        </rect>
       </property>
       <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
+       <enum>QFrame::Shape::NoFrame</enum>
       </property>
       <widget class="QLabel" name="label_42">
        <property name="geometry">
@@ -2013,10 +2013,10 @@ QPushButton:checked {
         </font>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::ClickFocus</enum>
+        <enum>Qt::FocusPolicy::ClickFocus</enum>
        </property>
        <property name="buttonSymbols">
-        <enum>QAbstractSpinBox::NoButtons</enum>
+        <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
        </property>
        <property name="decimals">
         <number>0</number>
@@ -2055,7 +2055,7 @@ QPushButton:checked {
         <cursorShape>OpenHandCursor</cursorShape>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::FocusPolicy::NoFocus</enum>
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
@@ -2106,7 +2106,7 @@ QPushButton:checked {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
@@ -2174,7 +2174,7 @@ QPushButton:checked {
         <cursorShape>OpenHandCursor</cursorShape>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::FocusPolicy::NoFocus</enum>
        </property>
        <property name="toolTip">
         <string>设置为高处</string>
@@ -2227,7 +2227,7 @@ QPushButton:checked {
         <cursorShape>OpenHandCursor</cursorShape>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::FocusPolicy::NoFocus</enum>
        </property>
        <property name="toolTip">
         <string>设置为底面</string>
@@ -2272,7 +2272,7 @@ QPushButton:checked {
         <cursorShape>OpenHandCursor</cursorShape>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::FocusPolicy::NoFocus</enum>
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
@@ -2311,7 +2311,7 @@ QPushButton:hover {
         <cursorShape>OpenHandCursor</cursorShape>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::FocusPolicy::NoFocus</enum>
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
@@ -2374,7 +2374,7 @@ QPushButton:hover {
         <cursorShape>OpenHandCursor</cursorShape>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::FocusPolicy::NoFocus</enum>
        </property>
        <property name="toolTip">
         <string>设置为高处</string>
@@ -2427,7 +2427,7 @@ QPushButton:checked {
         <cursorShape>OpenHandCursor</cursorShape>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::FocusPolicy::NoFocus</enum>
        </property>
        <property name="toolTip">
         <string>设置为底面</string>
@@ -2472,7 +2472,7 @@ QPushButton:checked {
         <cursorShape>OpenHandCursor</cursorShape>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::FocusPolicy::NoFocus</enum>
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
@@ -2511,7 +2511,7 @@ QPushButton:hover {
         <cursorShape>OpenHandCursor</cursorShape>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::FocusPolicy::NoFocus</enum>
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
@@ -2558,7 +2558,7 @@ QPushButton:hover {
         <cursorShape>OpenHandCursor</cursorShape>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::FocusPolicy::NoFocus</enum>
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
@@ -2608,7 +2608,7 @@ QPushButton:checked {
         <cursorShape>OpenHandCursor</cursorShape>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::FocusPolicy::NoFocus</enum>
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
@@ -2658,7 +2658,7 @@ QPushButton:checked {
         <cursorShape>OpenHandCursor</cursorShape>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::FocusPolicy::NoFocus</enum>
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
@@ -2709,7 +2709,7 @@ QPushButton:checked {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
@@ -2802,7 +2802,7 @@ QPushButton:checked {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
@@ -2852,7 +2852,7 @@ QPushButton:checked {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>250 μm</string>
@@ -2905,7 +2905,7 @@ QPushButton:checked {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="toolTip">
        <string>250 μm</string>
@@ -2984,7 +2984,7 @@ QPushButton:checked {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
@@ -3028,7 +3028,7 @@ QPushButton:checked {
        <cursorShape>OpenHandCursor</cursorShape>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
+       <enum>Qt::FocusPolicy::NoFocus</enum>
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
@@ -3066,7 +3066,7 @@ QPushButton:checked {
      <cursorShape>OpenHandCursor</cursorShape>
     </property>
     <property name="focusPolicy">
-     <enum>Qt::NoFocus</enum>
+     <enum>Qt::FocusPolicy::NoFocus</enum>
     </property>
     <property name="toolTip">
      <string>重新开始</string>
@@ -3104,10 +3104,10 @@ QPushButton:checked {
      </size>
     </property>
     <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
+     <enum>QFrame::Shape::StyledPanel</enum>
     </property>
     <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
+     <enum>QFrame::Shadow::Raised</enum>
     </property>
     <widget class="QPushButton" name="BTN_STEP_FETCH_OOCYTE">
      <property name="geometry">
@@ -3122,7 +3122,7 @@ QPushButton:checked {
       <cursorShape>OpenHandCursor</cursorShape>
      </property>
      <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
+      <enum>Qt::FocusPolicy::NoFocus</enum>
      </property>
      <property name="toolTip">
       <string>Off</string>
@@ -3160,7 +3160,7 @@ QPushButton:checked {
       <cursorShape>OpenHandCursor</cursorShape>
      </property>
      <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
+      <enum>Qt::FocusPolicy::NoFocus</enum>
      </property>
      <property name="toolTip">
       <string>Off</string>
@@ -3212,7 +3212,7 @@ QPushButton:checked {
       <cursorShape>OpenHandCursor</cursorShape>
      </property>
      <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
+      <enum>Qt::FocusPolicy::NoFocus</enum>
      </property>
      <property name="toolTip">
       <string>Off</string>
@@ -3249,7 +3249,7 @@ QPushButton:checked {
       <cursorShape>OpenHandCursor</cursorShape>
      </property>
      <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
+      <enum>Qt::FocusPolicy::NoFocus</enum>
      </property>
      <property name="toolTip">
       <string>Off</string>
@@ -3286,7 +3286,7 @@ QPushButton:checked {
       <cursorShape>OpenHandCursor</cursorShape>
      </property>
      <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
+      <enum>Qt::FocusPolicy::NoFocus</enum>
      </property>
      <property name="toolTip">
       <string>Off</string>
@@ -3323,7 +3323,7 @@ QPushButton:checked {
       <cursorShape>OpenHandCursor</cursorShape>
      </property>
      <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
+      <enum>Qt::FocusPolicy::NoFocus</enum>
      </property>
      <property name="toolTip">
       <string>Off</string>
@@ -3369,7 +3369,7 @@ QPushButton:checked {
      <cursorShape>OpenHandCursor</cursorShape>
     </property>
     <property name="focusPolicy">
-     <enum>Qt::NoFocus</enum>
+     <enum>Qt::FocusPolicy::NoFocus</enum>
     </property>
     <property name="toolTip">
      <string>Off</string>
@@ -3409,10 +3409,10 @@ QPushButton:checked {
      </size>
     </property>
     <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
+     <enum>QFrame::Shape::StyledPanel</enum>
     </property>
     <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
+     <enum>QFrame::Shadow::Raised</enum>
     </property>
     <widget class="QPushButton" name="BTN_STEP_INJECT_SOMA">
      <property name="geometry">
@@ -3427,7 +3427,7 @@ QPushButton:checked {
       <cursorShape>OpenHandCursor</cursorShape>
      </property>
      <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
+      <enum>Qt::FocusPolicy::NoFocus</enum>
      </property>
      <property name="toolTip">
       <string>Off</string>
@@ -3464,7 +3464,7 @@ QPushButton:checked {
       <cursorShape>OpenHandCursor</cursorShape>
      </property>
      <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
+      <enum>Qt::FocusPolicy::NoFocus</enum>
      </property>
      <property name="toolTip">
       <string>Off</string>
@@ -3502,7 +3502,7 @@ QPushButton:checked {
       <cursorShape>OpenHandCursor</cursorShape>
      </property>
      <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
+      <enum>Qt::FocusPolicy::NoFocus</enum>
      </property>
      <property name="toolTip">
       <string>Off</string>
@@ -3550,7 +3550,7 @@ QPushButton:checked {
       <cursorShape>OpenHandCursor</cursorShape>
      </property>
      <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
+      <enum>Qt::FocusPolicy::NoFocus</enum>
      </property>
      <property name="toolTip">
       <string>Off</string>
@@ -3587,7 +3587,7 @@ QPushButton:checked {
       <cursorShape>OpenHandCursor</cursorShape>
      </property>
      <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
+      <enum>Qt::FocusPolicy::NoFocus</enum>
      </property>
      <property name="toolTip">
       <string>Off</string>
@@ -3625,7 +3625,7 @@ QPushButton:checked {
      <cursorShape>OpenHandCursor</cursorShape>
     </property>
     <property name="focusPolicy">
-     <enum>Qt::NoFocus</enum>
+     <enum>Qt::FocusPolicy::NoFocus</enum>
     </property>
     <property name="toolTip">
      <string>Off</string>
@@ -3670,7 +3670,7 @@ QPushButton:checked {
      <cursorShape>OpenHandCursor</cursorShape>
     </property>
     <property name="focusPolicy">
-     <enum>Qt::NoFocus</enum>
+     <enum>Qt::FocusPolicy::NoFocus</enum>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {
@@ -3715,7 +3715,7 @@ QPushButton:checked {
      <cursorShape>OpenHandCursor</cursorShape>
     </property>
     <property name="focusPolicy">
-     <enum>Qt::NoFocus</enum>
+     <enum>Qt::FocusPolicy::NoFocus</enum>
     </property>
     <property name="toolTip">
      <string>Off</string>
@@ -3763,7 +3763,7 @@ QPushButton:checked {
      <cursorShape>OpenHandCursor</cursorShape>
     </property>
     <property name="focusPolicy">
-     <enum>Qt::NoFocus</enum>
+     <enum>Qt::FocusPolicy::NoFocus</enum>
     </property>
     <property name="toolTip">
      <string>Off</string>
@@ -3794,13 +3794,13 @@ QPushButton:checked {
      </rect>
     </property>
     <property name="focusPolicy">
-     <enum>Qt::NoFocus</enum>
+     <enum>Qt::FocusPolicy::NoFocus</enum>
     </property>
     <property name="toolTip">
      <string>选择图像源</string>
     </property>
     <property name="layoutDirection">
-     <enum>Qt::LeftToRight</enum>
+     <enum>Qt::LayoutDirection::LeftToRight</enum>
     </property>
     <property name="editable">
      <bool>false</bool>
@@ -3828,7 +3828,7 @@ QPushButton:checked {
      <x>0</x>
      <y>0</y>
      <width>1224</width>
-     <height>21</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="MENU_HELP">
@@ -3859,7 +3859,7 @@ QPushButton:checked {
     </size>
    </property>
    <property name="features">
-    <set>QDockWidget::NoDockWidgetFeatures</set>
+    <set>QDockWidget::DockWidgetFeature::NoDockWidgetFeatures</set>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
@@ -3875,7 +3875,7 @@ QPushButton:checked {
       </rect>
      </property>
      <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
+      <enum>Qt::FocusPolicy::NoFocus</enum>
      </property>
      <property name="currentIndex">
       <number>0</number>
@@ -3902,7 +3902,7 @@ QPushButton:checked {
         <cursorShape>ArrowCursor</cursorShape>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::FocusPolicy::NoFocus</enum>
        </property>
        <property name="title">
         <string>操作臂</string>
@@ -3996,10 +3996,10 @@ QPushButton:checked {
          </sizepolicy>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
+         <enum>Qt::LayoutDirection::LeftToRight</enum>
         </property>
         <property name="text">
          <string>连
@@ -4019,7 +4019,7 @@ QPushButton:checked {
          </rect>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::ClickFocus</enum>
+         <enum>Qt::FocusPolicy::ClickFocus</enum>
         </property>
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;操作臂点动距离&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -4028,7 +4028,7 @@ QPushButton:checked {
          <string notr="true"/>
         </property>
         <property name="buttonSymbols">
-         <enum>QAbstractSpinBox::NoButtons</enum>
+         <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
         </property>
         <property name="decimals">
          <number>2</number>
@@ -4050,13 +4050,13 @@ QPushButton:checked {
          </rect>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::ClickFocus</enum>
+         <enum>Qt::FocusPolicy::ClickFocus</enum>
         </property>
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;操作臂点动速度&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="buttonSymbols">
-         <enum>QAbstractSpinBox::NoButtons</enum>
+         <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
         </property>
         <property name="decimals">
          <number>0</number>
@@ -4087,7 +4087,7 @@ QPushButton:checked {
          <cursorShape>ArrowCursor</cursorShape>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;快捷键 &amp;quot;L&amp;quot; 选中，ESC取消&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;前：↑ 后：↓ 左：← 右：→&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;上：PageUp 下：PageDown&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -4113,7 +4113,7 @@ background-color: rgb(0, 255, 0);
           <cursorShape>OpenHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="toolTip">
           <string>下移</string>
@@ -4165,7 +4165,7 @@ QPushButton:hover {
           <cursorShape>OpenHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="toolTip">
           <string>右移</string>
@@ -4212,7 +4212,7 @@ QPushButton:hover {
           <cursorShape>OpenHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="toolTip">
           <string>后移</string>
@@ -4259,7 +4259,7 @@ QPushButton:hover {
           <cursorShape>OpenHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="toolTip">
           <string>前移</string>
@@ -4311,7 +4311,7 @@ QPushButton:hover {
           <cursorShape>OpenHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="toolTip">
           <string>左移</string>
@@ -4361,7 +4361,7 @@ QPushButton:hover {
           <bool>true</bool>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="toolTip">
           <string>上移</string>
@@ -4417,7 +4417,7 @@ QPushButton:hover {
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;未连接&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;单击连接&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -4449,7 +4449,7 @@ QPushButton:hover {
          <cursorShape>ArrowCursor</cursorShape>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;快捷键 &amp;quot;R&amp;quot; 选中，ESC取消&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;前：↑ 后：↓ 左：← 右：→&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;上：PageUp 下：PageDown&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -4479,7 +4479,7 @@ QPushButton:hover {
           <cursorShape>OpenHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="toolTip">
           <string>右移</string>
@@ -4535,7 +4535,7 @@ QPushButton:hover {
           <bool>true</bool>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="toolTip">
           <string>上移</string>
@@ -4596,7 +4596,7 @@ QPushButton:hover {
           <cursorShape>OpenHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="toolTip">
           <string>前移</string>
@@ -4643,7 +4643,7 @@ QPushButton:hover {
           <cursorShape>OpenHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="toolTip">
           <string>下移</string>
@@ -4695,7 +4695,7 @@ QPushButton:hover {
           <cursorShape>OpenHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="toolTip">
           <string>左移</string>
@@ -4742,7 +4742,7 @@ QPushButton:hover {
           <cursorShape>OpenHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="toolTip">
           <string>后移</string>
@@ -4789,7 +4789,7 @@ QPushButton:hover {
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;未连接&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;单击连接&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -4821,7 +4821,7 @@ QPushButton:hover {
          <cursorShape>ArrowCursor</cursorShape>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;快捷键 &amp;quot;I&amp;quot; 选中，ESC取消&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;前：↑ 后：↓ 左：← 右：→&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;上：PageUp 下：PageDown&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -4846,7 +4846,7 @@ QPushButton:hover {
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;未连接&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;单击连接&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -4882,7 +4882,7 @@ QPushButton:hover {
           <cursorShape>OpenHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="toolTip">
           <string>注入</string>
@@ -4934,7 +4934,7 @@ QPushButton:hover {
           <cursorShape>OpenHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="toolTip">
           <string>吸取</string>
@@ -5032,7 +5032,7 @@ QPushButton:hover {
           </rect>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::ClickFocus</enum>
+          <enum>Qt::FocusPolicy::ClickFocus</enum>
          </property>
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;操作臂点动距离&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -5041,7 +5041,7 @@ QPushButton:hover {
           <string notr="true"/>
          </property>
          <property name="buttonSymbols">
-          <enum>QAbstractSpinBox::NoButtons</enum>
+          <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
          </property>
          <property name="decimals">
           <number>3</number>
@@ -5082,13 +5082,13 @@ QPushButton:hover {
           </rect>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::ClickFocus</enum>
+          <enum>Qt::FocusPolicy::ClickFocus</enum>
          </property>
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;操作臂点动速度&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="buttonSymbols">
-          <enum>QAbstractSpinBox::NoButtons</enum>
+          <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
          </property>
          <property name="decimals">
           <number>3</number>
@@ -5123,7 +5123,7 @@ QPushButton:hover {
          <cursorShape>ArrowCursor</cursorShape>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;快捷键 &amp;quot;H&amp;quot; 选中，ESC取消&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;前：↑ 后：↓ 左：← 右：→&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;上：PageUp 下：PageDown&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -5154,7 +5154,7 @@ background-color: rgb(0, 255, 0);
           <cursorShape>OpenHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="toolTip">
           <string>注入</string>
@@ -5207,7 +5207,7 @@ QPushButton:hover {
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;未连接&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;单击连接&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -5243,7 +5243,7 @@ QPushButton:hover {
           <cursorShape>OpenHandCursor</cursorShape>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="toolTip">
           <string>吸取</string>
@@ -5287,7 +5287,7 @@ QPushButton:hover {
           </rect>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::ClickFocus</enum>
+          <enum>Qt::FocusPolicy::ClickFocus</enum>
          </property>
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;操作臂点动距离&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -5296,7 +5296,7 @@ QPushButton:hover {
           <string notr="true"/>
          </property>
          <property name="buttonSymbols">
-          <enum>QAbstractSpinBox::NoButtons</enum>
+          <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
          </property>
          <property name="decimals">
           <number>4</number>
@@ -5369,13 +5369,13 @@ QPushButton:hover {
           </rect>
          </property>
          <property name="focusPolicy">
-          <enum>Qt::ClickFocus</enum>
+          <enum>Qt::FocusPolicy::ClickFocus</enum>
          </property>
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;操作臂点动速度&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="buttonSymbols">
-          <enum>QAbstractSpinBox::NoButtons</enum>
+          <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
          </property>
          <property name="decimals">
           <number>4</number>
@@ -5426,10 +5426,10 @@ QPushButton:hover {
          </sizepolicy>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
+         <enum>Qt::LayoutDirection::LeftToRight</enum>
         </property>
         <property name="text">
          <string>连
@@ -5473,7 +5473,7 @@ QPushButton:hover {
         <cursorShape>ArrowCursor</cursorShape>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
+        <enum>Qt::FocusPolicy::NoFocus</enum>
        </property>
        <property name="toolTip">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;快捷键 &amp;quot;M&amp;quot; 选中，ESC取消&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;前：↑ 后：↓ 左：← 右：→&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;上：PageUp 下：PageDown&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -5503,7 +5503,7 @@ QPushButton:hover {
          <cursorShape>OpenHandCursor</cursorShape>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="toolTip">
          <string>视野前移</string>
@@ -5550,10 +5550,10 @@ QPushButton:hover {
          <cursorShape>OpenHandCursor</cursorShape>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="contextMenuPolicy">
-         <enum>Qt::NoContextMenu</enum>
+         <enum>Qt::ContextMenuPolicy::NoContextMenu</enum>
         </property>
         <property name="toolTip">
          <string>视野后移</string>
@@ -5605,7 +5605,7 @@ QPushButton:hover {
          <cursorShape>OpenHandCursor</cursorShape>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="toolTip">
          <string>视野左移</string>
@@ -5657,7 +5657,7 @@ QPushButton:hover {
          <cursorShape>OpenHandCursor</cursorShape>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="toolTip">
          <string>视野右移</string>
@@ -5707,7 +5707,7 @@ QPushButton:hover {
          <bool>true</bool>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="toolTip">
          <string>上移</string>
@@ -5763,7 +5763,7 @@ QPushButton:hover {
          <cursorShape>OpenHandCursor</cursorShape>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="toolTip">
          <string>下移</string>
@@ -5871,13 +5871,13 @@ QPushButton:hover {
          </rect>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::ClickFocus</enum>
+         <enum>Qt::FocusPolicy::ClickFocus</enum>
         </property>
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;调焦设备&amp;amp;平台&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;点动距离&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="buttonSymbols">
-         <enum>QAbstractSpinBox::NoButtons</enum>
+         <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
         </property>
         <property name="decimals">
          <number>2</number>
@@ -5899,13 +5899,13 @@ QPushButton:hover {
          </rect>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::ClickFocus</enum>
+         <enum>Qt::FocusPolicy::ClickFocus</enum>
         </property>
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;调焦设备&amp;amp;平台&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;连动速度&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="buttonSymbols">
-         <enum>QAbstractSpinBox::NoButtons</enum>
+         <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
         </property>
         <property name="decimals">
          <number>2</number>
@@ -5930,7 +5930,7 @@ QPushButton:hover {
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;未连接&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;单击连接&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -5961,7 +5961,7 @@ QPushButton:hover {
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;未连接&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;单击连接&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -5989,7 +5989,7 @@ QPushButton:hover {
          </rect>
         </property>
         <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
+         <enum>QFrame::Shape::NoFrame</enum>
         </property>
         <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
@@ -6007,7 +6007,7 @@ QPushButton:hover {
              <cursorShape>OpenHandCursor</cursorShape>
             </property>
             <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
+             <enum>Qt::FocusPolicy::NoFocus</enum>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
@@ -6043,7 +6043,7 @@ QPushButton:checked {
              <cursorShape>OpenHandCursor</cursorShape>
             </property>
             <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
+             <enum>Qt::FocusPolicy::NoFocus</enum>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
@@ -6076,7 +6076,7 @@ QPushButton:checked {
              <cursorShape>OpenHandCursor</cursorShape>
             </property>
             <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
+             <enum>Qt::FocusPolicy::NoFocus</enum>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
@@ -6109,7 +6109,7 @@ QPushButton:checked {
              <cursorShape>OpenHandCursor</cursorShape>
             </property>
             <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
+             <enum>Qt::FocusPolicy::NoFocus</enum>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
@@ -6149,7 +6149,7 @@ QPushButton:checked {
          </rect>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="text">
          <string>连动</string>
@@ -6171,7 +6171,7 @@ QPushButton:checked {
          <cursorShape>OpenHandCursor</cursorShape>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="text">
          <string>慢</string>
@@ -6199,7 +6199,7 @@ QPushButton:checked {
          <cursorShape>OpenHandCursor</cursorShape>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="text">
          <string>快</string>
@@ -6230,7 +6230,7 @@ QPushButton:checked {
          <cursorShape>OpenHandCursor</cursorShape>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="text">
          <string>中</string>
@@ -6258,7 +6258,7 @@ QPushButton:checked {
          <cursorShape>OpenHandCursor</cursorShape>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="text">
          <string>自定义</string>
@@ -6289,143 +6289,6 @@ QPushButton:checked {
        <property name="title">
         <string/>
        </property>
-       <widget class="QPushButton" name="BTN_GOTO_STORE_AREA">
-        <property name="geometry">
-         <rect>
-          <x>145</x>
-          <y>100</y>
-          <width>55</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="cursor">
-         <cursorShape>OpenHandCursor</cursorShape>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	border: 1px solid gray;
-	border-radius: 10px;
-    background-color: rgb(225, 225, 225);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:hover {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.7);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}</string>
-        </property>
-        <property name="text">
-         <string>存储</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="BTN_GOTO_WORK_AREA">
-        <property name="geometry">
-         <rect>
-          <x>145</x>
-          <y>10</y>
-          <width>55</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="cursor">
-         <cursorShape>OpenHandCursor</cursorShape>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	border: 1px solid gray;
-	border-radius: 10px;
-    background-color: rgb(225, 225, 225);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:hover {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.7);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}</string>
-        </property>
-        <property name="text">
-         <string>操作</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="BTN_SET_SPIT_AREA">
-        <property name="geometry">
-         <rect>
-          <x>230</x>
-          <y>40</y>
-          <width>45</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>华文楷体</family>
-          <pointsize>12</pointsize>
-          <italic>false</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="cursor">
-         <cursorShape>OpenHandCursor</cursorShape>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	border: 1px solid gray;
-	border-radius: 10px;
-    background-color: rgb(225, 225, 225);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:checked {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(50, 50, 50, 0.5);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:hover {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.7);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}</string>
-        </property>
-        <property name="text">
-         <string>设定</string>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-       </widget>
        <widget class="QLabel" name="label_38">
         <property name="geometry">
          <rect>
@@ -6437,202 +6300,6 @@ QPushButton:hover {
         </property>
         <property name="text">
          <string>×</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="BTN_SET_WORK_AREA">
-        <property name="geometry">
-         <rect>
-          <x>230</x>
-          <y>10</y>
-          <width>45</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>华文楷体</family>
-          <pointsize>12</pointsize>
-          <italic>false</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="cursor">
-         <cursorShape>OpenHandCursor</cursorShape>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	border: 1px solid gray;
-	border-radius: 10px;
-    background-color: rgb(225, 225, 225);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:checked {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(50, 50, 50, 0.5);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:hover {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.7);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}</string>
-        </property>
-        <property name="text">
-         <string>设定</string>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="BTN_SET_STORE_AREA">
-        <property name="geometry">
-         <rect>
-          <x>230</x>
-          <y>100</y>
-          <width>45</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>华文楷体</family>
-          <pointsize>12</pointsize>
-          <italic>false</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="cursor">
-         <cursorShape>OpenHandCursor</cursorShape>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	border: 1px solid gray;
-	border-radius: 10px;
-    background-color: rgb(225, 225, 225);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:checked {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(50, 50, 50, 0.5);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:hover {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.7);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}</string>
-        </property>
-        <property name="text">
-         <string>设定</string>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="BTN_GOTO_SPIT_AREA">
-        <property name="geometry">
-         <rect>
-          <x>145</x>
-          <y>40</y>
-          <width>55</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="cursor">
-         <cursorShape>OpenHandCursor</cursorShape>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	border: 1px solid gray;
-	border-radius: 10px;
-    background-color: rgb(225, 225, 225);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:hover {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.7);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}</string>
-        </property>
-        <property name="text">
-         <string>吐核</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="BTN_GOTO_DONOR_AREA">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>10</y>
-          <width>61</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="cursor">
-         <cursorShape>OpenHandCursor</cursorShape>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	border: 1px solid gray;
-	border-radius: 10px;
-    background-color: rgb(225, 225, 225);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:hover {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.7);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}</string>
-        </property>
-        <property name="text">
-         <string>供体</string>
         </property>
        </widget>
        <widget class="QPushButton" name="BTN_GOTO_OOCYTE_AREA">
@@ -6648,7 +6315,7 @@ QPushButton:hover {
          <cursorShape>OpenHandCursor</cursorShape>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
@@ -6678,7 +6345,7 @@ QPushButton:hover {
          <cursorShape>OpenHandCursor</cursorShape>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="toolTip">
          <string>Off</string>
@@ -6717,218 +6384,6 @@ QPushButton:checked {
          <string notr="true">workflowButtons</string>
         </attribute>
        </widget>
-       <widget class="QPushButton" name="BTN_SET_DONOR_AREA">
-        <property name="geometry">
-         <rect>
-          <x>79</x>
-          <y>10</y>
-          <width>51</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>华文楷体</family>
-          <pointsize>12</pointsize>
-          <italic>false</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="cursor">
-         <cursorShape>OpenHandCursor</cursorShape>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	border: 1px solid gray;
-	border-radius: 10px;
-    background-color: rgb(225, 225, 225);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:checked {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(50, 50, 50, 0.5);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:hover {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.7);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}</string>
-        </property>
-        <property name="text">
-         <string>设定</string>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-        <property name="checked">
-         <bool>false</bool>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="BTN_SET_FAIL_AREA">
-        <property name="geometry">
-         <rect>
-          <x>230</x>
-          <y>130</y>
-          <width>45</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>华文楷体</family>
-          <pointsize>12</pointsize>
-          <italic>false</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="cursor">
-         <cursorShape>OpenHandCursor</cursorShape>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	border: 1px solid gray;
-	border-radius: 10px;
-    background-color: rgb(225, 225, 225);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:checked {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(50, 50, 50, 0.5);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:hover {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.7);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}</string>
-        </property>
-        <property name="text">
-         <string>设定</string>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="BTN_GOTO_FAIL_AREA">
-        <property name="geometry">
-         <rect>
-          <x>145</x>
-          <y>130</y>
-          <width>55</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="cursor">
-         <cursorShape>OpenHandCursor</cursorShape>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	border: 1px solid gray;
-	border-radius: 10px;
-    background-color: rgb(225, 225, 225);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:hover {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.7);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}</string>
-        </property>
-        <property name="text">
-         <string>失败</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_43">
-        <property name="geometry">
-         <rect>
-          <x>210</x>
-          <y>60</y>
-          <width>20</width>
-          <height>48</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="cursor">
-         <cursorShape>ArrowCursor</cursorShape>
-        </property>
-        <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
-        </property>
-        <property name="text">
-         <string>区
-域</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_44">
-        <property name="geometry">
-         <rect>
-          <x>280</x>
-          <y>60</y>
-          <width>20</width>
-          <height>48</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="cursor">
-         <cursorShape>ArrowCursor</cursorShape>
-        </property>
-        <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
-        </property>
-        <property name="text">
-         <string>设
-定</string>
-        </property>
-       </widget>
        <widget class="QSpinBox" name="TXT_GLOBALMAP_ROWS">
         <property name="geometry">
          <rect>
@@ -6939,10 +6394,10 @@ QPushButton:hover {
          </rect>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::ClickFocus</enum>
+         <enum>Qt::FocusPolicy::ClickFocus</enum>
         </property>
         <property name="buttonSymbols">
-         <enum>QAbstractSpinBox::NoButtons</enum>
+         <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
         </property>
         <property name="minimum">
          <number>1</number>
@@ -6964,13 +6419,13 @@ QPushButton:hover {
          </rect>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::ClickFocus</enum>
+         <enum>Qt::FocusPolicy::ClickFocus</enum>
         </property>
         <property name="wrapping">
          <bool>false</bool>
         </property>
         <property name="buttonSymbols">
-         <enum>QAbstractSpinBox::NoButtons</enum>
+         <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
         </property>
         <property name="minimum">
          <number>1</number>
@@ -6980,45 +6435,6 @@ QPushButton:hover {
         </property>
         <property name="value">
          <number>1</number>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="BTN_GOTO_SPIT_EDGE">
-        <property name="geometry">
-         <rect>
-          <x>145</x>
-          <y>70</y>
-          <width>55</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="cursor">
-         <cursorShape>OpenHandCursor</cursorShape>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	border: 1px solid gray;
-	border-radius: 10px;
-    background-color: rgb(225, 225, 225);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:hover {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.7);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}</string>
-        </property>
-        <property name="text">
-         <string>边缘</string>
         </property>
        </widget>
        <widget class="QPushButton" name="BTN_SET_SPIT_EDGE">
@@ -7042,7 +6458,7 @@ QPushButton:hover {
          <cursorShape>OpenHandCursor</cursorShape>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
@@ -7074,13 +6490,599 @@ QPushButton:hover {
 }</string>
         </property>
         <property name="text">
-         <string>设定</string>
+         <string>边缘</string>
         </property>
         <property name="checkable">
          <bool>true</bool>
         </property>
         <property name="checked">
          <bool>false</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_44">
+        <property name="geometry">
+         <rect>
+          <x>280</x>
+          <y>60</y>
+          <width>20</width>
+          <height>48</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>华文楷体</family>
+          <pointsize>12</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>ArrowCursor</cursorShape>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LayoutDirection::LeftToRight</enum>
+        </property>
+        <property name="text">
+         <string>区
+域</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="BTN_GOTO_SPIT_EDGE">
+        <property name="geometry">
+         <rect>
+          <x>145</x>
+          <y>70</y>
+          <width>55</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="cursor">
+         <cursorShape>OpenHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::FocusPolicy::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: 1px solid gray;
+	border-radius: 10px;
+    background-color: rgb(225, 225, 225);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:hover {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.7);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}</string>
+        </property>
+        <property name="text">
+         <string>GOTO</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="BTN_SET_DONOR_AREA">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>10</y>
+          <width>80</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>华文楷体</family>
+          <pointsize>12</pointsize>
+          <italic>false</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>OpenHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::FocusPolicy::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: 1px solid gray;
+	border-radius: 10px;
+    background-color: rgb(225, 225, 225);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:checked {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(50, 50, 50, 0.5);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:hover {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.7);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}</string>
+        </property>
+        <property name="text">
+         <string>供体</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="BTN_GOTO_WORK_AREA">
+        <property name="geometry">
+         <rect>
+          <x>145</x>
+          <y>10</y>
+          <width>55</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="cursor">
+         <cursorShape>OpenHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::FocusPolicy::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: 1px solid gray;
+	border-radius: 10px;
+    background-color: rgb(225, 225, 225);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:hover {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.7);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}</string>
+        </property>
+        <property name="text">
+         <string>GOTO</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_43">
+        <property name="geometry">
+         <rect>
+          <x>210</x>
+          <y>60</y>
+          <width>20</width>
+          <height>48</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>华文楷体</family>
+          <pointsize>12</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>ArrowCursor</cursorShape>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LayoutDirection::LeftToRight</enum>
+        </property>
+        <property name="text">
+         <string>设
+定</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="BTN_SET_STORE_AREA">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>100</y>
+          <width>45</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>华文楷体</family>
+          <pointsize>12</pointsize>
+          <italic>false</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>OpenHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::FocusPolicy::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: 1px solid gray;
+	border-radius: 10px;
+    background-color: rgb(225, 225, 225);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:checked {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(50, 50, 50, 0.5);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:hover {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.7);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}</string>
+        </property>
+        <property name="text">
+         <string>存储</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="BTN_GOTO_STORE_AREA">
+        <property name="geometry">
+         <rect>
+          <x>145</x>
+          <y>100</y>
+          <width>55</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="cursor">
+         <cursorShape>OpenHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::FocusPolicy::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: 1px solid gray;
+	border-radius: 10px;
+    background-color: rgb(225, 225, 225);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:hover {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.7);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}</string>
+        </property>
+        <property name="text">
+         <string>GOTO</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="BTN_GOTO_DONOR_AREA">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>31</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="cursor">
+         <cursorShape>OpenHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::FocusPolicy::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: 1px solid gray;
+	border-radius: 10px;
+    background-color: rgb(225, 225, 225);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:hover {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.7);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}</string>
+        </property>
+        <property name="text">
+         <string>GO</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="BTN_GOTO_FAIL_AREA">
+        <property name="geometry">
+         <rect>
+          <x>145</x>
+          <y>130</y>
+          <width>55</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="cursor">
+         <cursorShape>OpenHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::FocusPolicy::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: 1px solid gray;
+	border-radius: 10px;
+    background-color: rgb(225, 225, 225);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:hover {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.7);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}</string>
+        </property>
+        <property name="text">
+         <string>GOTO</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="BTN_SET_FAIL_AREA">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>130</y>
+          <width>45</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>华文楷体</family>
+          <pointsize>12</pointsize>
+          <italic>false</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>OpenHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::FocusPolicy::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: 1px solid gray;
+	border-radius: 10px;
+    background-color: rgb(225, 225, 225);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:checked {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(50, 50, 50, 0.5);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:hover {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.7);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}</string>
+        </property>
+        <property name="text">
+         <string>失败</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="BTN_GOTO_SPIT_AREA">
+        <property name="geometry">
+         <rect>
+          <x>145</x>
+          <y>40</y>
+          <width>55</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="cursor">
+         <cursorShape>OpenHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::FocusPolicy::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: 1px solid gray;
+	border-radius: 10px;
+    background-color: rgb(225, 225, 225);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:hover {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.7);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}</string>
+        </property>
+        <property name="text">
+         <string>GOTO</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="BTN_SET_WORK_AREA">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>10</y>
+          <width>45</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>华文楷体</family>
+          <pointsize>12</pointsize>
+          <italic>false</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>OpenHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::FocusPolicy::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: 1px solid gray;
+	border-radius: 10px;
+    background-color: rgb(225, 225, 225);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:checked {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(50, 50, 50, 0.5);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:hover {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.7);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}</string>
+        </property>
+        <property name="text">
+         <string>操作</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="BTN_SET_SPIT_AREA">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>40</y>
+          <width>45</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>华文楷体</family>
+          <pointsize>12</pointsize>
+          <italic>false</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>OpenHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::FocusPolicy::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: 1px solid gray;
+	border-radius: 10px;
+    background-color: rgb(225, 225, 225);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:checked {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(50, 50, 50, 0.5);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:hover {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.7);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}</string>
+        </property>
+        <property name="text">
+         <string>吐核</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
         </property>
        </widget>
       </widget>
@@ -7163,7 +7165,7 @@ QPushButton:hover {
          </rect>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="toolTip">
          <string>相对位置</string>
@@ -7393,7 +7395,7 @@ QPushButton:hover {
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;未连接&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;单击连接&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -7424,7 +7426,7 @@ QPushButton:hover {
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+         <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;未连接&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;单击连接&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -7598,7 +7600,7 @@ QPushButton:hover {
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="workflowButtons"/>
   <buttongroup name="speedGroup"/>
+  <buttongroup name="workflowButtons"/>
  </buttongroups>
 </ui>

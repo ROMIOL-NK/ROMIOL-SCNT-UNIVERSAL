@@ -32,6 +32,7 @@
 #include "WorkFlow/vision.h"
 #include "WorkFlow/track.h"
 #include "WorkFlow/pservo.h"
+#include "WorkFlow/autofocus.h"
 #include "WorkFlow/autoclone.h"
 #include "WorkFlow/functions.h"
 
