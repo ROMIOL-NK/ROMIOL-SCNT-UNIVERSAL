@@ -605,6 +605,8 @@ void RomiolSCNT::initDevices()
 
     connect(pServo,             SIGNAL(holdBlow(float, float, bool)),   holder->syringeMotor,   SLOT(blow(float, float, bool)), Qt::BlockingQueuedConnection);
     connect(pServo,             SIGNAL(injSuck(float, float, bool)),    injector->syringeMotor, SLOT(suck(float, float, bool)), Qt::BlockingQueuedConnection);
+    connect(pServo,             SIGNAL(stopHoldSyringe()),              holder->syringeMotor,   SLOT(stop()),                    Qt::BlockingQueuedConnection);
+    connect(pServo,             SIGNAL(stopInjSyringe()),               injector->syringeMotor,   SLOT(stop()),                    Qt::BlockingQueuedConnection);
 
     //连接子线程信号槽
     connect(stepBuildMap,       SIGNAL(moveStage(float,float,float)),       microscope->stage,      SLOT(move(float,float,float)),          Qt::BlockingQueuedConnection);

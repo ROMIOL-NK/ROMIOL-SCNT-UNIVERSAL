@@ -31,7 +31,6 @@ PServo::PServo() {
 void PServo::servoPressure()
 {
     vector<double> y, u;
-
     y.clear(); y.push_back(holder->pSensor->pressure);
     pHoldController->set_y(y);
     y.clear(); y.push_back(holdRotateP);
@@ -54,8 +53,8 @@ void PServo::start()
 void PServo::stop()
 {
     timerPressure->stop();
-    emit holdBlow(0, 0, true);
-    emit injSuck(0, 0, true);
+    emit stopHoldSyringe();
+    emit stopInjSyringe();
 }
 
 void PServo::startCompare(Mat img, Rect rect)

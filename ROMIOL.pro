@@ -53,6 +53,7 @@ SOURCES += \
     Objects/soma.cpp \
     Objects/somas.cpp \
     WorkFlow/autoclone.cpp \
+    WorkFlow/autofocus.cpp \
     WorkFlow/functions.cpp \
     WorkFlow/pservo.cpp \
     WorkFlow/stepbuildmap.cpp \
@@ -129,6 +130,7 @@ HEADERS += \
     Objects/soma.h \
     Objects/somas.h \
     WorkFlow/autoclone.h \
+    WorkFlow/autofocus.h \
     WorkFlow/functions.h \
     WorkFlow/pservo.h \
     WorkFlow/stepbuildmap.h \

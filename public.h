@@ -55,31 +55,6 @@
 //图像的高度和宽度
 #define WIDTH  640                    //图像宽度  （单位：像素）
 #define HEIGHT 480                    //图像高度  （单位：像素）
-//显微镜放大参数
-// Basler
-// #define Pixel2Um_4x  2.870//4x
-// #define Pixel2Um_10x 1.164//10x
-// #define Pixel2Um_20x 0.582//20x
-// #define Pixel2Um_40x 0.291//40x
-// Toup
-// #define Pixel2Um_4x  7.212//4x
-// #define Pixel2Um_10x 2.899//10x
-// #define Pixel2Um_20x 1.455//20x
-// #define Pixel2Um_40x 0.727//40x
-
-#ifdef SYSTEM_TJ
-    #define Pixel2Um_4x  3.515//4x
-    #define Pixel2Um_10x 1.406//10x
-    #define Pixel2Um_20x 0.703//20x
-    #define Pixel2Um_40x 0.351//40x
-#endif
-
-#if (defined SYSTEM_SZ_IPC)||(defined SYSTEM_SZ_STATION)
-    #define Pixel2Um_4x  6.700//4x
-    #define Pixel2Um_10x 2.680//10x
-    #define Pixel2Um_20x 1.340//20x
-    #define Pixel2Um_40x 0.670//40x
-#endif
 
 #define BiasX_4to10 -583.76//4x → 10x
 #define BiasY_4to10 -437.52//4x → 10x
@@ -240,6 +215,11 @@ extern float REGION_OX_UM;      //当前图像（左上角）在全局地图（�
 extern float REGION_OY_UM;      //当前图像（左上角）在全局地图（左上角）中的 Y位置（单位：um）
 
 //相机参数或配置
+extern float Pixel2Um_4x;       //4倍镜下像素的尺寸 (um)
+extern float Pixel2Um_10x;      //10倍镜下像素的尺寸 (um)
+extern float Pixel2Um_20x;      //20倍镜头下像素的尺寸 (um)
+extern float Pixel2Um_40x;      //40倍镜头下像素的尺寸 (um)
+
 extern float IMG_STAGE_ANGLE;   //显微图像偏转的角度
 extern float Pixel2Um;          //当前镜头下像素的尺寸 (um)
 extern QString exceptionInfo;   //异常信息

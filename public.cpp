@@ -1,4 +1,15 @@
 #include"public.h"
+//显微镜放大参数
+// Basler
+// #define Pixel2Um_4x  2.870//4x
+// #define Pixel2Um_10x 1.164//10x
+// #define Pixel2Um_20x 0.582//20x
+// #define Pixel2Um_40x 0.291//40x
+// Toup
+// #define Pixel2Um_4x  7.212//4x
+// #define Pixel2Um_10x 2.899//10x
+// #define Pixel2Um_20x 1.455//20x
+// #define Pixel2Um_40x 0.727//40x
 
 //----------------------------------------------------------------- 声明全局变量 (初始化） -----------------------------------------------------------------
 //-----------------深圳系统 IPC start-----------------------
@@ -11,6 +22,10 @@
     QString strPortPInj   = "COM12";
     QString strPortLMotor = "COM9";
     QString strPortRMotor = "COM8";//wzf 油泵 COM13; 气泵：COM8
+    float Pixel2Um_4x = 6.700;//4x
+    float Pixel2Um_10x = 2.680;//10x
+    float Pixel2Um_20x = 1.340;//20x
+    float Pixel2Um_40x = 0.670;//40x
 #endif
 //-----------------深圳系统 IPC end------------------------
 
@@ -24,6 +39,10 @@
     QString strPortPInj   = "COM12";
     QString strPortLMotor = "COM9";
     QString strPortRMotor = "COM7";
+    float Pixel2Um_4x = 6.700;//4x
+    float Pixel2Um_10x = 2.680;//10x
+    float Pixel2Um_20x = 1.340;//20x
+    float Pixel2Um_40x = 0.670;//40x
 #endif
 //-----------------深圳系统 Station end------------------------
 
@@ -37,6 +56,10 @@
     QString strPortPInj   = "COM0";
     QString strPortLMotor = "COM15";
     QString strPortRMotor = "COM13";
+    float Pixel2Um_4x =  3.515;//4x
+    float Pixel2Um_10x = 1.406;//10x
+    float Pixel2Um_20x = 0.703;//20x
+    float Pixel2Um_40x = 0.351;//40x
 #endif
 //-----------------南开系统 end------------------------
 
@@ -78,6 +101,7 @@ float GMAP_HEIGHT_UM = 6000;        //全局地图的高度（单位：um）
 float REGION_OX_UM = 0;             //当前图像（左上角）在全局地图（左上角）中的 X位置（单位：um）
 float REGION_OY_UM = 0;             //当前图像（左上角）在全局地图（左上角）中的 Y位置（单位：um）
 //相机参数或配置
+
 float IMG_STAGE_ANGLE = 0;          //显微图像偏转的角度 默认为 0°
 float Pixel2Um = Pixel2Um_4x;       //4x 下 1 pixel = 2.78 um
 QString exceptionInfo = "";         //异常信息
