@@ -34,6 +34,8 @@ signals:
     void stopHoldSyringe();
     void stopInjSyringe();
 
+    void sgnStopPServo();
+
     void setLManipSpeed(float);                     //设置左操作臂运动速度 (um/s)
     void setRManipSpeed(float);                     //设置右操作臂运动速度 (um/s)
 

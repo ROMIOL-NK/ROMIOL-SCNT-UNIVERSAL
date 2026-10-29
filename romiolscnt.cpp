@@ -294,6 +294,8 @@ void RomiolSCNT::init()
     track->moveToThread(&threadTrack);
     pServo = new PServo();
     pServo->moveToThread(&threadPServo);
+    autoFocus = new AutoFocus();
+    autoFocus->moveToThread(&threadWorkFlow);
 
     // 连接各步骤的子线程信号
     stepBuildMap = new StepBuildMap();

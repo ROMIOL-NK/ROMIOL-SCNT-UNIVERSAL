@@ -8,6 +8,10 @@ class StepFetchOocyteForSoma: public WorkFlow
 public:
     StepFetchOocyteForSoma();
     bool ON;
+    bool firstOocytePending;
+    bool manualNextOocyteAccepted;
+
+    void prepareFirstOocyte();
 
     void findOocyteAround();                    //在附近寻找卵细胞
     void findNextOocyte();                      //在附近寻找卵细胞

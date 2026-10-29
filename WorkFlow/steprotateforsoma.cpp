@@ -72,11 +72,9 @@ WORKSTEP StepRotateForSoma::run()
     ON = true;
     // zyj 20251029 拨动时追踪卵细胞
     emit sgnInitTrackerOocyte(CurrentBGR, currentOocyte->rectZP);
-    emit sgnStartPServo();
     while (ON&&(!isPBinPlace()) && rotatedAngle < maxRotateAngle)
     {
         //zyj 2025.11.03 拨动情况监测
-        emit sgnStartCompare(CurrentGray(currentOocyte->rectZP), currentOocyte->rectZP);
         //      3.2.1 刺入一定深度
         inject_rot_arc_xy(iniAngle,0,0);
         //      3.2.2 沿着弧线移动，旋转细胞（40 °） (TODO:局部函数，每次旋转10 °，每次调用确定是否满足退出旋转条件）
@@ -92,7 +90,6 @@ WORKSTEP StepRotateForSoma::run()
         smallRotatedAngle = 0;
         //zyj 2025.11.03 拨动情况监测
         QThread::msleep(600);
-        emit sgnCompareAndCalHoldP(CurrentGray);
     }
 
     //  3.3 注射针返回初始位置
@@ -103,7 +100,6 @@ WORKSTEP StepRotateForSoma::run()
     //------------------------------------------------------步骤完成---------------------------------------------------
     emit sgnStopTrackPB();
     emit sgnStopTrackOocyte();
-    emit sgnStopPServo();
     nextStep = PENETRATEFORSOMA;
     isWorking = false;
     emit finish();

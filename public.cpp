@@ -125,6 +125,7 @@ Yolo*                   yoloPB;
 Vision*                 vision;
 Track*                  track;
 PServo*                 pServo;
+AutoFocus*              autoFocus;
 ObjectDetector*         objectDetector;
 //关注对象
 cv::Mat                 CurrentGray;

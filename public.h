@@ -237,6 +237,7 @@ class Yolo;
 class Vision;
 class Track;
 class PServo;
+class AutoFocus;
 class ObjectDetector;
 
 class Microscope;
@@ -310,6 +311,7 @@ extern Yolo*            yolo;               //Yolo 目标检测网络
 extern Yolo*            yoloPB;             //Yolo 目标检测网络
 extern Vision*          vision;             //物体检测模块
 extern PServo*          pServo;             //气压伺服
+extern AutoFocus*       autoFocus;          //自动调焦
 extern ObjectDetector*  objectDetector;     //物体检测模块
 extern Track*           track;              //视觉跟踪模块
 extern bool             areAllOocytesEnucleated;

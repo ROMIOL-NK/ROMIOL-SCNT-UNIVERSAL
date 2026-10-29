@@ -5,11 +5,11 @@ using namespace cv;
 
 StepRotateInPlane::StepRotateInPlane()
 {
-//去往操作区
+    //去往操作区
     curInjectTipRel = vector<float>(3);
     penDepth = 15;
     iniDisRatio = 1.5;
-    iniAngle = 50;
+    iniAngle = 30;
     oneBigAngle = 40;
     oneSmallAngle = 10;
     rotatedAngle = 0;
@@ -23,6 +23,7 @@ WORKSTEP StepRotateInPlane::run()
 {
     isWorking = true;
     isPBdetected = false;
+    injectPipette->find(CurrentGray);
     if(isPBinPlace())
     {
         emit sgnStopTrackPB();
@@ -72,27 +73,24 @@ WORKSTEP StepRotateInPlane::run()
     ON = true;
     // zyj 20251029 拨动时追踪卵细胞
     emit sgnInitTrackerOocyte(CurrentBGR, currentOocyte->rectZP);
-    emit sgnStartPServo();
     while (ON&&(!isPBinPlace()) && rotatedAngle < maxRotateAngle)
     {
         //zyj 2025.11.03 拨动情况监测
-        emit sgnStartCompare(CurrentGray(currentOocyte->rectZP), currentOocyte->rectZP);
         //      3.2.1 刺入一定深度
-        inject_rot_arc_xy(iniAngle,0,0);
+        injet_move_to_rel((oocytesRadius-penDepth)*cos((iniAngle)*3.14/180),
+                          (oocytesRadius-penDepth)*sin((iniAngle)*3.14/180),0,250);
         //      3.2.2 沿着弧线移动，旋转细胞（40 °） (TODO:局部函数，每次旋转10 °，每次调用确定是否满足退出旋转条件）
-        while (ON&&(!isPBinPlace())&&(smallRotatedAngle<oneBigAngle)&&(rotatedAngle < maxRotateAngle))
-        {
-            inject_rot_arc_xy(iniAngle,smallRotatedAngle,oneSmallAngle);
-            smallRotatedAngle += oneSmallAngle ;
-            rotatedAngle += oneSmallAngle ;
-        }
-        //      3.2.3 分两步回归平面外循环旋转的初始位置（30 °）
+        injet_move_to_rel((oocytesRadius-penDepth)*cos((iniAngle)*3.14/180),
+                          (oocytesRadius-penDepth)*sin((iniAngle)*3.14/180)+0.2*oocytesRadius,0,250);
+        injet_move_to_rel((oocytesRadius-penDepth)*cos((iniAngle)*3.14/180)-oocytesRadius,
+                          (oocytesRadius-penDepth)*sin((iniAngle)*3.14/180)+0.2*oocytesRadius,0,250);
+
+
         injet_move_to_rel(iniDisRatio*oocytesRadius,(oocytesRadius-penDepth)*sin((iniAngle+smallRotatedAngle)*ANTORAD),0);
         injet_move_to_rel(iniDisRatio*oocytesRadius,(oocytesRadius-penDepth)*sin(iniAngle*ANTORAD),0);
         smallRotatedAngle = 0;
         //zyj 2025.11.03 拨动情况监测
         QThread::msleep(600);
-        emit sgnCompareAndCalHoldP(CurrentGray);
     }
 
     //  3.3 注射针返回初始位置
@@ -103,7 +101,6 @@ WORKSTEP StepRotateInPlane::run()
     //------------------------------------------------------步骤完成---------------------------------------------------
     emit sgnStopTrackPB();
     emit sgnStopTrackOocyte();
-    emit sgnStopPServo();
     nextStep = PENETRATE;
     isWorking = false;
     emit finish();
@@ -138,7 +135,7 @@ bool StepRotateInPlane::isPBinPlace()
         aim_angel = -30*CV_PI/180;
     else aim_angel = 30*CV_PI/180;
 
-     qDebug() << "错误:" << atan2(currentOocyte->centerPB.y-currentOocyte->centerZP.y, currentOocyte->centerPB.x-currentOocyte->centerZP.x)<<aim_angel;
+    qDebug() << "错误:" << atan2(currentOocyte->centerPB.y-currentOocyte->centerZP.y, currentOocyte->centerPB.x-currentOocyte->centerZP.x)<<aim_angel;
     if(abs(atan2(currentOocyte->centerPB.y-currentOocyte->centerZP.y, currentOocyte->centerPB.x-currentOocyte->centerZP.x)-aim_angel) < 15*CV_PI/180)
         return true;
     return false;

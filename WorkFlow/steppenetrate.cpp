@@ -88,14 +88,27 @@ int StepPenetrate::get_center(cv::Mat img, int cy_x, int cy_y, int cy_r) {
 WORKSTEP StepPenetrate::run()
 {
     isWorking = true;
+    // emit setHoldPressureTarget(holdPenetrateP);
     //添加处理代码: 将卵细胞吸紧，刺破卵细胞，回撤一定距离
-    if((holder->pSensor->isConnected)&&(holder->pSensor->pressure>0.5*holdPressure))
-        emit funcAdjHoldP(holdPressure);
     QThread::msleep(1000);
     currentOocyte->find(CurrentGray);
     injectPipette->find(CurrentGray);
-    if(!currentOocyte->isDetected || !injectPipette->isDetected)
-        DEAL_FAULT("请手动检测卵母细胞|注射针");
+    holdPipette->find(CurrentGray);
+    if(!currentOocyte->isDetected || !injectPipette->isDetected || !holdPipette->isDetected)
+    {
+        DEAL_FAULT("请手动检测卵母细胞|注射针|吸持针");
+        currentOocyte->find(CurrentGray);
+        injectPipette->find(CurrentGray);
+        holdPipette->find(CurrentGray);
+    }
+    if(!currentOocyte->isDetected || !injectPipette->isDetected || !holdPipette->isDetected)
+    {
+        exceptionInfo = "去核穿刺前无法重新检测到卵母细胞、注射针或吸持针";
+        nextStep = EXCEPTION;
+        isWorking = false;
+        emit finish();
+        return nextStep;
+    }
     //添加代码:获取刺入环节开始时的第一帧图像img1，用于获取ROI
     Mat src = CurrentGray.clone();
     int cy_x, cy_y, cy_r;
@@ -107,19 +120,43 @@ WORKSTEP StepPenetrate::run()
     // cy_x = int(circle[0]);
     // cy_y = int(circle[1]);
     // cy_r = int(circle[2]);
-    cy_x = currentOocyte->center.x;
-    cy_y = currentOocyte->center.y;
-    cy_r = currentOocyte->radius;
-
     if(injectPipette->tip.x<currentOocyte->xM+currentOocyte->radius)//注射针针尖在卵细胞左侧，先移到右侧
     {
         moveInjWait((currentOocyte->xM-injectPipette->tip.x)*Pixel2Um+50, 0, 0, MANIP_VEL);
     }
     //添加代码:设置注射针刺入速度
-    double x0Inj = injector->manipulator->getAbsX();
     moveInjWait(0, (currentOocyte->center.y-injectPipette->tip.y)*Pixel2Um, 0, MANIP_VEL);
-    emit moveInjX(0, -60, true);
-    QThread::msleep(200);
+
+    // 穿刺预定位后重新检测，用当前双针位置计算吸持针针口边界。
+    currentOocyte->find(CurrentGray);
+    injectPipette->find(CurrentGray);
+    holdPipette->find(CurrentGray);
+    if(!currentOocyte->isDetected || !injectPipette->isDetected || !holdPipette->isDetected)
+    {
+        exceptionInfo = "去核穿刺预定位后无法检测到卵母细胞、注射针或吸持针";
+        nextStep = EXCEPTION;
+        isWorking = false;
+        emit finish();
+        return nextStep;
+    }
+
+    cy_x = currentOocyte->center.x;
+    cy_y = currentOocyte->center.y;
+    cy_r = currentOocyte->radius;
+
+    const float holdSafetyMargin = 0.0f;
+    double x0Inj = injector->manipulator->getAbsX();
+    float holdSafetyTipX = holdPipette->xM+holdSafetyMargin/Pixel2Um;
+    float availablePenetration = (injectPipette->tip.x-holdSafetyTipX)*Pixel2Um;
+    double holdSafetyAbsX = x0Inj-availablePenetration;
+    bool holdSafetyReached = availablePenetration<=0;
+    if(!holdSafetyReached)
+    {
+        emit moveInjX(0, -60, true);
+        int initialMoveDelay = int(1000*(availablePenetration-5.0f)/60.0f);
+        if(initialMoveDelay>200) initialMoveDelay = 200;
+        if(initialMoveDelay>0) QThread::msleep(initialMoveDelay);
+    }
 
     int puncture_threshold = 5;
     int stable_threshold = 20;
@@ -127,16 +164,26 @@ WORKSTEP StepPenetrate::run()
     int init = -1;
     int min_x = -1;
     ON = true;
-    while (ON)
+    while (ON && !holdSafetyReached)
     {
-        if(injector->manipulator->getAbsX()<x0Inj-(injectPipette->xm-currentOocyte->xMZP)*Pixel2Um-0.8*(currentOocyte->xMZP-currentOocyte->xmZP)*Pixel2Um)//扎透，停止
+        if(injector->manipulator->getAbsX()<=holdSafetyAbsX)
         {
-            qDebug()<<"0.8 break";
+            holdSafetyReached = true;
+            break;
+        }
+        if(injector->manipulator->getAbsX()<x0Inj-(injectPipette->xm-currentOocyte->xMZP)*Pixel2Um-0.9*(currentOocyte->xMZP-currentOocyte->xmZP)*Pixel2Um)//扎透|0.9，停止
+        {
+            qDebug()<<"0.9 break";
             qDebug()<<"injAbsX: "<<injector->manipulator->getAbsX()<<"x0InJ: "<<x0Inj<<"inj xm: "<<injectPipette->xm<<"oocyte xm: "<<currentOocyte->xm<<"Pixel2Um: "<<Pixel2Um;
             break;
         }
         //添加代码:获取当前图片img
         int now = get_center(CurrentGray.clone(), cy_x, cy_y, cy_r);
+        if(injector->manipulator->getAbsX()<=holdSafetyAbsX)
+        {
+            holdSafetyReached = true;
+            break;
+        }
         // qDebug()<<now<<", ";
         if (init == -1) {
             init = now;
@@ -148,12 +195,17 @@ WORKSTEP StepPenetrate::run()
             break;
     }
     emit moveInjX(0, 0, true);
+    if(holdSafetyReached)
+        qDebug()<<"hold pipette safety limit reached: "<<holdSafetyAbsX;
     QThread::sleep(1);
 
     //撤针距离重新计算
+    // 原回撤量末尾减 20 um；再减 10 um，使去核穿刺后的小回撤比原来少 10 um。
+    // double withdrawDis = (x0Inj-injector->manipulator->getAbsX())-(injectPipette->xm-currentOocyte->xM)*Pixel2Um-20;
     double withdrawDis = (x0Inj-injector->manipulator->getAbsX())-(injectPipette->xm-currentOocyte->xM)*Pixel2Um-30;
     // double withdrawDis = 5;
-    moveInjWait(withdrawDis, 0, 0, MANIP_VEL);
+    if(withdrawDis>0)
+        moveInjWait(withdrawDis, 0, 0, 250);
     //------------------------------------------------------步骤完成---------------------------------------------------
     nextStep = ENUCLEATION;
     isWorking = false;

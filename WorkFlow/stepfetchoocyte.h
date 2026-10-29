@@ -18,6 +18,19 @@ public:
     void findNextOocyte();                      //在附近寻找卵细胞
     bool holdOocyte();                          //将卵细胞吸持住
     bool moveToNextOocyteInView();
+    bool selectNextOocyteCandidateInRegion(Oocyte& candidate);
+    cv::Point2f clampHoldOriginTarget(const cv::Point2f& target);
+    bool moveBothNeedlesXYWait(float holdDx, float holdDy, float injDx, float injDy, float v);
+    bool moveBothNeedlesXYWait(float dx, float dy, float v);
+    bool moveInjXYWaitRelaxed(float x, float y, float v, float epsUm=2.0f);
+    bool moveHoldXYWaitRelaxed(float x, float y, float v, float epsUm=2.0f);
+    bool isInjectTipNear(const cv::Point2f& targetTip, float toleranceUm=5.0f);
+    bool isNeedleRelativePoseValid(float relX, float relY, float relZ, float toleranceUm=5.0f);
+    bool moveToNextMappedRegion();
+    void removeNearestMapOocyte(const cv::Point2f& centerUm);
+    QString lastMappedRegionFailure;
+    QString lastNeedleMoveFailure;
+    cv::Point2f lastMappedRegionTarget;
 
 public slots:
     WORKSTEP run();

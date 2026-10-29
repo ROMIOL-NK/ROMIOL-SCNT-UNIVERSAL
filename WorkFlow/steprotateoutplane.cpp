@@ -4,7 +4,7 @@ using namespace cv;
 
 StepRotateOutPlane::StepRotateOutPlane()
 {
-//去往操作区
+    //去往操作区
     curInjectTipRel = vector<float>(3);
     penDepth = 15;
     iniDisRatio = 1.5;
@@ -14,10 +14,16 @@ StepRotateOutPlane::StepRotateOutPlane()
     rotatedAngle = 0;
     maxRotateAngle = 720;
     ANTORAD = 3.14/180;
+    rotateOutPlaneMode = ROTATE_OUT_X_LINE_UP;  //ROTATE_OUT_XYZ  ROTATE_OUT_X_LINE_DOWN  ROTATE_OUT_X_LINE_UP   ROTATE_OUT_ORIGINAL_3D
+    outPlaneVel = 250;
 }
+
+static const int ROTATE_OUT_SHORT_MAX_COUNT = 5;
+
 WORKSTEP StepRotateOutPlane::run()
 {
     isWorking = true;
+    QThread::msleep(200);
     currentOocyte->find(CurrentGray);
     if(isPBinPlace())
     {
@@ -26,9 +32,6 @@ WORKSTEP StepRotateOutPlane::run()
         emit finish();
         return nextStep;
     }
-    holdRotateP = -500;
-    // if(holder->pSensor->pressure<holdRotateP-200)
-    //     emit funcAdjHoldP(holdRotateP);
     if(currentOocyte->isPBDetected)//极体已经在焦平面，不需要进行平面外拨动
     {
         nextStep = ROTATEINPLANE;
@@ -37,79 +40,42 @@ WORKSTEP StepRotateOutPlane::run()
         return nextStep;
     }
 
-    //添加处理代码: 确认吸持足够松弛，移动注射微针拨动细胞到极体在目标位置
-
-    //开启 平面外旋转操作
-    //0. 操作前提：细胞被稳定吸持在吸持针上， 细胞、吸持针、注射针三者处于同一焦平面并清晰。
-    //1. 信息初始化
-    //  1.1 图像处理，得到:细胞中心位置，细胞半径，注射针针尖位置。(TODO:细胞透明带的神经网络处理)
+    // 平面外拨动公共准备：检测吸持针、卵母细胞、注射针，并建立相对卵中心的针尖坐标。
     holdPipette->find(CurrentBGR);
     if(!holdPipette->isDetected)
         DEAL_FAULT("无法找到吸持针！请手动标记吸持针！");
     currentOocyte->find(CurrentGray);
     injectPipette->find(CurrentGray);
     if(!currentOocyte->isDetected || !injectPipette->isDetected)
-        {DEAL_FAULT("请手动标注卵细胞|注射针，完成后关闭窗口！")}
-    oocytesRadius = currentOocyte->radiusZP*Pixel2Um; //单位微米。TODO: 透明带检测后，oocytesRadius*Pixel2Um
-    //  1.2 以当前细胞中心位置为原点，建立相对坐标系，单位微米，更新操作过程中当前吸持针位置  (TODO:局部函数，在当前坐标系下实现 move_to操作）。
+    {DEAL_FAULT("请手动标注卵细胞|注射针，完成后关闭窗口！")}
+    oocytesRadius = currentOocyte->radiusZP*Pixel2Um; //单位微米
     curInjectTipRel[0] = (injectPipette->tip.x-currentOocyte->centerZP.x)*Pixel2Um;
     curInjectTipRel[1] = (injectPipette->tip.y-currentOocyte->centerZP.y)*Pixel2Um;
     curInjectTipRel[2] = 0;
-    //2. 双针初始化
-    //  2.1 吸持针减小负压 (TODO:加入吸持压调整的硬件和软件)
-    //  2.2 注射针移动到初始位置(x轴上距离细胞边缘0.5R)
-    injet_move_to_rel(iniDisRatio*oocytesRadius,0,0);
-    // QThread::msleep(100);
-    //3. 开启旋转
-    //  3.0 (TODO:若极体已出现，直接跳过平面外拨动。)
-    //  3.1 移动到平面外循环旋转的初始位置（30 °）
-    injet_move_to_rel(iniDisRatio*oocytesRadius,0,(oocytesRadius-penDepth)*sin(iniAngle*ANTORAD));
-    // QThread::msleep(100);
-    //  3.2 开启循环, 循环结束条件：1.旋转140 °确认无极体。2.旋转60 ° (时极体出现)。3. 按钮急停？,(TODO:使用神经网络获取极体是否存在的信息)(TODO:确定按钮急停对操作的影响)
-    int smallRotatedAngle = 0;
-    rotatedAngle = 0;
+
     ON = true;
-    // zyj 20251229 拨动时追踪卵细胞
-    // emit sgnInitTrackerOocyte(CurrentBGR, currentOocyte->rectZP);
-    // emit sgnStartPServo();
-    while (ON&&(!currentOocyte->isPBDetected) && rotatedAngle < maxRotateAngle)
+    emit sgnInitTrackerOocyte(CurrentBGR, currentOocyte->rectZP);
+
+    switch(rotateOutPlaneMode)
     {
-        // emit sgnStartCompare(CurrentGray(currentOocyte->rectZP), currentOocyte->rectZP);
-        //      3.2.1 刺入一定深度
-        inject_rot_arc_xz(iniAngle,0,0);
-        // QThread::msleep(300);
-        //      3.2.2 沿着弧线移动，旋转细胞（40 °） (TODO:局部函数，每次旋转10 °，每次调用确定是否满足退出旋转条件）
-        while ((smallRotatedAngle<oneBigAngle)&&(rotatedAngle < maxRotateAngle))
-        {
-            inject_rot_arc_xz(iniAngle,smallRotatedAngle,oneSmallAngle);
-            smallRotatedAngle += oneSmallAngle ;
-            rotatedAngle += oneSmallAngle ;
-            // if(currentOocyte->findPB(CurrentBGR))
-            //     break;
-        }
-        if(currentOocyte->isPBDetected)
-            break;
-        else
-        {
-            //      3.2.3 分两步回归平面外循环旋转的初始位置（30 °）
-            injet_move_to_rel(iniDisRatio*oocytesRadius,0,(oocytesRadius-penDepth)*sin((iniAngle+smallRotatedAngle)*ANTORAD));
-            injet_move_to_rel(iniDisRatio*oocytesRadius,0,(oocytesRadius-penDepth)*sin(iniAngle*ANTORAD));
-            smallRotatedAngle = 0;
-            //zyj 2025.11.03 拨动情况监测
-            // QThread::msleep(600);
-            // if(currentOocyte->findPB(CurrentBGR))
-            //     break;
-            // emit sgnCompareAndCalHoldP(CurrentGray);
-        }
+    case ROTATE_OUT_ORIGINAL_3D:
+        rotate_original_3d();
+        break;
+    case ROTATE_OUT_X_LINE_DOWN:
+        rotate_x_line_down();
+        break;
+    case ROTATE_OUT_X_LINE_UP:
+        rotate_x_line_up();
+        break;
+    case ROTATE_OUT_XYZ:
+    default:
+        rotate_xyz();
+        break;
     }
-    //  3.3 注射针返回初始位置
-    //injet_move_to_rel(iniDisRatio*oocytesRadius,0,(oocytesRadius-penDepth)*sin(iniAngle*ANTORAD));
-    injet_move_to_rel(iniDisRatio*oocytesRadius,0,0);
-    //  3.4 吸持针恢复负压
-    // emit sgnStopPServo();
-    // emit sgnStopTrackOocyte();
-    //4. 根据不同的旋转停止条件，返回相应的状态信息：1.极体出现，开启平面内旋转。2.细胞无极体，等待更换细胞。3. 急停，等待人工介入
-    //------------------------------------------------------步骤完成---------------------------------------------------
+
+    emit sgnStopTrackOocyte();
+
+    // 根据停止条件返回下一步：急停交互、极体进入焦平面、或直接进入穿刺。
     if(ON==false)
     {
         DEAL_FAULT("平面外拨动完成，是否进行平面内拨动");
@@ -117,7 +83,7 @@ WORKSTEP StepRotateOutPlane::run()
         emit finish();
         return nextStep;
     }
-    if(currentOocyte->isPBDetected)//没有极体，跳过平面内拨动
+    if(currentOocyte->isPBDetected)
     {
         nextStep = ROTATEINPLANE;
         isWorking = false;
@@ -133,21 +99,159 @@ WORKSTEP StepRotateOutPlane::run()
     }
 }
 
-void StepRotateOutPlane::injet_move_to_rel(float x,float y,float z)
+void StepRotateOutPlane::rotate_original_3d()
 {
-    moveInjWait(x-curInjectTipRel[0],y-curInjectTipRel[1],z-curInjectTipRel[2], 0);
+    // 原始3D弧线拨法：保持旧版run()中的XZ圆弧拨动语义。
+    injet_move_to_rel(iniDisRatio*oocytesRadius,0,0);
+    injet_move_to_rel(iniDisRatio*oocytesRadius,0,(oocytesRadius-penDepth)*sin(iniAngle*ANTORAD));
+
+    int smallRotatedAngle = 0;
+    rotatedAngle = 0;
+    while (ON&&(!currentOocyte->isPBDetected) && rotatedAngle < maxRotateAngle)
+    {
+        inject_rot_arc_xz(iniAngle,0,0);
+        while ((smallRotatedAngle<oneBigAngle)&&(rotatedAngle < maxRotateAngle))
+        {
+            inject_rot_arc_xz(iniAngle,smallRotatedAngle,oneSmallAngle);
+            smallRotatedAngle += oneSmallAngle ;
+            rotatedAngle += oneSmallAngle ;
+            if(currentOocyte->findPB(CurrentBGR))
+                break;
+        }
+        if(currentOocyte->isPBDetected)
+            break;
+        else
+        {
+            injet_move_to_rel(iniDisRatio*oocytesRadius,0,(oocytesRadius-penDepth)*sin((iniAngle+smallRotatedAngle)*ANTORAD));
+            injet_move_to_rel(iniDisRatio*oocytesRadius,0,(oocytesRadius-penDepth)*sin(iniAngle*ANTORAD));
+            smallRotatedAngle = 0;
+            QThread::msleep(600);
+            if(currentOocyte->findPB(CurrentBGR))
+                break;
+        }
+    }
+    injet_move_to_rel(iniDisRatio*oocytesRadius,0,0);
+}
+
+void StepRotateOutPlane::rotate_x_line_down()
+{
+    // x_line_down：针壁从down侧接触，沿X/Y直线蹭动细胞。
+    rotate_x_line(true);
+}
+
+void StepRotateOutPlane::rotate_x_line_up()
+{
+    // x_line_up：针壁从up侧接触，沿X/Y直线蹭动细胞。
+    rotate_x_line(false);
+}
+
+void StepRotateOutPlane::rotate_x_line(bool isDown)
+{
+    // 正Z方向与原始3D拨法一致；先让针壁贴到细胞，再沿Y方向蹭动。
+    float r = oocytesRadius;
+    float workR = r - penDepth;
+    if(workR < 10)
+        workR = 10;
+    float contactX = safe_injection_side_x(0.35*r);
+    float startX = iniDisRatio*r;
+    float safeZ = cos(25*ANTORAD)*workR;
+    if(safeZ < 20)
+        safeZ = 20;
+
+    float sideSign = isDown ? 1.0 : -1.0;
+    float startY = sideSign*sin(40*ANTORAD)*workR;
+    float scrubY = -sideSign*0.75*workR;
+
+    int rotateCount = 0;
+    while (ON&&(!currentOocyte->isPBDetected) && rotateCount < ROTATE_OUT_SHORT_MAX_COUNT)
+    {
+        // 接触点：针壁已经贴住细胞，不能只停在外侧。
+        injet_move_to_rel(contactX,startY,safeZ,outPlaneVel);
+        if(!ON) break;
+        injet_move_to_rel(contactX,scrubY,safeZ,outPlaneVel);
+        if(!ON) break;
+        injet_move_to_rel(startX,scrubY,safeZ,outPlaneVel);
+        if(!ON) break;
+        injet_move_to_rel(startX,startY,safeZ,outPlaneVel);
+
+        rotateCount++;
+        if(currentOocyte->findPB(CurrentBGR))
+            break;
+        QThread::msleep(100);
+    }
+    injet_move_to_rel(startX,0,0,outPlaneVel);
+}
+
+void StepRotateOutPlane::rotate_xyz()
+{
+    // xyz：A到B的斜向进入段中途蹭到细胞，C点向外侧和正Z方向撤出。
+    float r = oocytesRadius;
+    float workR = r - penDepth;
+    if(workR < 10)
+        workR = 10;
+    float contactX = safe_injection_side_x(0.25*r);
+    float startX = iniDisRatio*r;
+    float safeZ = 0.65*workR;
+    if(safeZ < 20)
+        safeZ = 20;
+    float contactY = -0.65*workR;
+    float retractZ = safeZ + 0.35*workR;
+
+    int rotateCount = 0;
+    while (ON&&(!currentOocyte->isPBDetected) && rotateCount < ROTATE_OUT_SHORT_MAX_COUNT)
+    {
+        // A：外侧、中轴线、正Z安全高位。
+        injet_move_to_rel(startX,0,safeZ,outPlaneVel);
+        if(!ON) break;
+        // B：偏下并略越过细胞表面，A->B段中途产生接触。
+        injet_move_to_rel(contactX,contactY,safeZ,outPlaneVel);
+        if(!ON) break;
+        // C：向外侧和更高Z方向撤出。
+        injet_move_to_rel(startX,contactY,retractZ,outPlaneVel);
+        if(!ON) break;
+        // 回到A后再进行极体检测和下一轮判断。
+        injet_move_to_rel(startX,0,safeZ,outPlaneVel);
+
+        rotateCount++;
+        if(currentOocyte->findPB(CurrentBGR))
+            break;
+        QThread::msleep(100);
+    }
+    injet_move_to_rel(startX,0,0,outPlaneVel);
+}
+
+float StepRotateOutPlane::safe_injection_side_x(float preferredX)
+{
+    // 吸持针在细胞左侧，平面外拨动不主动越过细胞右半侧，降低碰针风险。
+    float r = oocytesRadius;
+    float minX = 0.35*r;
+    if(holdPipette->isDetected)
+    {
+        float holdTipRelX = (holdPipette->xM-currentOocyte->centerZP.x)*Pixel2Um;
+        float holdSafeX = holdTipRelX + 0.5*r;
+        if(minX < holdSafeX)
+            minX = holdSafeX;
+    }
+    if(preferredX < minX)
+        return minX;
+    return preferredX;
+}
+
+void StepRotateOutPlane::injet_move_to_rel(float x,float y,float z,float v)
+{
+    moveInjWait(x-curInjectTipRel[0],y-curInjectTipRel[1],z-curInjectTipRel[2], v);
     curInjectTipRel.clear();
     curInjectTipRel.push_back(x);
     curInjectTipRel.push_back(y);
     curInjectTipRel.push_back(z);
-    // QThread::msleep(300);
 }
+
 void StepRotateOutPlane::inject_rot_arc_xz(int iniAngle,int smallRotatedAngle,int oneSmallAngle)
 {
-
     injet_move_to_rel((oocytesRadius-penDepth)*cos((iniAngle+smallRotatedAngle+oneSmallAngle)*3.14/180),0,
                       (oocytesRadius-penDepth)*sin((iniAngle+smallRotatedAngle+oneSmallAngle)*3.14/180));
 }
+
 bool StepRotateOutPlane::isPBinPlace()
 {
     if(currentOocyte->findPB(CurrentBGR))
