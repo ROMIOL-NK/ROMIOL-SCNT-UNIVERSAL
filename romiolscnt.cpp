@@ -16,6 +16,9 @@ RomiolSCNT::RomiolSCNT(QWidget *parent)
     ui->setupUi(this);
     setWindowIcon(QIcon(":/images/NK.ico"));
 
+    QRect full = QGuiApplication::primaryScreen()->geometry();
+    full_size = QSize(WIDTH, HEIGHT).scaled(full.size(), Qt::KeepAspectRatio);
+    qDebug()<<full.size();
     // 注册 F11 快捷键
     auto *shortcut = new QShortcut(QKeySequence(Qt::Key_F11), this);
     // 整个应用程序内有效
@@ -260,10 +263,7 @@ RomiolSCNT::~RomiolSCNT()
 void RomiolSCNT::togglePopup()
 {
     // 弹窗存在：关闭并销毁
-    if (popup_) {
-        popup_->close();
-        return;
-    }
+    if (popup_) {popup_->close();return;}
 
     // 创建顶层窗口
     auto *popup = new QWidget(
@@ -275,29 +275,20 @@ void RomiolSCNT::togglePopup()
 
     // 关闭窗口时自动销毁
     popup->setAttribute(Qt::WA_DeleteOnClose);
-
     popup->setWindowTitle("全屏弹窗");
     popup->setStyleSheet("background-color: #202020;");
 
     auto *layout = new QVBoxLayout(popup);
-
     auto *label = new QLabel("", popup);
     label->setAlignment(Qt::AlignCenter);
-    label->setPixmap(QPixmap::fromImage(QImage(CurrentBGR.data, CurrentBGR.cols,CurrentBGR.rows,CurrentBGR.step,QImage::Format_BGR888)));
-    label->setScaledContents(true);
-    // QImage(Image.data, Image.cols,Image.rows,Image.step,QImage::Format_BGR888)
-    // QImage(CurrentBGR.data, CurrentBGR.cols,CurrentBGR.rows,CurrentBGR.step,QImage::Format_BGR888)
+    // label->setScaledContents(true);
     layout->addWidget(label);
-
-    // 使用 QPointer 管理窗口
-    popup_ = popup;
-
+    popup_ = popup;    layout_ = layout;    label_ = label;
     // 全屏显示
     popup->showFullScreen();
 
-    // 提升到前台并请求键盘焦点
-    popup->raise();
-    popup->activateWindow();
+    // 提升主窗口到前台并请求键盘焦点
+    this->activateWindow();
 }
 void RomiolSCNT::init()
 {
@@ -845,47 +836,6 @@ void RomiolSCNT::modeChanged(QString s)
     else if(s=="ICSI")
         mode=ICSI;
 }
-void RomiolSCNT::btnReset()
-{
-    isWorking = false;
-    //关闭与运动相关的子线程
-    // threadFunctions.terminate();
-    // threadWorkFlow.terminate();
-    stepBuildMap->ON = false;
-    stepFetchOocyte->ON = false;
-    stepRotateOutPlane->ON = false;
-    stepRotateInPlane->ON = false;
-    stepPenetrate->ON = false;
-    stepEnucleation->ON = false;
-    stepFetchSoma->ON = false;
-    stepReleaseOocyte->ON = false;
-    stepExpel->ON = false;
-    stepFetchSoma->ON = false;
-    stepFetchOocyteForSoma->ON = false;
-    stepRotateForSoma->ON = false;
-    stepPenetrateForSoma->ON = false;
-    stepInjectSoma->ON = false;
-    //停止所有电机的运动
-    stopAllMotors();
-
-    holdPipette->reset();
-    currentOocyte->reset();
-    injectPipette->reset();
-    ui->BTN_AUTOCLONE->setStyleSheet(NORMAL_QSS);
-    // threadFunctions.start();
-    // threadWorkFlow.start();
-    motorStatus->setText("Reset!");
-}
-void RomiolSCNT::stopAllMotors()
-{
-    emit sgnStopPServo();
-    emit sgnStopFocus();
-    emit sgnStopStage();
-    emit sgnStopLManip();
-    emit sgnStopLSMotor();
-    emit sgnStopRManip();
-    emit sgnStopRSMotor();
-}
 // **************************************** 设备操控 ****************************************
 // ------------------- 连接设备 -------------------
 void RomiolSCNT::connectStage()
@@ -1395,6 +1345,11 @@ void RomiolSCNT::scopeUpdateImage()
     else
         qimg = QImage(Image.data, Image.cols,Image.rows,Image.step,QImage::Format_BGR888);
     ui->LABEL_IMAGE->setPixmap(QPixmap::fromImage(qimg));
+    if(popup_)
+    {
+        // label_->setPixmap(QPixmap::fromImage(QImage(CurrentBGR.data, CurrentBGR.cols,CurrentBGR.rows,CurrentBGR.step,QImage::Format_BGR888)).scaled(full_size));
+        label_->setPixmap(QPixmap::fromImage(QImage(Image.data, Image.cols,Image.rows,Image.step,QImage::Format_BGR888)).scaled(full_size));
+    }
 }
 void RomiolSCNT::btnCapture()
 {
@@ -2576,6 +2531,47 @@ void RomiolSCNT::btnRestart()
     ui->BTN_STEP_RELEASE_OOCYTE->setChecked(false);
     ui->BTN_AUTOCLONE->setChecked(false);
 }
+void RomiolSCNT::btnReset()
+{
+    isWorking = false;
+    //关闭与运动相关的子线程
+    // threadFunctions.terminate();
+    // threadWorkFlow.terminate();
+    stepBuildMap->ON = false;
+    stepFetchOocyte->ON = false;
+    stepRotateOutPlane->ON = false;
+    stepRotateInPlane->ON = false;
+    stepPenetrate->ON = false;
+    stepEnucleation->ON = false;
+    stepFetchSoma->ON = false;
+    stepReleaseOocyte->ON = false;
+    stepExpel->ON = false;
+    stepFetchSoma->ON = false;
+    stepFetchOocyteForSoma->ON = false;
+    stepRotateForSoma->ON = false;
+    stepPenetrateForSoma->ON = false;
+    stepInjectSoma->ON = false;
+    //停止所有电机的运动
+    stopAllMotors();
+
+    holdPipette->reset();
+    currentOocyte->reset();
+    injectPipette->reset();
+    ui->BTN_AUTOCLONE->setStyleSheet(NORMAL_QSS);
+    // threadFunctions.start();
+    // threadWorkFlow.start();
+    motorStatus->setText("Reset!");
+}
+void RomiolSCNT::stopAllMotors()
+{
+    emit sgnStopPServo();
+    emit sgnStopFocus();
+    emit sgnStopStage();
+    emit sgnStopLManip();
+    emit sgnStopLSMotor();
+    emit sgnStopRManip();
+    emit sgnStopRSMotor();
+}
 
 void RomiolSCNT::finishFunc(QString str)
 {
@@ -3253,6 +3249,8 @@ bool RomiolSCNT::event(QEvent *event)
             ui->BTN_RIGHT_MANIP_BACK->  setShortcut(Qt::Key_Down);
             break;
         case Qt::Key_Escape:
+            // 弹窗存在：关闭并销毁
+            if (popup_) popup_->close();
             ui->GROUP_MICROSCOPE->setStyleSheet("background-color: none;");
             ui->GROUP_LEFT_MANIP->setStyleSheet("background-color: none;");
             ui->GROUP_RIGHT_MANIP->setStyleSheet("background-color: none");

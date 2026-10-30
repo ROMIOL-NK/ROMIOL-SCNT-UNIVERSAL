@@ -49,8 +49,11 @@ public:
     ~RomiolSCNT();
 private:
     Ui::RomiolSCNT *ui;
-
-    QPointer<QWidget> popup_;  // 自动感知窗口销毁
+    // F11 全屏弹窗
+    QSize full_size;
+    QPointer<QWidget> popup_;
+    QPointer<QVBoxLayout> layout_;
+    QPointer<QLabel> label_;
     void togglePopup();
 
     QLabel* pixelStatus;        //像素信息状态栏标签
