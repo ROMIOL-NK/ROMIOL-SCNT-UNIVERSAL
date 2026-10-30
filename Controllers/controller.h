@@ -1,9 +1,6 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 #include "public.h"
-#undef slots
-#include <Python.h>
-#define slots Q_SLOTS
 enum TRAJ_MODE{TRAJ_MODE_SIGMOID, TRAJ_MODE_ACC_DEC, TRAJ_MODE_SINE, TRAJ_MODE_SETPOINT, TRAJ_MODE_SLOPE};
 //通用的控制器类，使用方式：setTrajParas[, setParas], initialize -> (loop) {get_yd(), (observe) set_y(_), get_u(&u), step()}，其中 y由外部观测器获得，计算得到 u 后提供给执行器
 class Controller: public QObject
@@ -58,10 +55,6 @@ public:
     bool isStage2;                           //进入第二阶段的标志；y_observe[0]-y_history[0][0]-y_bias[0]<y_th时恒定控制输入为u1
     bool isSaveLastPara;                     //是否保持上次辨识的参数
     bool isInitialized;                      //是否已完成初始化
-
-    PyObject *pModule;
-    PyObject * pFuncDrawTraj;
-    PyObject * pFuncDrawU;
 };
 
 #endif // CONTROLLER_H

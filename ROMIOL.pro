@@ -188,22 +188,13 @@ LIBS += -L$$PWD/LIB/ -lzmotion
 #     # opencv
 #     INCLUDEPATH += D:\OpenCV\opencv-4.8.0\build\include
 #     LIBS += -LD:\OpenCV\opencv-4.8.0\build\x64\vc16\lib/ -lopencv_world480d
-#     # python
-#     INCLUDEPATH += D:/anaconda3/envs/qt_romiol/include
-#     LIBS += -LD:/anaconda3/envs/qt_romiol/libs/ -lpython312 -lpython3
-#     DEFINES += PYTHONHOME="D:/anaconda3/envs/qt_romiol"
 # }
 
 # CONFIG(release,debug|release)\
 # {#release 模式
-#     # python
 #     # opnecv cpu版
 #     INCLUDEPATH += D:\OpenCV\opencv-4.8.0\build\include
 #     LIBS += -LD:\OpenCV\opencv-4.8.0\build\x64\vc16\lib/ -lopencv_world480
-#     # python
-#     INCLUDEPATH += D:/anaconda3/envs/qt_romiol/include
-#     LIBS += -LD:/anaconda3/envs/qt_romiol/libs/ -lpython312 -lpython3
-#     DEFINES += PYTHONHOME="D:/anaconda3/envs/qt_romiol"
 # }
 # #------------------------------------------深圳配置 IPC end------------------------------------------
 
@@ -214,15 +205,6 @@ LIBS += -L$$PWD/LIB/ -lzmotion
 #     # opencv
 #     INCLUDEPATH += D:\OpenCV\opencv-4.8.0\build\include
 #     LIBS += -LD:\OpenCV\opencv-4.8.0\build\x64\vc16\lib/ -lopencv_world480d
-#     # python
-#     exists(C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.1\bin\nppial64_11.dll){# 对应深圳424的工控机
-#     INCLUDEPATH += D:/Python/Python3-8-10/include
-#     LIBS += -LD:/Python/Python3-8-10/libs/ -lpython38 -lpython3
-#     DEFINES += PYTHONHOME="D:/Python/Python3-8-10"}
-#     else{# 对应其他使用anaconda的平台
-#     INCLUDEPATH += D:/anaconda3/include
-#     LIBS += -LD:/anaconda3/libs/ -lpython312 -lpython3
-#     DEFINES += PYTHONHOME="D:/anaconda3"}
 # }
 
 # CONFIG(release,debug|release)\
@@ -230,29 +212,17 @@ LIBS += -L$$PWD/LIB/ -lzmotion
 #     exists(C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.1\bin\nppial64_11.dll){# 对应深圳424拥有GPU的工控机
 #     # opencv 本地编译的 gpu版
 #     INCLUDEPATH += D:\OpenCV\opencv-4.7.0-gpu\build\install\include
-#     LIBS += -LD:\OpenCV\opencv-4.7.0-gpu\build\lib\Release -lopencv_world470
-#     # python
-#     INCLUDEPATH += D:/Python/Python3-8-10/include
-#     LIBS += -LD:/Python/Python3-8-10/libs/ -lpython38 -lpython3
-#     DEFINES += PYTHONHOME="D:/Python/Python3-8-10"}
+#     LIBS += -LD:\OpenCV\opencv-4.7.0-gpu\build\lib\Release -lopencv_world470}
 #     else{# 对应其他的平台
 #     # opnecv cpu版
 #     INCLUDEPATH += D:\OpenCV\opencv-4.8.0\build\include
-#     LIBS += -LD:\OpenCV\opencv-4.8.0\build\x64\vc16\lib/ -lopencv_world480
-#     # python
-#     INCLUDEPATH += D:/anaconda3/include
-#     LIBS += -LD:/anaconda3/libs/ -lpython312 -lpython3
-#     DEFINES += PYTHONHOME="D:/anaconda3"}
+#     LIBS += -LD:\OpenCV\opencv-4.8.0\build\x64\vc16\lib/ -lopencv_world480}
 # }
 #------------------------------------------深圳配置 Station end------------------------------------------
 
 
 #------------------------------------------天津配置 start------------------------------------------
 DEFINES += SYSTEM_TJ
-# python
-INCLUDEPATH += D:/software/Anaconda/envs/qt_romiol/include
-LIBS += -LD:/software/Anaconda/envs/qt_romiol/libs -lpython312
-DEFINES += PYTHONHOME="D:/software/Anaconda/envs/qt_romiol"
 CONFIG(debug,debug|release)\
 {
     INCLUDEPATH += D:/Software/OpenCV/opencv/build/include

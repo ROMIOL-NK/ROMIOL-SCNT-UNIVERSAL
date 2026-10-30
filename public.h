@@ -10,12 +10,15 @@
 #include <QFileDialog>
 #include <QImage>
 #include <QKeyEvent>
+#include <QKeySequence>
+#include <QLabel>
 #include <QLineSeries>
 #include <QMediaDevices>
 #include <QMessageBox>
 #include <QObject>
 #include <QProcess>
 #include <QPushButton>
+#include <QShortcut>
 #include <QString>
 #include <QThread>
 #include <QTime>
@@ -27,7 +30,7 @@
 #include <QWheelEvent>
 #include <QValueAxis>
 #include <QVariant>
-
+#include <QVBoxLayout>
 #include <QVector>
 
 // float.h, limits.h 中定义了 int, float, double 的最大值

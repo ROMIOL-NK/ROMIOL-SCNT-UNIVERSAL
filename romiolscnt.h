@@ -50,6 +50,9 @@ public:
 private:
     Ui::RomiolSCNT *ui;
 
+    QPointer<QWidget> popup_;  // 自动感知窗口销毁
+    void togglePopup();
+
     QLabel* pixelStatus;        //像素信息状态栏标签
     QLabel* workFlowStatus;     //工作流信息状态栏标签
     QLabel* motorStatus;        //电机运动信息状态栏标签
@@ -158,6 +161,7 @@ signals:
     void sgnCloseRSMotor();
 
     void sgnStopFocus();
+    void sgnStopPServo();
     void sgnStopStage();
     void sgnStopLManip();
     void sgnStopLSMotor();
