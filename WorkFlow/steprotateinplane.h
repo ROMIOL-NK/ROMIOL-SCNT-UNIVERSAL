@@ -14,7 +14,6 @@ public:
     bool isPBinPlace();
     std::vector<float> curInjectTipRel;//相对于细胞中心的注射针针尖位置（单位微米）
 
-    bool ON;
     bool isPBdetected;
     int oocytesRadius; //细胞半径，单位微米
     int penDepth; //刺入细胞的深度

@@ -12,7 +12,6 @@ public:
 
     Controller* enuController;
     Controller* injP_Controller;
-    bool ON;
 private:
     std::string path;                                                   //文件保存路径
 

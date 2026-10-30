@@ -25,7 +25,6 @@ public:
     float safe_injection_side_x(float preferredX); /* 避开吸持针侧的最小安全X */
     std::vector<float> curInjectTipRel;//相对于细胞中心的注射针针尖位置（单位微米）
 
-    bool ON;
     RotateOutPlaneMode rotateOutPlaneMode; // 平面外拨动方式，默认XYZ斜蹭
     float outPlaneVel; // 新拨法的注射针移动速度
     int oocytesRadius; //细胞半径，单位微米

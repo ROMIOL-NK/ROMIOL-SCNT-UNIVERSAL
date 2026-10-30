@@ -22,7 +22,6 @@ class StepBuildMap: public WorkFlow
 public:
     StepBuildMap();
 
-    bool ON;
     cv::Mat mapImg;
     cv::Mat validMask;
     // 地图构建参数

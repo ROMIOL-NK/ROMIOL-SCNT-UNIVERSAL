@@ -2078,6 +2078,7 @@ void RomiolSCNT::btnStepBuildMap()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepBuildMap->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("构建卵细胞区域地图开始");
@@ -2104,6 +2105,7 @@ void RomiolSCNT::btnStepFetchOocyte()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepFetchOocyte->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("换卵细胞开始");
@@ -2126,6 +2128,7 @@ void RomiolSCNT::btnStepRotateOutPlane()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepRotateOutPlane->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("平面外旋转卵细胞开始");
@@ -2148,6 +2151,7 @@ void RomiolSCNT::btnStepRotateInPlane()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepRotateInPlane->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("平面内旋转卵细胞开始");
@@ -2170,6 +2174,7 @@ void RomiolSCNT::btnStepPenetrate()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepPenetrate->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("刺入卵细胞开始");
@@ -2192,6 +2197,7 @@ void RomiolSCNT::btnStepEnucleation()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepEnucleation->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("去核开始");
@@ -2214,6 +2220,7 @@ void RomiolSCNT::btnStepExpel()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepExpel->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("吐核开始");
@@ -2236,6 +2243,7 @@ void RomiolSCNT::btnStepReleaseOocyte()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepReleaseOocyte->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("释放卵细胞开始");
@@ -2258,6 +2266,7 @@ void RomiolSCNT::btnStepFetchSoma()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepFetchSoma->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("取体细胞开始");
@@ -2280,6 +2289,7 @@ void RomiolSCNT::btnStepInjectSoma()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepInjectSoma->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("注入体细胞开始");
@@ -2303,6 +2313,7 @@ void RomiolSCNT::btnStepFetchOocyteForSoma()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepFetchOocyteForSoma->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("换卵细胞 开始");
@@ -2325,6 +2336,7 @@ void RomiolSCNT::btnStepRotateForSoma()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepRotateForSoma->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("旋转卵细胞 开始");
@@ -2347,6 +2359,7 @@ void RomiolSCNT::btnStepPenetrateForSoma()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepPenetrateForSoma->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("刺入卵细胞 开始");
@@ -2467,7 +2480,8 @@ void RomiolSCNT::btnAutoClone()
         stepFetchOocyteForSoma->ON = false;
         stepRotateForSoma->ON = false;
         stepPenetrateForSoma->ON = false;
-        stepInjectSoma->ON = false;
+        stepInjectSoma->ON = false;        
+        emit stopAllMotors();
         // threadWorkFlow.terminate();
         // isWorking = false;
     }

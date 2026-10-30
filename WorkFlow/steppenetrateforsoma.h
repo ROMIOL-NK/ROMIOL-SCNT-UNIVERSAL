@@ -8,7 +8,6 @@ class StepPenetrateForSoma: public WorkFlow
 public:
     StepPenetrateForSoma();
 
-    bool ON;
 public slots:
     WORKSTEP run();
 

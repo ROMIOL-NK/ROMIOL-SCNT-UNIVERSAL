@@ -10,8 +10,6 @@ public:
     StepExpel();
     ~StepExpel();
 
-    bool ON;
-
 public slots:
     WORKSTEP run();
 };

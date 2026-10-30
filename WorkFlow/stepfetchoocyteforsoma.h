@@ -7,7 +7,6 @@ class StepFetchOocyteForSoma: public WorkFlow
     Q_OBJECT
 public:
     StepFetchOocyteForSoma();
-    bool ON;
     bool firstOocytePending;
     bool manualNextOocyteAccepted;
 

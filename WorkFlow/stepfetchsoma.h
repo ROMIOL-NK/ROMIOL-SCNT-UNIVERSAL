@@ -10,7 +10,6 @@ public:
     StepFetchSoma();
     ~StepFetchSoma();
     Controller* somaController;
-    bool ON;
     bool isReady;       //已经到达供体区域，调整后焦距和注射针高度
 public slots:
     WORKSTEP run();

@@ -9,6 +9,7 @@ class WorkFlow: public QObject
     Q_OBJECT
 public:
     WorkFlow(){};
+    bool ON;
     bool isDealingFault;
 public slots:
     virtual WORKSTEP run()=0;    //运行当前步骤，返回下一步要执行步骤的编号
