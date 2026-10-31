@@ -31,10 +31,12 @@ SOURCES += \
     Controllers/controller_pneumatic.cpp \
     Controllers/controller_test.cpp \
     Controllers/controller_zdt.cpp \
+    Devices/anglesensoraod.cpp \
     Devices/cameratoup.cpp \
     Devices/camerausb.cpp \
     Devices/focusdevicenikon.cpp \
     Devices/focusdeviceprior.cpp \
+    Devices/manipulatorhuayue.cpp \
     Devices/manipulatormp285.cpp \
     Devices/manipulatorscientifica.cpp \
     Devices/manipulatorscientificamotion8.cpp \
@@ -101,16 +103,19 @@ HEADERS += \
     Controllers/controller_test.h \
     Controllers/controller_zdt.h \
     Controllers/controllers.h \
+    Devices/Base/anglesensor.h \
     Devices/Base/camera.h \
     Devices/Base/focusdevice.h \
     Devices/Base/manipulator.h \
     Devices/Base/psensor.h \
     Devices/Base/stage.h \
     Devices/Base/syringemotor.h \
+    Devices/anglesensoraod.h \
     Devices/cameratoup.h \
     Devices/camerausb.h \
     Devices/focusdevicenikon.h \
     Devices/focusdeviceprior.h \
+    Devices/manipulatorhuayue.h \
     Devices/manipulatormp285.h \
     Devices/manipulatorscientifica.h \
     Devices/manipulatorscientificamotion8.h \

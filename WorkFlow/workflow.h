@@ -3,7 +3,7 @@
 #include "public.h"
 #include "Objects/objects.h"
 #include "Components/components.h"
-#define DEAL_FAULT(msg)     {emit sgnFault(msg);isDealingFault = true;while(isDealingFault)QThread::msleep(10);}
+#define DEAL_FAULT(msg)     {emit sgnFault(msg);isDealingFault = true;while(isDealingFault)QThread::msleep(10);if(!isWorking)return nextStep;}
 class WorkFlow: public QObject
 {
     Q_OBJECT
@@ -49,6 +49,7 @@ signals:
     void funcWithdrawInj();
     void funcAdjHoldP(float);
     void funcHoldOocyte();                      //指派 functions 完成 holdOocyte 功能
+    void setHoldPressureTarget(float);
 
     void moveHoldX(float, float, bool);
     void moveHoldY(float, float, bool);

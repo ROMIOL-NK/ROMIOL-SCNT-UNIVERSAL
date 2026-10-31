@@ -5,10 +5,12 @@
 #include "Devices/manipulatormp285.h"
 #include "Devices/manipulatorscientifica.h"
 #include "Devices/manipulatorscientificamotion8.h"
+#include "Devices/manipulatorhuayue.h"
 #include "Devices/syringemotorgt.h"
 #include "Devices/syringemotorvince.h"
 #include "Devices/psensormik_p3000.h"
 #include "Devices/psensormik_p300.h"
+#include "Devices/anglesensoraod.h"
 
 class Injector: public QObject
 {
@@ -19,6 +21,7 @@ public:
     Manipulator*    manipulator;
     SyringeMotor*   syringeMotor;
     PSensor*        pSensor;
+    AngleSensor*    anglesensor;
 
     bool isLiquid;                  //是否为液泵
 

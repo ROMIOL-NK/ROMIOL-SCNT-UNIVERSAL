@@ -324,4 +324,5 @@ extern bool             areAllSomasInjected;
 extern bool             isWorking;          //执行工作中的标志，防止多项工作冲突；在进入 run函数前要确保没有其他进行中的工作
 extern bool             isUsingSocket;      //物体检测是否使用 socket通讯
 extern bool             isHCI;              //是否使用人机交互模式 （部分workflow完全交给操作员完成）
+extern float            currentAngle;
 #endif // PUBLIC_H

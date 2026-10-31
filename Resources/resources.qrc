@@ -29,6 +29,9 @@
         <file>Running.png</file>
         <file>Restart.png</file>
         <file>Auto.png</file>
+        <file>logo_purple.png</file>
+        <file>NKU.png</file>
+        <file>ROMIOL.png</file>
     </qresource>
     <qresource prefix="/config">
         <file>GTS800.cfg</file>
@@ -40,6 +43,8 @@
         <file>controller_paras.json</file>
         <file>polar_body.pt</file>
         <file>SCNT-detect-20250518.pt</file>
+        <file>2.pt</file>
+        <file>3.pt</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

@@ -2937,6 +2937,25 @@ QPushButton:checked {
        <bool>true</bool>
       </property>
      </widget>
+     <widget class="QLabel" name="LABEL_LOGO">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>760</y>
+        <width>221</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="Resources/resources.qrc">:/images/logo_purple.png</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
      <zorder>frame_2</zorder>
      <zorder>BTN_WITHDRAW_INJ</zorder>
      <zorder>BTN_CO_UP</zorder>
@@ -2958,6 +2977,7 @@ QPushButton:checked {
      <zorder>BTN_SAVE_CTL_RESULT</zorder>
      <zorder>BTN_MOVE_UP</zorder>
      <zorder>BTN_MOVE_DOWN</zorder>
+     <zorder>LABEL_LOGO</zorder>
     </widget>
     <widget class="QWidget" name="TAB_CONFIG">
      <attribute name="title">
@@ -3828,7 +3848,7 @@ QPushButton:checked {
      <x>0</x>
      <y>0</y>
      <width>1224</width>
-     <height>26</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="MENU_HELP">
@@ -5442,6 +5462,19 @@ QPushButton:hover {
          <bool>false</bool>
         </property>
        </widget>
+       <widget class="QPushButton" name="BTN_IS_MANUAL">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>70</y>
+          <width>51</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>手动</string>
+        </property>
+       </widget>
        <zorder>GROUP_HOLDER</zorder>
        <zorder>label_8</zorder>
        <zorder>label_5</zorder>
@@ -5454,6 +5487,7 @@ QPushButton:hover {
        <zorder>GROUP_LEFT_MANIP</zorder>
        <zorder>GROUP_INJECTOR</zorder>
        <zorder>RADIO_SYRINGE_CONTINUOUS</zorder>
+       <zorder>BTN_IS_MANUAL</zorder>
       </widget>
       <widget class="QGroupBox" name="GROUP_MICROSCOPE">
        <property name="geometry">
@@ -7600,7 +7634,7 @@ QPushButton:hover {
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="workflowButtons"/>
   <buttongroup name="speedGroup"/>
+  <buttongroup name="workflowButtons"/>
  </buttongroups>
 </ui>

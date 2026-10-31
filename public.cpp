@@ -107,6 +107,7 @@ float Pixel2Um = Pixel2Um_4x;       //4x 下 1 pixel = 2.78 um
 QString exceptionInfo = "";         //异常信息
 Objective CurObj = x4;              //默认为 4x
 
+float currentAngle=0;
 //辅助信息存储变量
 MODE    mode = SCNT_BATCH;
 WORKSTEP nextStep = BUILDMAP;
