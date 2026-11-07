@@ -10,12 +10,15 @@
 #include <QFileDialog>
 #include <QImage>
 #include <QKeyEvent>
+#include <QKeySequence>
+#include <QLabel>
 #include <QLineSeries>
 #include <QMediaDevices>
 #include <QMessageBox>
 #include <QObject>
 #include <QProcess>
 #include <QPushButton>
+#include <QShortcut>
 #include <QString>
 #include <QThread>
 #include <QTime>
@@ -27,11 +30,12 @@
 #include <QWheelEvent>
 #include <QValueAxis>
 #include <QVariant>
-
+#include <QVBoxLayout>
 #include <QVector>
 
 // float.h, limits.h 中定义了 int, float, double 的最大值
 #include <algorithm>
+#include <atomic>
 #include <cmath>
 #include <direct.h>
 #include <float.h>
@@ -55,31 +59,6 @@
 //图像的高度和宽度
 #define WIDTH  640                    //图像宽度  （单位：像素）
 #define HEIGHT 480                    //图像高度  （单位：像素）
-//显微镜放大参数
-// Basler
-// #define Pixel2Um_4x  2.870//4x
-// #define Pixel2Um_10x 1.164//10x
-// #define Pixel2Um_20x 0.582//20x
-// #define Pixel2Um_40x 0.291//40x
-// Toup
-// #define Pixel2Um_4x  7.212//4x
-// #define Pixel2Um_10x 2.899//10x
-// #define Pixel2Um_20x 1.455//20x
-// #define Pixel2Um_40x 0.727//40x
-
-#ifdef SYSTEM_TJ
-    #define Pixel2Um_4x  3.515//4x
-    #define Pixel2Um_10x 1.406//10x
-    #define Pixel2Um_20x 0.703//20x
-    #define Pixel2Um_40x 0.351//40x
-#endif
-
-#if (defined SYSTEM_SZ_IPC)||(defined SYSTEM_SZ_STATION)
-    #define Pixel2Um_4x  6.700//4x
-    #define Pixel2Um_10x 2.680//10x
-    #define Pixel2Um_20x 1.340//20x
-    #define Pixel2Um_40x 0.670//40x
-#endif
 
 #define BiasX_4to10 -583.76//4x → 10x
 #define BiasY_4to10 -437.52//4x → 10x
@@ -240,6 +219,11 @@ extern float REGION_OX_UM;      //当前图像（左上角）在全局地图（�
 extern float REGION_OY_UM;      //当前图像（左上角）在全局地图（左上角）中的 Y位置（单位：um）
 
 //相机参数或配置
+extern float Pixel2Um_4x;       //4倍镜下像素的尺寸 (um)
+extern float Pixel2Um_10x;      //10倍镜下像素的尺寸 (um)
+extern float Pixel2Um_20x;      //20倍镜头下像素的尺寸 (um)
+extern float Pixel2Um_40x;      //40倍镜头下像素的尺寸 (um)
+
 extern float IMG_STAGE_ANGLE;   //显微图像偏转的角度
 extern float Pixel2Um;          //当前镜头下像素的尺寸 (um)
 extern QString exceptionInfo;   //异常信息
@@ -257,6 +241,7 @@ class Yolo;
 class Vision;
 class Track;
 class PServo;
+class AutoFocus;
 class ObjectDetector;
 
 class Microscope;
@@ -330,6 +315,7 @@ extern Yolo*            yolo;               //Yolo 目标检测网络
 extern Yolo*            yoloPB;             //Yolo 目标检测网络
 extern Vision*          vision;             //物体检测模块
 extern PServo*          pServo;             //气压伺服
+extern AutoFocus*       autoFocus;          //自动调焦
 extern ObjectDetector*  objectDetector;     //物体检测模块
 extern Track*           track;              //视觉跟踪模块
 extern bool             areAllOocytesEnucleated;
@@ -338,4 +324,5 @@ extern bool             areAllSomasInjected;
 extern bool             isWorking;          //执行工作中的标志，防止多项工作冲突；在进入 run函数前要确保没有其他进行中的工作
 extern bool             isUsingSocket;      //物体检测是否使用 socket通讯
 extern bool             isHCI;              //是否使用人机交互模式 （部分workflow完全交给操作员完成）
+extern float            currentAngle;
 #endif // PUBLIC_H

@@ -27,23 +27,6 @@ Controller::Controller(int n_in, int n_out, int n_observe)
         trajParas.push_back(map<string, double>());
 
     saveParas();//设置好参数后保存参数
-    //加载模块，模块名称为myModule，就是myModule.py文件
-    pModule = PyImport_ImportModule("viz");
-    //如果加载失败，则返回
-    if(!pModule)
-    {
-        qDebug()<<"Error Load Module";
-        return;
-    }
-    //加载函数greatFunc
-    else
-    {
-        pFuncDrawTraj = PyObject_GetAttrString(pModule, "drawTraj");
-        pFuncDrawU = PyObject_GetAttrString(pModule, "drawU");
-    }
-    //如果失败则返回
-    if(!pFuncDrawTraj || !pFuncDrawU)
-        qDebug()<<"Error Load Function";
 }
 void Controller::saveParas()
 {
@@ -253,38 +236,11 @@ void Controller::save_data(string filename)
 }
 void Controller::drawTrajectory()
 {
-    //调用 Python 函数
-    PyObject* pyTim = PyList_New(0);           //初始化一个列表: 时间列表
-    PyObject* pyPos = PyList_New(0);           //初始化一个列表: 实际位置
-    PyObject* pyRef = PyList_New(0);           //初始化一个列表：参考轨迹
-    for(size_t i=0; i<k_step; ++i)
-    {
-        // PyList_Append(pyTim, Py_BuildValue("d", double(i)));
-        PyList_Append(pyTim, Py_BuildValue("d", double(1.0*mtime[i]/1000)));
-        PyList_Append(pyPos, Py_BuildValue("d", y_history[i][0]));
-        PyList_Append(pyRef, Py_BuildValue("d", yd_history[i][0]));
-    }
-    PyObject* pArgs = PyTuple_New(3);
-    PyTuple_SetItem(pArgs, 0, pyTim);
-    PyTuple_SetItem(pArgs, 1, pyPos);
-    PyTuple_SetItem(pArgs, 2, pyRef);
-    PyEval_CallObject(pFuncDrawTraj, pArgs);
+
 }
 void Controller::drawU()
 {
-    //调用 Python 函数
-    PyObject* pyTim = PyList_New(0);
-    PyObject* pyU = PyList_New(0);
-    for(size_t i=0; i<k_step; ++i)
-    {
-        // PyList_Append(pyTim, Py_BuildValue("d", double(i)));
-        PyList_Append(pyTim, Py_BuildValue("d", double(1.0*mtime[i]/1000)));
-        PyList_Append(pyU, Py_BuildValue("d", u_real_history[i][0]));
-    }
-    PyObject* pArgs = PyTuple_New(2);
-    PyTuple_SetItem(pArgs, 0, pyTim);
-    PyTuple_SetItem(pArgs, 1, pyU);
-    PyEval_CallObject(pFuncDrawU, pArgs);
+
 }
 void Controller::set_y(vector<double> y_observe)
 {

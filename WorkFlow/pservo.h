@@ -28,6 +28,8 @@ public slots:
 signals:
     void holdBlow(float, float, bool);
     void injSuck(float, float, bool);
+    void stopHoldSyringe();
+    void stopInjSyringe();
 };
 
 #endif // PSERVO_H

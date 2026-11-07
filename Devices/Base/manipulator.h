@@ -28,6 +28,7 @@ public:
     float oriz;//z的自定义原点
 public slots:
     virtual void connectDevice(QString portName)=0;                         //连接设备
+    virtual void modbus_enable(bool is_manual)=0;                           //华粤行手臂
     virtual void moveX(float x, float vel=0, bool CONTINUOUS=false)=0;      //x轴相对运动
     virtual void moveY(float y, float vel=0, bool CONTINUOUS=false)=0;      //y轴相对运动
     virtual void moveZ(float z, float vel=0, bool CONTINUOUS=false)=0;      //z轴相对运动

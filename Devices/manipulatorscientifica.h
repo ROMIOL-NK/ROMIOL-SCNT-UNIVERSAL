@@ -30,6 +30,7 @@ private:
 
 public slots:
     void connectDevice(QString portName);              //连接设备
+    void modbus_enable(bool is_manual){};
     void moveX(float x, float vel=0, bool CONTINUOUS=false);        //x轴相对运动
     void moveY(float y, float vel=0, bool CONTINUOUS=false);        //y轴相对运动
     void moveZ(float z, float vel=0, bool CONTINUOUS=false);        //z轴相对运动

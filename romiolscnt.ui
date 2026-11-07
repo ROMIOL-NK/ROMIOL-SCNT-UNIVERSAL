@@ -266,12 +266,12 @@
       </item>
       <item>
        <property name="text">
-        <string>图片</string>
+        <string>视频</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>视频</string>
+        <string>图片</string>
        </property>
       </item>
      </widget>
@@ -2937,6 +2937,25 @@ QPushButton:checked {
        <bool>true</bool>
       </property>
      </widget>
+     <widget class="QLabel" name="LABEL_LOGO">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>760</y>
+        <width>221</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="Resources/resources.qrc">:/images/logo_purple.png</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
      <zorder>frame_2</zorder>
      <zorder>BTN_WITHDRAW_INJ</zorder>
      <zorder>BTN_CO_UP</zorder>
@@ -2958,6 +2977,7 @@ QPushButton:checked {
      <zorder>BTN_SAVE_CTL_RESULT</zorder>
      <zorder>BTN_MOVE_UP</zorder>
      <zorder>BTN_MOVE_DOWN</zorder>
+     <zorder>LABEL_LOGO</zorder>
     </widget>
     <widget class="QWidget" name="TAB_CONFIG">
      <attribute name="title">
@@ -3828,7 +3848,7 @@ QPushButton:checked {
      <x>0</x>
      <y>0</y>
      <width>1224</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="MENU_HELP">
@@ -5442,6 +5462,19 @@ QPushButton:hover {
          <bool>false</bool>
         </property>
        </widget>
+       <widget class="QPushButton" name="BTN_IS_MANUAL">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>70</y>
+          <width>51</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>手动</string>
+        </property>
+       </widget>
        <zorder>GROUP_HOLDER</zorder>
        <zorder>label_8</zorder>
        <zorder>label_5</zorder>
@@ -5454,6 +5487,7 @@ QPushButton:hover {
        <zorder>GROUP_LEFT_MANIP</zorder>
        <zorder>GROUP_INJECTOR</zorder>
        <zorder>RADIO_SYRINGE_CONTINUOUS</zorder>
+       <zorder>BTN_IS_MANUAL</zorder>
       </widget>
       <widget class="QGroupBox" name="GROUP_MICROSCOPE">
        <property name="geometry">
@@ -5997,7 +6031,7 @@ QPushButton:hover {
            <x>5</x>
            <y>10</y>
            <width>291</width>
-           <height>26</height>
+           <height>30</height>
           </rect>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout">
@@ -6289,143 +6323,6 @@ QPushButton:checked {
        <property name="title">
         <string/>
        </property>
-       <widget class="QPushButton" name="BTN_GOTO_STORE_AREA">
-        <property name="geometry">
-         <rect>
-          <x>145</x>
-          <y>100</y>
-          <width>55</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="cursor">
-         <cursorShape>OpenHandCursor</cursorShape>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	border: 1px solid gray;
-	border-radius: 10px;
-    background-color: rgb(225, 225, 225);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:hover {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.7);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}</string>
-        </property>
-        <property name="text">
-         <string>存储</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="BTN_GOTO_WORK_AREA">
-        <property name="geometry">
-         <rect>
-          <x>145</x>
-          <y>10</y>
-          <width>55</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="cursor">
-         <cursorShape>OpenHandCursor</cursorShape>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	border: 1px solid gray;
-	border-radius: 10px;
-    background-color: rgb(225, 225, 225);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:hover {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.7);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}</string>
-        </property>
-        <property name="text">
-         <string>操作</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="BTN_SET_SPIT_AREA">
-        <property name="geometry">
-         <rect>
-          <x>230</x>
-          <y>40</y>
-          <width>45</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>华文楷体</family>
-          <pointsize>12</pointsize>
-          <italic>false</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="cursor">
-         <cursorShape>OpenHandCursor</cursorShape>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	border: 1px solid gray;
-	border-radius: 10px;
-    background-color: rgb(225, 225, 225);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:checked {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(50, 50, 50, 0.5);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:hover {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.7);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}</string>
-        </property>
-        <property name="text">
-         <string>设定</string>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-       </widget>
        <widget class="QLabel" name="label_38">
         <property name="geometry">
          <rect>
@@ -6437,202 +6334,6 @@ QPushButton:hover {
         </property>
         <property name="text">
          <string>×</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="BTN_SET_WORK_AREA">
-        <property name="geometry">
-         <rect>
-          <x>230</x>
-          <y>10</y>
-          <width>45</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>华文楷体</family>
-          <pointsize>12</pointsize>
-          <italic>false</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="cursor">
-         <cursorShape>OpenHandCursor</cursorShape>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	border: 1px solid gray;
-	border-radius: 10px;
-    background-color: rgb(225, 225, 225);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:checked {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(50, 50, 50, 0.5);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:hover {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.7);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}</string>
-        </property>
-        <property name="text">
-         <string>设定</string>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="BTN_SET_STORE_AREA">
-        <property name="geometry">
-         <rect>
-          <x>230</x>
-          <y>100</y>
-          <width>45</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>华文楷体</family>
-          <pointsize>12</pointsize>
-          <italic>false</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="cursor">
-         <cursorShape>OpenHandCursor</cursorShape>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	border: 1px solid gray;
-	border-radius: 10px;
-    background-color: rgb(225, 225, 225);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:checked {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(50, 50, 50, 0.5);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:hover {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.7);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}</string>
-        </property>
-        <property name="text">
-         <string>设定</string>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="BTN_GOTO_SPIT_AREA">
-        <property name="geometry">
-         <rect>
-          <x>145</x>
-          <y>40</y>
-          <width>55</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="cursor">
-         <cursorShape>OpenHandCursor</cursorShape>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	border: 1px solid gray;
-	border-radius: 10px;
-    background-color: rgb(225, 225, 225);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:hover {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.7);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}</string>
-        </property>
-        <property name="text">
-         <string>吐核</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="BTN_GOTO_DONOR_AREA">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>10</y>
-          <width>61</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="cursor">
-         <cursorShape>OpenHandCursor</cursorShape>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	border: 1px solid gray;
-	border-radius: 10px;
-    background-color: rgb(225, 225, 225);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:hover {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.7);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}</string>
-        </property>
-        <property name="text">
-         <string>供体</string>
         </property>
        </widget>
        <widget class="QPushButton" name="BTN_GOTO_OOCYTE_AREA">
@@ -6717,218 +6418,6 @@ QPushButton:checked {
          <string notr="true">workflowButtons</string>
         </attribute>
        </widget>
-       <widget class="QPushButton" name="BTN_SET_DONOR_AREA">
-        <property name="geometry">
-         <rect>
-          <x>79</x>
-          <y>10</y>
-          <width>51</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>华文楷体</family>
-          <pointsize>12</pointsize>
-          <italic>false</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="cursor">
-         <cursorShape>OpenHandCursor</cursorShape>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	border: 1px solid gray;
-	border-radius: 10px;
-    background-color: rgb(225, 225, 225);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:checked {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(50, 50, 50, 0.5);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:hover {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.7);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}</string>
-        </property>
-        <property name="text">
-         <string>设定</string>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-        <property name="checked">
-         <bool>false</bool>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="BTN_SET_FAIL_AREA">
-        <property name="geometry">
-         <rect>
-          <x>230</x>
-          <y>130</y>
-          <width>45</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>华文楷体</family>
-          <pointsize>12</pointsize>
-          <italic>false</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="cursor">
-         <cursorShape>OpenHandCursor</cursorShape>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	border: 1px solid gray;
-	border-radius: 10px;
-    background-color: rgb(225, 225, 225);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:checked {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(50, 50, 50, 0.5);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:hover {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.7);
-	font-family: 华文楷体;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}</string>
-        </property>
-        <property name="text">
-         <string>设定</string>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="BTN_GOTO_FAIL_AREA">
-        <property name="geometry">
-         <rect>
-          <x>145</x>
-          <y>130</y>
-          <width>55</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="cursor">
-         <cursorShape>OpenHandCursor</cursorShape>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	border: 1px solid gray;
-	border-radius: 10px;
-    background-color: rgb(225, 225, 225);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:hover {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.7);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}</string>
-        </property>
-        <property name="text">
-         <string>失败</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_43">
-        <property name="geometry">
-         <rect>
-          <x>210</x>
-          <y>60</y>
-          <width>20</width>
-          <height>48</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="cursor">
-         <cursorShape>ArrowCursor</cursorShape>
-        </property>
-        <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
-        </property>
-        <property name="text">
-         <string>区
-域</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_44">
-        <property name="geometry">
-         <rect>
-          <x>280</x>
-          <y>60</y>
-          <width>20</width>
-          <height>48</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="cursor">
-         <cursorShape>ArrowCursor</cursorShape>
-        </property>
-        <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
-        </property>
-        <property name="text">
-         <string>设
-定</string>
-        </property>
-       </widget>
        <widget class="QSpinBox" name="TXT_GLOBALMAP_ROWS">
         <property name="geometry">
          <rect>
@@ -6980,45 +6469,6 @@ QPushButton:hover {
         </property>
         <property name="value">
          <number>1</number>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="BTN_GOTO_SPIT_EDGE">
-        <property name="geometry">
-         <rect>
-          <x>145</x>
-          <y>70</y>
-          <width>55</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="cursor">
-         <cursorShape>OpenHandCursor</cursorShape>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-	border: 1px solid gray;
-	border-radius: 10px;
-    background-color: rgb(225, 225, 225);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}
-QPushButton:hover {
-	border: 1px solid #3a8ee6;
-	border-radius: 10px;
-    background-color: rgba(0, 255, 0, 0.7);
-	font-family: Times New Roman;
-	font-size: 12pt;
-	color: black;
-	font: bold;
-}</string>
-        </property>
-        <property name="text">
-         <string>边缘</string>
         </property>
        </widget>
        <widget class="QPushButton" name="BTN_SET_SPIT_EDGE">
@@ -7074,13 +6524,599 @@ QPushButton:hover {
 }</string>
         </property>
         <property name="text">
-         <string>设定</string>
+         <string>边缘</string>
         </property>
         <property name="checkable">
          <bool>true</bool>
         </property>
         <property name="checked">
          <bool>false</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_44">
+        <property name="geometry">
+         <rect>
+          <x>280</x>
+          <y>60</y>
+          <width>20</width>
+          <height>48</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>华文楷体</family>
+          <pointsize>12</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>ArrowCursor</cursorShape>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="text">
+         <string>区
+域</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="BTN_GOTO_SPIT_EDGE">
+        <property name="geometry">
+         <rect>
+          <x>145</x>
+          <y>70</y>
+          <width>55</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="cursor">
+         <cursorShape>OpenHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: 1px solid gray;
+	border-radius: 10px;
+    background-color: rgb(225, 225, 225);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:hover {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.7);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}</string>
+        </property>
+        <property name="text">
+         <string>GOTO</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="BTN_SET_DONOR_AREA">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>10</y>
+          <width>80</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>华文楷体</family>
+          <pointsize>12</pointsize>
+          <italic>false</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>OpenHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: 1px solid gray;
+	border-radius: 10px;
+    background-color: rgb(225, 225, 225);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:checked {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(50, 50, 50, 0.5);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:hover {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.7);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}</string>
+        </property>
+        <property name="text">
+         <string>供体</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="BTN_GOTO_WORK_AREA">
+        <property name="geometry">
+         <rect>
+          <x>145</x>
+          <y>10</y>
+          <width>55</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="cursor">
+         <cursorShape>OpenHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: 1px solid gray;
+	border-radius: 10px;
+    background-color: rgb(225, 225, 225);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:hover {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.7);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}</string>
+        </property>
+        <property name="text">
+         <string>GOTO</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_43">
+        <property name="geometry">
+         <rect>
+          <x>210</x>
+          <y>60</y>
+          <width>20</width>
+          <height>48</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>华文楷体</family>
+          <pointsize>12</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>ArrowCursor</cursorShape>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="text">
+         <string>设
+定</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="BTN_SET_STORE_AREA">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>100</y>
+          <width>45</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>华文楷体</family>
+          <pointsize>12</pointsize>
+          <italic>false</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>OpenHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: 1px solid gray;
+	border-radius: 10px;
+    background-color: rgb(225, 225, 225);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:checked {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(50, 50, 50, 0.5);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:hover {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.7);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}</string>
+        </property>
+        <property name="text">
+         <string>存储</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="BTN_GOTO_STORE_AREA">
+        <property name="geometry">
+         <rect>
+          <x>145</x>
+          <y>100</y>
+          <width>55</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="cursor">
+         <cursorShape>OpenHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: 1px solid gray;
+	border-radius: 10px;
+    background-color: rgb(225, 225, 225);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:hover {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.7);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}</string>
+        </property>
+        <property name="text">
+         <string>GOTO</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="BTN_GOTO_DONOR_AREA">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>31</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="cursor">
+         <cursorShape>OpenHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: 1px solid gray;
+	border-radius: 10px;
+    background-color: rgb(225, 225, 225);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:hover {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.7);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}</string>
+        </property>
+        <property name="text">
+         <string>GO</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="BTN_GOTO_FAIL_AREA">
+        <property name="geometry">
+         <rect>
+          <x>145</x>
+          <y>130</y>
+          <width>55</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="cursor">
+         <cursorShape>OpenHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: 1px solid gray;
+	border-radius: 10px;
+    background-color: rgb(225, 225, 225);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:hover {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.7);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}</string>
+        </property>
+        <property name="text">
+         <string>GOTO</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="BTN_SET_FAIL_AREA">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>130</y>
+          <width>45</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>华文楷体</family>
+          <pointsize>12</pointsize>
+          <italic>false</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>OpenHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: 1px solid gray;
+	border-radius: 10px;
+    background-color: rgb(225, 225, 225);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:checked {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(50, 50, 50, 0.5);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:hover {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.7);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}</string>
+        </property>
+        <property name="text">
+         <string>失败</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="BTN_GOTO_SPIT_AREA">
+        <property name="geometry">
+         <rect>
+          <x>145</x>
+          <y>40</y>
+          <width>55</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="cursor">
+         <cursorShape>OpenHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: 1px solid gray;
+	border-radius: 10px;
+    background-color: rgb(225, 225, 225);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:hover {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.7);
+	font-family: Times New Roman;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}</string>
+        </property>
+        <property name="text">
+         <string>GOTO</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="BTN_SET_WORK_AREA">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>10</y>
+          <width>45</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>华文楷体</family>
+          <pointsize>12</pointsize>
+          <italic>false</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>OpenHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: 1px solid gray;
+	border-radius: 10px;
+    background-color: rgb(225, 225, 225);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:checked {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(50, 50, 50, 0.5);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:hover {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.7);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}</string>
+        </property>
+        <property name="text">
+         <string>操作</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="BTN_SET_SPIT_AREA">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>40</y>
+          <width>45</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>华文楷体</family>
+          <pointsize>12</pointsize>
+          <italic>false</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>OpenHandCursor</cursorShape>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border: 1px solid gray;
+	border-radius: 10px;
+    background-color: rgb(225, 225, 225);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:checked {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(50, 50, 50, 0.5);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}
+QPushButton:hover {
+	border: 1px solid #3a8ee6;
+	border-radius: 10px;
+    background-color: rgba(0, 255, 0, 0.7);
+	font-family: 华文楷体;
+	font-size: 12pt;
+	color: black;
+	font: bold;
+}</string>
+        </property>
+        <property name="text">
+         <string>吐核</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
         </property>
        </widget>
       </widget>
@@ -7598,7 +7634,7 @@ QPushButton:hover {
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="workflowButtons"/>
   <buttongroup name="speedGroup"/>
+  <buttongroup name="workflowButtons"/>
  </buttongroups>
 </ui>

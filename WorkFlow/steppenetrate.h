@@ -8,7 +8,6 @@ class StepPenetrate: public WorkFlow
 public:
     StepPenetrate();
 
-    bool ON;
 public slots:
     WORKSTEP run();
 

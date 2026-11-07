@@ -198,7 +198,7 @@ void Functions::adjInjP(float tarP)
 }
 void Functions::withdrawInj()
 {
-    moveInjWait(180, 0, 0, 500);
+    moveInjWait(180, 0, 0, 250);
     emit finish("WITHDRAW_INJ");
 }
 void Functions::co_up()
@@ -215,13 +215,12 @@ void Functions::co_down()
 }
 void Functions::nextOocyte()
 {
-    if(allOocytes->total_num==0)
+    if(allOocytes->oocytes.empty())
     {
         emit finish("NEXT_OOCYTE");
         return;
     }
     emit gotoArea(allOocytes->oocytes.back().centerUm);
-    allOocytes->total_num--;
     allOocytes->oocytes.pop_back();
     emit finish("NEXT_OOCYTE");
 }
@@ -401,74 +400,6 @@ void Functions::focus(QString s)
         emit finish("FOCUS_INJ");
 }
 
-void Functions::holdBlowWait(float x, float v, bool b)
-{
-    float r0,r, dr;
-    r0 = holder->syringeMotor->getAbsPos();
-    emit holdBlow(x, v, b);
-    bool isMoveFinished = false;
-    QDateTime startTime=  QDateTime::currentDateTime();
-    QTime time = QTime::currentTime().addMSecs(3000);
-    while(!isMoveFinished && QTime::currentTime() < time)
-    {
-        r = holder->syringeMotor->getAbsPos();
-        dr = abs(r-r0);
-        float eps = 0.00001;      //TODO:不同设备误差设置需要修改
-        if(abs(dr-abs(x))<eps)
-            isMoveFinished = true;
-    }
-}
-bool Functions::moveHoldWait(float x, float y, float z, float v)
-{
-    float x0, y0, z0, x1, y1, z1, dx, dy, dz;
-    x0 = holder->manipulator->getAbsX();
-    y0 = holder->manipulator->getAbsY();
-    z0 = holder->manipulator->getAbsZ();
-    emit moveHold(x,y,z,v);
-    bool isMoveFinished = false;
-    QDateTime startTime=  QDateTime::currentDateTime();
-    QTime time = QTime::currentTime().addMSecs(3000);
-    while(!isMoveFinished && QTime::currentTime() < time)
-    {
-        x1 = holder->manipulator->getAbsX();
-        y1 = holder->manipulator->getAbsY();
-        z1 = holder->manipulator->getAbsZ();
-        dx = x1-x0;
-        dy = y1-y0;
-        dz = z1-z0;
-        qDebug()<< "dx = "<<dx<<"; dy = "<<dy<<"; dz = "<<dz;
-        float eps = 1;      //TODO:不同设备误差设置需要修改
-        if(abs(dx-x)<eps && abs(dy-y)<eps && abs(dz-z)<eps)
-            isMoveFinished = true;
-    }
-    return isMoveFinished;
-}
-bool Functions::moveInjWait(float x, float y, float z, float v)
-{
-    float x0, y0, z0, x1, y1, z1, dx, dy, dz;
-    x0 = injector->manipulator->getAbsX();
-    y0 = injector->manipulator->getAbsY();
-    z0 = injector->manipulator->getAbsZ();
-    emit moveInj(x,y,z,v);
-    bool isMoveFinished = false;
-    QDateTime startTime=  QDateTime::currentDateTime();
-    QTime time = QTime::currentTime().addMSecs(5000);
-    while(!isMoveFinished && QTime::currentTime() < time)
-    {
-        x1 = injector->manipulator->getAbsX();
-        y1 = injector->manipulator->getAbsY();
-        z1 = injector->manipulator->getAbsZ();
-        dx = x1-x0;
-        dy = y1-y0;
-        dz = z1-z0;
-        // qDebug()<< "dx = "<<dx<<"; dy = "<<dy<<"; dz = "<<dz<< "x = "<<x<<"; y = "<<y<<"; z = "<<z;
-        float eps = 0.02;      //TODO:不同设备误差设置需要修改
-        if(abs(dx-x)<eps && abs(dy-y)<eps && abs(dz-z)<eps)
-            isMoveFinished = true;
-    }
-    // qDebug()<<dx-x<<dy-y<<dz-z;
-    return isMoveFinished;
-}
 void Functions::test()
 {
     // holdBlowWait(0.03,  0.2, false);

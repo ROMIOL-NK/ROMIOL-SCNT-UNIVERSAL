@@ -32,6 +32,7 @@
 #include "WorkFlow/vision.h"
 #include "WorkFlow/track.h"
 #include "WorkFlow/pservo.h"
+#include "WorkFlow/autofocus.h"
 #include "WorkFlow/autoclone.h"
 #include "WorkFlow/functions.h"
 
@@ -48,6 +49,12 @@ public:
     ~RomiolSCNT();
 private:
     Ui::RomiolSCNT *ui;
+    // F11 全屏弹窗
+    QSize full_size;
+    QPointer<QWidget> popup_;
+    QPointer<QVBoxLayout> layout_;
+    QPointer<QLabel> label_;
+    void togglePopup();
 
     QLabel* pixelStatus;        //像素信息状态栏标签
     QLabel* workFlowStatus;     //工作流信息状态栏标签
@@ -157,6 +164,7 @@ signals:
     void sgnCloseRSMotor();
 
     void sgnStopFocus();
+    void sgnStopPServo();
     void sgnStopStage();
     void sgnStopLManip();
     void sgnStopLSMotor();

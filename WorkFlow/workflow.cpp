@@ -22,9 +22,6 @@ bool WorkFlow::moveHoldWait(float x, float y, float z, float v)
         if(abs(dx-x)<eps && abs(dy-y)<eps && abs(dz-z)<eps)
             isMoveFinished = true;
         // qDebug()<< "dx = "<<dx<<"; dy = "<<dy<<"; dz = "<<dz;
-        // float k = 0.99;
-        // if(abs(dx)>=k*abs(x/100) && abs(dy)>=k*abs(y/100) && abs(dz)>=k*abs(z/100))
-        //     isMoveFinished = true;
     }
     return isMoveFinished;
 }
@@ -96,6 +93,24 @@ bool WorkFlow::moveFocusWait(float z, float v)
         dz = z1-z0;
         float eps = 0.1;      //TODO:不同设备误差设置需要修改
         if(abs(dz-z)<eps)
+            isMoveFinished = true;
+    }
+    return isMoveFinished;
+}
+bool WorkFlow::holdBlowWait(float x, float v, bool b)
+{
+    float r0,r, dr;
+    r0 = holder->syringeMotor->getAbsPos();
+    emit holdBlow(x, v, b);
+    bool isMoveFinished = false;
+    QDateTime startTime=  QDateTime::currentDateTime();
+    QTime time = QTime::currentTime().addMSecs(3000);
+    while(!isMoveFinished && QTime::currentTime() < time)
+    {
+        r = holder->syringeMotor->getAbsPos();
+        dr = abs(r-r0);
+        float eps = 0.00001;      //TODO:不同设备误差设置需要修改
+        if(abs(dr-abs(x))<eps)
             isMoveFinished = true;
     }
     return isMoveFinished;

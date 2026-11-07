@@ -4,7 +4,7 @@ Holder::Holder()
 {
     //-----------------深圳系统 start-----------------------
 #if (defined SYSTEM_SZ_IPC)||(defined SYSTEM_SZ_STATION)
-    manipulator = new ManipulatorMP285("Left Manipulator");
+    manipulator = new ManipulatorHuayue("Left Manipulator", 0x01, -1, -1, -1);
     // syringeMotor = new SyringeMotorGT();
     syringeMotor = new SyringeMotorVince(); syringeMotor->b_same_dir = false;
     pSensor = new PSensorMIK_P3000();

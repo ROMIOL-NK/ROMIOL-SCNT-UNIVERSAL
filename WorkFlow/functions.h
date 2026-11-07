@@ -4,22 +4,19 @@
 #include "Objects/objects.h"
 #include "Components/components.h"
 #include "Controllers/controllers.h"
+#include "WorkFlow/workflow.h"
 
-class Functions: public QObject
+class Functions: public WorkFlow
 {
     Q_OBJECT
 public:
     Functions();
     ~Functions();
 
-    bool ON;
+    std::atomic_bool ON;
     Controller* injGLI_Controller;
     Controller* holdP_Controller;
     Controller* injP_Controller;
-private:
-    bool moveHoldWait(float x, float y, float z, float v);
-    bool moveInjWait(float x, float y, float z, float v);
-    void holdBlowWait(float x, float v, bool b);
 public slots:
     void adjInjGLI();       //调节注射针液面位置
     void adjHoldP(float);   //调节吸持压
@@ -34,20 +31,9 @@ public slots:
     void focus(QString);    //调焦
     void test();
     void run(QString);
+    WORKSTEP run(){return END;}
 signals:
-    void moveFocus(float, bool, float);
-    void injSuck(float, float, bool);
-    void holdBlow(float, float, bool);
-    void moveHold(float, float, float, float);
-    void moveInjX(float, float, bool);
-    void moveHoldZ(float, float, bool);
-    void moveInjZ(float, float, bool);
-    void moveStage(float, float, float);
-    void gotoArea(cv::Point2f);
-    void moveInj(float, float, float, float);
     void finish(QString);
-    void sgnStartPServo();
-    void sgnStopPServo();
 
     void sgnPlotLine(std::vector<double>, std::vector<double>, QString, QString);
     void sgnPlotLineMat(std::vector<double>, std::vector<cv::Mat>, std::vector<cv::Mat>, QString, QString);

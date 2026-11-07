@@ -9,8 +9,6 @@ public:
     StepReleaseOocyte();
     bool output_Oocyte();
 
-    bool ON;
-
 public slots:
     WORKSTEP run();
 };

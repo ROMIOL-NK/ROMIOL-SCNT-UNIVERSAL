@@ -90,7 +90,26 @@ void SyringeMotorVince::blow(float disp, float vel, bool CONTINUOUS)
 
 void SyringeMotorVince::stop()
 {
-    queue("1 stp\n");
+    // 原逻辑仅将停止命令追加到队尾，队列积压时不能及时停止：
+    // queue("1 stp\n");
+    // 当前队首命令已经发出，必须保留并等待其回复；否则该回复会被误认为停止命令的回复，造成队列错位。
+    if(commandList.empty())
+    {
+        queue("1 stp\n");
+        return;
+    }
+
+    QByteArray currentCommand = commandList.first();
+    bool currentResponseType = responseTypes.empty()?true:responseTypes.first();
+    commandList.clear();
+    responseTypes.clear();
+    commandList.append(currentCommand);
+    responseTypes.append(currentResponseType);
+    if(currentCommand!="1 stp\n")
+    {
+        commandList.append("1 stp\n");
+        responseTypes.append(true);
+    }
 }
 void SyringeMotorVince::close()
 {
@@ -162,6 +181,7 @@ void SyringeMotorVince::recv()
         if(getRelPos() >= upperBound || getRelPos()<=lowerBound)
         {
             commandList.clear();
+            responseTypes.clear();
             queue("1 stp\n");                           //如果位置达到限位，停止运动
         }
         if(!commandList.empty())

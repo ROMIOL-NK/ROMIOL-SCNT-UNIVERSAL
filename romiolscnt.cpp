@@ -6,9 +6,6 @@
 #define LOW_SPEED_STAGE     20
 #define MEDIUM_SPEED_STAGE  200
 #define HIGH_SPEED_STAGE    2000
-//要将宏的值取成字符串，要宏转义两次；将pro文件中定义的 PYTHONHOME 作为Py_SetPythonHome的参数
-#define SSS(R) #R
-#define TTT(R) SSS(R)
 
 using namespace cv;
 using namespace std;
@@ -18,6 +15,18 @@ RomiolSCNT::RomiolSCNT(QWidget *parent)
 {
     ui->setupUi(this);
     setWindowIcon(QIcon(":/images/NK.ico"));
+
+    QRect full = QGuiApplication::primaryScreen()->geometry();
+    full_size = QSize(WIDTH, HEIGHT).scaled(full.size(), Qt::KeepAspectRatio);
+    qDebug()<<full.size();
+    // 注册 F11 快捷键
+    auto *shortcut = new QShortcut(QKeySequence(Qt::Key_F11), this);
+    // 整个应用程序内有效
+    shortcut->setContext(Qt::ApplicationShortcut);
+    // 防止长按 F11 反复触发
+    shortcut->setAutoRepeat(false);
+    connect(shortcut, &QShortcut::activated, this, &RomiolSCNT::togglePopup);
+
     // 状态栏信息：工作流、电机设备、像素
     workFlowStatus = new QLabel;
     ui->statusbar->addPermanentWidget(workFlowStatus);
@@ -178,8 +187,6 @@ RomiolSCNT::RomiolSCNT(QWidget *parent)
 }
 RomiolSCNT::~RomiolSCNT()
 {
-    //退出 Python
-    Py_Finalize();
     //如果当天没有保存文件，删除新建的文件夹
     QDir dir(FILE_PATH);
     if(dir.isEmpty())
@@ -253,6 +260,36 @@ RomiolSCNT::~RomiolSCNT()
     delete ui;
 }
 
+void RomiolSCNT::togglePopup()
+{
+    // 弹窗存在：关闭并销毁
+    if (popup_) {popup_->close();return;}
+
+    // 创建顶层窗口
+    auto *popup = new QWidget(
+        nullptr,
+        Qt::Window |
+            Qt::FramelessWindowHint |
+            Qt::WindowStaysOnTopHint
+        );
+
+    // 关闭窗口时自动销毁
+    popup->setAttribute(Qt::WA_DeleteOnClose);
+    popup->setWindowTitle("全屏弹窗");
+    popup->setStyleSheet("background-color: #202020;");
+
+    auto *layout = new QVBoxLayout(popup);
+    auto *label = new QLabel("", popup);
+    label->setAlignment(Qt::AlignCenter);
+    // label->setScaledContents(true);
+    layout->addWidget(label);
+    popup_ = popup;    layout_ = layout;    label_ = label;
+    // 全屏显示
+    popup->showFullScreen();
+
+    // 提升主窗口到前台并请求键盘焦点
+    this->activateWindow();
+}
 void RomiolSCNT::init()
 {
     holdPipette =   new HoldPipette;
@@ -277,14 +314,6 @@ void RomiolSCNT::init()
     FILE_PATH = FILE_PATH + QString("%1").arg(time);
     if(!QDir(FILE_PATH).exists())
         QDir().mkpath(FILE_PATH);
-    // python初始化
-    string str = TTT(PYTHONHOME);
-    wchar_t * wc = new wchar_t[str.size()];
-    swprintf(wc,100,L"%S",str.c_str());
-    Py_SetPythonHome(wc);
-    Py_Initialize();
-    if(!Py_IsInitialized())
-        qDebug()<<"Error Python Initialize";
     // Object Detector
     vision = new Vision();
     objectDetector = new ObjectDetector();
@@ -294,6 +323,8 @@ void RomiolSCNT::init()
     track->moveToThread(&threadTrack);
     pServo = new PServo();
     pServo->moveToThread(&threadPServo);
+    autoFocus = new AutoFocus();
+    autoFocus->moveToThread(&threadWorkFlow);
 
     // 连接各步骤的子线程信号
     stepBuildMap = new StepBuildMap();
@@ -602,9 +633,12 @@ void RomiolSCNT::initDevices()
     threadRManip.start();
     threadRPSensor.start();
     threadRSMotor.start();
+    connect(this,               SIGNAL(sgnStopPServo()),                pServo,                 SLOT(stop()),                   Qt::BlockingQueuedConnection);
 
     connect(pServo,             SIGNAL(holdBlow(float, float, bool)),   holder->syringeMotor,   SLOT(blow(float, float, bool)), Qt::BlockingQueuedConnection);
     connect(pServo,             SIGNAL(injSuck(float, float, bool)),    injector->syringeMotor, SLOT(suck(float, float, bool)), Qt::BlockingQueuedConnection);
+    connect(pServo,             SIGNAL(stopHoldSyringe()),              holder->syringeMotor,   SLOT(stop()),                    Qt::BlockingQueuedConnection);
+    connect(pServo,             SIGNAL(stopInjSyringe()),               injector->syringeMotor,   SLOT(stop()),                    Qt::BlockingQueuedConnection);
 
     //连接子线程信号槽
     connect(stepBuildMap,       SIGNAL(moveStage(float,float,float)),       microscope->stage,      SLOT(move(float,float,float)),          Qt::BlockingQueuedConnection);
@@ -702,6 +736,8 @@ void RomiolSCNT::initDevices()
     connect(stepReleaseOocyte,  SIGNAL(moveInj(float,float,float,float)),injector->manipulator, SLOT(move(float,float,float,float)),Qt::BlockingQueuedConnection);
     connect(stepReleaseOocyte,  SIGNAL(gotoArea(cv::Point2f)),          microscope->stage,      SLOT(moveToArea(cv::Point2f)),  Qt::BlockingQueuedConnection);
     connect(stepReleaseOocyte,  SIGNAL(holdBlow(float, float, bool)),   holder->syringeMotor,   SLOT(blow(float, float, bool)), Qt::BlockingQueuedConnection);
+    connect(stepReleaseOocyte,  SIGNAL(stopHoldSyringe()),             holder->syringeMotor,   SLOT(stop()),                    Qt::BlockingQueuedConnection);
+    connect(stepReleaseOocyte,  SIGNAL(sgnStopPServo()),               pServo,                 SLOT(stop()),                    Qt::BlockingQueuedConnection);
     connect(stepReleaseOocyte,  SIGNAL(funcAdjHoldP(float)),            functions,              SLOT(adjHoldP(float)),          Qt::BlockingQueuedConnection);
     connect(stepReleaseOocyte,  SIGNAL(moveStage(float, float, float)), microscope->stage,      SLOT(move(float, float, float)),Qt::BlockingQueuedConnection);
 
@@ -799,50 +835,6 @@ void RomiolSCNT::modeChanged(QString s)
     }
     else if(s=="ICSI")
         mode=ICSI;
-}
-void RomiolSCNT::btnReset()
-{
-    isWorking = false;
-    //关闭与运动相关的子线程
-    // threadFunctions.terminate();
-    // threadWorkFlow.terminate();
-    stepBuildMap->ON = false;
-    stepFetchOocyte->ON = false;
-    stepRotateOutPlane->ON = false;
-    stepRotateInPlane->ON = false;
-    stepPenetrate->ON = false;
-    stepEnucleation->ON = false;
-    stepFetchSoma->ON = false;
-    stepReleaseOocyte->ON = false;
-    stepExpel->ON = false;
-    stepFetchSoma->ON = false;
-    stepFetchOocyteForSoma->ON = false;
-    stepRotateForSoma->ON = false;
-    stepPenetrateForSoma->ON = false;
-    stepInjectSoma->ON = false;
-    //停止所有电机的运动
-    stopAllMotors();
-
-    holdPipette->reset();
-    currentOocyte->reset();
-    injectPipette->reset();
-    ui->BTN_AUTOCLONE->setStyleSheet(NORMAL_QSS);
-    //恢复所有按钮点击功能
-    QList<QPushButton*> btns = findChildren<QPushButton*>();//按钮列表
-    foreach(QPushButton* btn, btns)
-        btn->setEnabled(true);
-    // threadFunctions.start();
-    // threadWorkFlow.start();
-    motorStatus->setText("Reset!");
-}
-void RomiolSCNT::stopAllMotors()
-{
-    emit sgnStopFocus();
-    emit sgnStopStage();
-    emit sgnStopLManip();
-    emit sgnStopLSMotor();
-    emit sgnStopRManip();
-    emit sgnStopRSMotor();
 }
 // **************************************** 设备操控 ****************************************
 // ------------------- 连接设备 -------------------
@@ -966,22 +958,12 @@ void RomiolSCNT::btnScopeUp()
     if(state == strStateUp)
     {
         theBtn->setText(strStatePause);
-        ui->BTN_SCOPE_UP->      setShortcut(Qt::Key_PageUp);
-        foreach(QPushButton* btn, btns){
-            if(btn!=theBtn)
-                btn->setEnabled(false);
-        }
         motorStatus->setText("镜头上移");
         emit sgnMoveFocusZ(displacement, CONTINUOUS, vel);
     }
     else if(state == strStatePause)
     {
         theBtn->setText(strStateUp);
-        ui->BTN_SCOPE_UP->      setShortcut(Qt::Key_PageUp);
-        foreach(QPushButton* btn, btns){
-            if(btn!=theBtn)
-                btn->setEnabled(true);
-        }
         emit sgnStopFocus();
         motorStatus->setText("");
     }
@@ -1011,22 +993,12 @@ void RomiolSCNT::btnScopeDown()
     if(state == strStateDown)
     {
         theBtn->setText(strStatePause);
-        ui->BTN_SCOPE_DOWN->    setShortcut(Qt::Key_PageDown);
-        foreach(QPushButton* btn, btns){
-            if(btn!=theBtn)
-                btn->setEnabled(false);
-        }
         motorStatus->setText("镜头下移");
         emit sgnMoveFocusZ(-displacement, CONTINUOUS, -vel);
     }
     else if(state == strStatePause)
     {
         theBtn->setText(strStateDown);
-        ui->BTN_SCOPE_DOWN->    setShortcut(Qt::Key_PageDown);
-        foreach(QPushButton* btn, btns){
-            if(btn!=theBtn)
-                btn->setEnabled(true);
-        }
         emit sgnStopFocus();
         motorStatus->setText("");
     }
@@ -1056,22 +1028,12 @@ void RomiolSCNT::btnScopeLeft()
     if(state == strStateLeft)
     {
         theBtn->setText(strStatePause);
-        ui->BTN_SCOPE_LEFT->    setShortcut(Qt::Key_Left);
-        foreach(QPushButton* btn, btns){
-            if(btn!=theBtn)
-                btn->setEnabled(false);
-        }
         motorStatus->setText("视野左移");
         emit sgnMoveStageX(-displacement, CONTINUOUS, -vel);
     }
     else if(state == strStatePause)
     {
         theBtn->setText(strStateLeft);
-        ui->BTN_SCOPE_LEFT->    setShortcut(Qt::Key_Left);
-        foreach(QPushButton* btn, btns){
-            if(btn!=theBtn)
-                btn->setEnabled(true);
-        }
         emit sgnStopStage();
         motorStatus->setText("");
     }
@@ -1101,22 +1063,12 @@ void RomiolSCNT::btnScopeRight()
     if(state == strStateRight)
     {
         theBtn->setText(strStatePause);
-        ui->BTN_SCOPE_RIGHT->   setShortcut(Qt::Key_Right);
-        foreach(QPushButton* btn, btns){
-            if(btn!=theBtn)
-                btn->setEnabled(false);
-        }
         motorStatus->setText("视野右移");
         emit sgnMoveStageX(displacement, CONTINUOUS, vel);
     }
     else if(state == strStatePause)
     {
         theBtn->setText(strStateRight);
-        ui->BTN_SCOPE_RIGHT->   setShortcut(Qt::Key_Right);
-        foreach(QPushButton* btn, btns){
-            if(btn!=theBtn)
-                btn->setEnabled(true);
-        }
         emit sgnStopStage();
         motorStatus->setText("");
     }
@@ -1146,22 +1098,12 @@ void RomiolSCNT::btnScopeForward()
     if(state == strStateForward)
     {
         theBtn->setText(strStatePause);
-        ui->BTN_SCOPE_FORWARD-> setShortcut(Qt::Key_Up);
-        foreach(QPushButton* btn, btns){
-            if(btn!=theBtn)
-                btn->setEnabled(false);
-        }
         motorStatus->setText("视野前移");
         emit sgnMoveStageY(-displacement, CONTINUOUS, -vel);
     }
     else if(state == strStatePause)
     {
         theBtn->setText(strStateForward);
-        ui->BTN_SCOPE_FORWARD-> setShortcut(Qt::Key_Up);
-        foreach(QPushButton* btn, btns){
-            if(btn!=theBtn)
-                btn->setEnabled(true);
-        }
         emit sgnStopStage();
         motorStatus->setText("");
     }
@@ -1191,22 +1133,12 @@ void RomiolSCNT::btnScopeBack()
     if(state == strStateBack)
     {
         theBtn->setText(strStatePause);
-        ui->BTN_SCOPE_BACK->    setShortcut(Qt::Key_Down);
-        foreach(QPushButton* btn, btns){
-            if(btn!=theBtn)
-                btn->setEnabled(false);
-        }
         motorStatus->setText("视野后移");
         emit sgnMoveStageY(displacement, CONTINUOUS, vel);
     }
     else if(state == strStatePause)
     {
         theBtn->setText(strStateBack);
-        ui->BTN_SCOPE_BACK->    setShortcut(Qt::Key_Down);
-        foreach(QPushButton* btn, btns){
-            if(btn!=theBtn)
-                btn->setEnabled(true);
-        }
         emit sgnStopStage();
         motorStatus->setText("");
     }
@@ -1216,8 +1148,6 @@ void RomiolSCNT::focusOpenPortFailure()
 {
     ui->LED_FOCUSDEVICE->setToolTip("调焦设备：无法打开端口");
     ui->LED_FOCUSDEVICE->setStyleSheet("background-color: red;");
-    ui->BTN_SCOPE_UP->setEnabled(false);
-    ui->BTN_SCOPE_DOWN->setEnabled(false);
 }
 void RomiolSCNT::focusNoConnection()
 {
@@ -1228,8 +1158,6 @@ void RomiolSCNT::focusStartConnection()
 {
     ui->LED_FOCUSDEVICE->setToolTip("调焦设备：正常");
     ui->LED_FOCUSDEVICE->setStyleSheet("background-color: rgb(85, 255, 0);");
-    ui->BTN_SCOPE_UP->setEnabled(true);
-    ui->BTN_SCOPE_DOWN->setEnabled(true);
 }
 void RomiolSCNT::scopeUpdateZ()
 {
@@ -1243,10 +1171,6 @@ void RomiolSCNT::stageOpenPortFailure()
 {
     ui->LED_STAGE->setToolTip("平台：无法打开端口");
     ui->LED_STAGE->setStyleSheet("background-color: red;");
-    ui->BTN_SCOPE_LEFT->    setEnabled(false);
-    ui->BTN_SCOPE_RIGHT->   setEnabled(false);
-    ui->BTN_SCOPE_FORWARD-> setEnabled(false);
-    ui->BTN_SCOPE_BACK->    setEnabled(false);
 }
 void RomiolSCNT::stageNoConnection()
 {
@@ -1257,10 +1181,6 @@ void RomiolSCNT::stageStartConnection()
 {
     ui->LED_STAGE->setToolTip("平台：正常");
     ui->LED_STAGE->setStyleSheet("background-color: rgb(85, 255, 0);");
-    ui->BTN_SCOPE_LEFT->    setEnabled(true);
-    ui->BTN_SCOPE_RIGHT->   setEnabled(true);
-    ui->BTN_SCOPE_FORWARD-> setEnabled(true);
-    ui->BTN_SCOPE_BACK->    setEnabled(true);
     microscope->stage->orix = microscope->getAbsX();
     microscope->stage->oriy = microscope->getAbsY();
 }
@@ -1371,9 +1291,9 @@ void RomiolSCNT::scopeUpdateImage()
     contours.push_back(currentOocyte->contour);
     contours.push_back(holdPipette->contour);
     contours.push_back(injectPipette->contour);
-    for(int i=0; i<oocytesInView->total_num; ++i)
+    for(int i=0; i<oocytesInView->oocytes.size(); ++i)
         contours.push_back(oocytesInView->oocytes[i].contour);
-    for(int i=0; i<allSomas->total_num; ++i)
+    for(int i=0; i<allSomas->somas.size(); ++i)
         contours.push_back(allSomas->somas[i].contour);
     if(ui->BTN_CUR_OOCYTE->isChecked() && currentOocyte->isDetected)
     {
@@ -1406,13 +1326,13 @@ void RomiolSCNT::scopeUpdateImage()
         line(Image, Point(injectPipette->xGLI, injectPipette->ym), Point(injectPipette->xGLI, injectPipette->yM), Scalar(128, 128, 128), 2);
     }
     if(ui->BTN_OOCYTES->isChecked())
-        for(int i=4; i<4+oocytesInView->total_num; ++i)
+        for(int i=4; i<4+oocytesInView->oocytes.size(); ++i)
             if(contours[i].empty())
                 continue;
             else
                 drawContours(Image, contours, i, Scalar(0, 0, 255), 1);
     if(ui->BTN_SOMAS->isChecked())
-        for(int i=4+oocytesInView->total_num; i<contours.size(); ++i)
+        for(int i=4+oocytesInView->oocytes.size(); i<contours.size(); ++i)
             if(contours[i].empty())
                 continue;
             else
@@ -1425,6 +1345,11 @@ void RomiolSCNT::scopeUpdateImage()
     else
         qimg = QImage(Image.data, Image.cols,Image.rows,Image.step,QImage::Format_BGR888);
     ui->LABEL_IMAGE->setPixmap(QPixmap::fromImage(qimg));
+    if(popup_)
+    {
+        // label_->setPixmap(QPixmap::fromImage(QImage(CurrentBGR.data, CurrentBGR.cols,CurrentBGR.rows,CurrentBGR.step,QImage::Format_BGR888)).scaled(full_size));
+        label_->setPixmap(QPixmap::fromImage(QImage(Image.data, Image.cols,Image.rows,Image.step,QImage::Format_BGR888)).scaled(full_size));
+    }
 }
 void RomiolSCNT::btnCapture()
 {
@@ -1530,20 +1455,12 @@ void RomiolSCNT::btnLManipUp()
         if(state == strStateUp)
         {
             theBtn->setText(strStatePause);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(false);
-            }
             motorStatus->setText("左操作臂上移");
             emit sgnMoveLManipZ(-displacement, -vel, CONTINUOUS);// 操作臂正方向为向下
         }
         else if(state == strStatePause)
         {
             theBtn->setText(strStateUp);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(true);
-            }
             emit sgnStopLManip();
             motorStatus->setText("");
         }
@@ -1567,20 +1484,12 @@ void RomiolSCNT::btnLManipDown()
         if(state == strStateDown)
         {
             theBtn->setText(strStatePause);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(false);
-            }
             motorStatus->setText("左操作臂下移");
             emit sgnMoveLManipZ(displacement, vel, CONTINUOUS);// 操作臂正方向为向下
         }
         else if(state == strStatePause)
         {
             theBtn->setText(strStateDown);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(true);
-            }
             emit sgnStopLManip();
             motorStatus->setText("");
         }
@@ -1605,20 +1514,12 @@ void RomiolSCNT::btnLManipLeft()
         if(state == strStateLeft)
         {
             theBtn->setText(strStatePause);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(false);
-            }
             motorStatus->setText("左操作臂左移");
             emit sgnMoveLManipX(-displacement, -vel, CONTINUOUS);
         }
         else if(state == strStatePause)
         {
             theBtn->setText(strStateLeft);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(true);
-            }
             emit sgnStopLManip();
             motorStatus->setText("");
         }
@@ -1643,20 +1544,12 @@ void RomiolSCNT::btnLManipRight()
         if(state == strStateRight)
         {
             theBtn->setText(strStatePause);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(false);
-            }
             motorStatus->setText("左操作臂右移");
             emit sgnMoveLManipX(displacement, vel, CONTINUOUS);
         }
         else if(state == strStatePause)
         {
             theBtn->setText(strStateRight);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(true);
-            }
             emit sgnStopLManip();
             motorStatus->setText("");
         }
@@ -1681,20 +1574,12 @@ void RomiolSCNT::btnLManipForward()
         if(state == strStateForward)
         {
             theBtn->setText(strStatePause);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(false);
-            }
             motorStatus->setText("左操作臂前移");
             emit sgnMoveLManipY(-displacement, -vel, CONTINUOUS);
         }
         else if(state == strStatePause)
         {
             theBtn->setText(strStateForward);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(true);
-            }
             emit sgnStopLManip();
             motorStatus->setText("");
         }
@@ -1719,20 +1604,12 @@ void RomiolSCNT::btnLManipBack()
         if(state == strStateBack)
         {
             theBtn->setText(strStatePause);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(false);
-            }
             motorStatus->setText("左操作臂后移");
             emit sgnMoveLManipY(displacement, vel, CONTINUOUS);
         }
         else if(state == strStatePause)
         {
             theBtn->setText(strStateBack);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(true);
-            }
             emit sgnStopLManip();
             motorStatus->setText("");
         }
@@ -1742,12 +1619,6 @@ void RomiolSCNT::lManipOpenPortFailure()
 {
     ui->LED_LEFT_MANIP->setToolTip("无法打开端口");
     ui->LED_LEFT_MANIP->setStyleSheet("background-color: red;");
-    ui->BTN_LEFT_MANIP_UP->setEnabled(false);
-    ui->BTN_LEFT_MANIP_DOWN->setEnabled(false);
-    ui->BTN_LEFT_MANIP_LEFT->setEnabled(false);
-    ui->BTN_LEFT_MANIP_RIGHT->setEnabled(false);
-    ui->BTN_LEFT_MANIP_FORWARD->setEnabled(false);
-    ui->BTN_LEFT_MANIP_BACK->setEnabled(false);
 }
 void RomiolSCNT::lManipNoConnection()
 {
@@ -1758,12 +1629,6 @@ void RomiolSCNT::lManipStartConnection()
 {
     ui->LED_LEFT_MANIP->setToolTip("正常");
     ui->LED_LEFT_MANIP->setStyleSheet("background-color: rgb(85, 255, 0);");
-    ui->BTN_LEFT_MANIP_UP->setEnabled(true);
-    ui->BTN_LEFT_MANIP_DOWN->setEnabled(true);
-    ui->BTN_LEFT_MANIP_LEFT->setEnabled(true);
-    ui->BTN_LEFT_MANIP_RIGHT->setEnabled(true);
-    ui->BTN_LEFT_MANIP_FORWARD->setEnabled(true);
-    ui->BTN_LEFT_MANIP_BACK->setEnabled(true);
 }
 void RomiolSCNT::lManipUpdatePos()
 {
@@ -1822,22 +1687,12 @@ void RomiolSCNT::btnHolderSuck()
         if(state == strStateLeft)
         {
             theBtn->setText(strStatePause);
-            ui->BTN_HOLDER_SUCK->setShortcut(Qt::Key_Left);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(false);
-            }
             motorStatus->setText("吸持针吸取");
             emit sgnLSMotorSuck(displacement, vel, CONTINUOUS);
         }
         else if(state == strStatePause)
         {
             theBtn->setText(strStateLeft);
-            ui->BTN_HOLDER_SUCK->setShortcut(Qt::Key_Left);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(true);
-            }
             emit sgnStopLSMotor();
             motorStatus->setText("");
         }
@@ -1859,22 +1714,12 @@ void RomiolSCNT::btnHolderBlow()
         if(state == strStateRight)
         {
             theBtn->setText(strStatePause);
-            ui->BTN_HOLDER_BLOW->setShortcut(Qt::Key_Right);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(false);
-            }
             motorStatus->setText("注射器注入");
             emit sgnLSMotorBlow(displacement, vel, CONTINUOUS);
         }
         else if(state == strStatePause)
         {
             theBtn->setText(strStateRight);
-            ui->BTN_HOLDER_BLOW->setShortcut(Qt::Key_Right);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(true);
-            }
             emit sgnStopLSMotor();
             motorStatus->setText("");
         }
@@ -1911,20 +1756,12 @@ void RomiolSCNT::btnRManipUp()
         if(state == strStateUp)
         {
             theBtn->setText(strStatePause);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(false);
-            }
             motorStatus->setText("右操作臂上移");
             emit sgnMoveRManipZ(-displacement, -vel, CONTINUOUS);// 操作臂正方向为向下
         }
         else if(state == strStatePause)
         {
             theBtn->setText(strStateUp);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(true);
-            }
             emit sgnStopRManip();
             motorStatus->setText("");
         }
@@ -1946,20 +1783,12 @@ void RomiolSCNT::btnRManipDown()
         if(state == strStateDown)
         {
             theBtn->setText(strStatePause);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(false);
-            }
             motorStatus->setText("右操作臂下移");
             emit sgnMoveRManipZ(displacement, vel, CONTINUOUS);// 操作臂正方向为向下
         }
         else if(state == strStatePause)
         {
             theBtn->setText(strStateDown);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(true);
-            }
             emit sgnStopRManip();
             motorStatus->setText("");
         }
@@ -1981,20 +1810,12 @@ void RomiolSCNT::btnRManipLeft()
         if(state == strStateLeft)
         {
             theBtn->setText(strStatePause);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(false);
-            }
             motorStatus->setText("右操作臂左移");
             emit sgnMoveRManipX(-displacement, -vel, CONTINUOUS);
         }
         else if(state == strStatePause)
         {
             theBtn->setText(strStateLeft);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(true);
-            }
             emit sgnStopRManip();
             motorStatus->setText("");
         }
@@ -2016,20 +1837,12 @@ void RomiolSCNT::btnRManipRight()
         if(state == strStateRight)
         {
             theBtn->setText(strStatePause);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(false);
-            }
             motorStatus->setText("右操作臂右移");
             emit sgnMoveRManipX(displacement, vel, CONTINUOUS);
         }
         else if(state == strStatePause)
         {
             theBtn->setText(strStateRight);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(true);
-            }
             emit sgnStopRManip();
             motorStatus->setText("");
         }
@@ -2051,20 +1864,12 @@ void RomiolSCNT::btnRManipForward()
         if(state == strStateForward)
         {
             theBtn->setText(strStatePause);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(false);
-            }
             motorStatus->setText("右操作臂前移");
             emit sgnMoveRManipY(-displacement, -vel, CONTINUOUS);
         }
         else if(state == strStatePause)
         {
             theBtn->setText(strStateForward);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(true);
-            }
             emit sgnStopRManip();
             motorStatus->setText("");
         }
@@ -2086,20 +1891,12 @@ void RomiolSCNT::btnRManipBack()
         if(state == strStateBack)
         {
             theBtn->setText(strStatePause);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(false);
-            }
             motorStatus->setText("右操作臂后移");
             emit sgnMoveRManipY(displacement, vel, CONTINUOUS);
         }
         else if(state == strStatePause)
         {
             theBtn->setText(strStateBack);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(true);
-            }
             emit sgnStopRManip();
             motorStatus->setText("");
         }
@@ -2109,12 +1906,6 @@ void RomiolSCNT::rManipOpenPortFailure()
 {
     ui->LED_RIGHT_MANIP->setToolTip("无法打开端口");
     ui->LED_RIGHT_MANIP->setStyleSheet("background-color: red;");
-    ui->BTN_RIGHT_MANIP_UP->setEnabled(false);
-    ui->BTN_RIGHT_MANIP_DOWN->setEnabled(false);
-    ui->BTN_RIGHT_MANIP_LEFT->setEnabled(false);
-    ui->BTN_RIGHT_MANIP_RIGHT->setEnabled(false);
-    ui->BTN_RIGHT_MANIP_FORWARD->setEnabled(false);
-    ui->BTN_RIGHT_MANIP_BACK->setEnabled(false);
 }
 void RomiolSCNT::rManipNoConnection()
 {
@@ -2125,12 +1916,6 @@ void RomiolSCNT::rManipStartConnection()
 {
     ui->LED_RIGHT_MANIP->setToolTip("正常");
     ui->LED_RIGHT_MANIP->setStyleSheet("background-color: rgb(85, 255, 0);");
-    ui->BTN_RIGHT_MANIP_UP->setEnabled(true);
-    ui->BTN_RIGHT_MANIP_DOWN->setEnabled(true);
-    ui->BTN_RIGHT_MANIP_LEFT->setEnabled(true);
-    ui->BTN_RIGHT_MANIP_RIGHT->setEnabled(true);
-    ui->BTN_RIGHT_MANIP_FORWARD->setEnabled(true);
-    ui->BTN_RIGHT_MANIP_BACK->setEnabled(true);
 }
 void RomiolSCNT::rManipUpdatePos()
 {
@@ -2184,22 +1969,12 @@ void RomiolSCNT::btnInjectorSuck()
         if(state == strStateRight)
         {
             theBtn->setText(strStatePause);
-            ui->BTN_INJECTOR_SUCK->setShortcut(Qt::Key_Right);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(false);
-            }
             motorStatus->setText("注射器吸取");
             emit sgnRSMotorSuck(displacement, vel, CONTINUOUS);
         }
         else if(state == strStatePause)
         {
             theBtn->setText(strStateRight);
-            ui->BTN_INJECTOR_SUCK->setShortcut(Qt::Key_Right);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(true);
-            }
             emit sgnStopRSMotor();
             motorStatus->setText("");
         }
@@ -2221,22 +1996,12 @@ void RomiolSCNT::btnInjectorBlow()
         if(state == strStateLeft)
         {
             theBtn->setText(strStatePause);
-            ui->BTN_INJECTOR_BLOW->setShortcut(Qt::Key_Left);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(false);
-            }
             motorStatus->setText("注射器注入");
             emit sgnRSMotorBlow(displacement, vel, CONTINUOUS);
         }
         else if(state == strStatePause)
         {
             theBtn->setText(strStateLeft);
-            ui->BTN_INJECTOR_BLOW->setShortcut(Qt::Key_Left);
-            foreach(QPushButton* btn, btns){
-                if(btn!=theBtn)
-                    btn->setEnabled(true);
-            }
             emit sgnStopRSMotor();
             motorStatus->setText("");
         }
@@ -2268,6 +2033,7 @@ void RomiolSCNT::btnStepBuildMap()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepBuildMap->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("构建卵细胞区域地图开始");
@@ -2294,6 +2060,7 @@ void RomiolSCNT::btnStepFetchOocyte()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepFetchOocyte->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("换卵细胞开始");
@@ -2316,6 +2083,7 @@ void RomiolSCNT::btnStepRotateOutPlane()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepRotateOutPlane->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("平面外旋转卵细胞开始");
@@ -2338,6 +2106,7 @@ void RomiolSCNT::btnStepRotateInPlane()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepRotateInPlane->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("平面内旋转卵细胞开始");
@@ -2360,6 +2129,7 @@ void RomiolSCNT::btnStepPenetrate()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepPenetrate->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("刺入卵细胞开始");
@@ -2382,6 +2152,7 @@ void RomiolSCNT::btnStepEnucleation()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepEnucleation->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("去核开始");
@@ -2404,6 +2175,7 @@ void RomiolSCNT::btnStepExpel()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepExpel->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("吐核开始");
@@ -2426,6 +2198,7 @@ void RomiolSCNT::btnStepReleaseOocyte()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepReleaseOocyte->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("释放卵细胞开始");
@@ -2448,6 +2221,7 @@ void RomiolSCNT::btnStepFetchSoma()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepFetchSoma->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("取体细胞开始");
@@ -2470,6 +2244,7 @@ void RomiolSCNT::btnStepInjectSoma()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepInjectSoma->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("注入体细胞开始");
@@ -2493,6 +2268,7 @@ void RomiolSCNT::btnStepFetchOocyteForSoma()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepFetchOocyteForSoma->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("换卵细胞 开始");
@@ -2515,6 +2291,7 @@ void RomiolSCNT::btnStepRotateForSoma()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepRotateForSoma->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("旋转卵细胞 开始");
@@ -2537,6 +2314,7 @@ void RomiolSCNT::btnStepPenetrateForSoma()
     {
         workFlowStatus->setText("工作中！请稍候...");
         stepPenetrateForSoma->ON = false;
+        emit stopAllMotors();
         return;
     }
     workFlowStatus->setText("刺入卵细胞 开始");
@@ -2657,7 +2435,8 @@ void RomiolSCNT::btnAutoClone()
         stepFetchOocyteForSoma->ON = false;
         stepRotateForSoma->ON = false;
         stepPenetrateForSoma->ON = false;
-        stepInjectSoma->ON = false;
+        stepInjectSoma->ON = false;        
+        emit stopAllMotors();
         // threadWorkFlow.terminate();
         // isWorking = false;
     }
@@ -2751,6 +2530,47 @@ void RomiolSCNT::btnRestart()
     ui->BTN_STEP_INJECT_SOMA->setChecked(false);
     ui->BTN_STEP_RELEASE_OOCYTE->setChecked(false);
     ui->BTN_AUTOCLONE->setChecked(false);
+}
+void RomiolSCNT::btnReset()
+{
+    isWorking = false;
+    //关闭与运动相关的子线程
+    // threadFunctions.terminate();
+    // threadWorkFlow.terminate();
+    stepBuildMap->ON = false;
+    stepFetchOocyte->ON = false;
+    stepRotateOutPlane->ON = false;
+    stepRotateInPlane->ON = false;
+    stepPenetrate->ON = false;
+    stepEnucleation->ON = false;
+    stepFetchSoma->ON = false;
+    stepReleaseOocyte->ON = false;
+    stepExpel->ON = false;
+    stepFetchSoma->ON = false;
+    stepFetchOocyteForSoma->ON = false;
+    stepRotateForSoma->ON = false;
+    stepPenetrateForSoma->ON = false;
+    stepInjectSoma->ON = false;
+    //停止所有电机的运动
+    stopAllMotors();
+
+    holdPipette->reset();
+    currentOocyte->reset();
+    injectPipette->reset();
+    ui->BTN_AUTOCLONE->setStyleSheet(NORMAL_QSS);
+    // threadFunctions.start();
+    // threadWorkFlow.start();
+    motorStatus->setText("Reset!");
+}
+void RomiolSCNT::stopAllMotors()
+{
+    emit sgnStopPServo();
+    emit sgnStopFocus();
+    emit sgnStopStage();
+    emit sgnStopLManip();
+    emit sgnStopLSMotor();
+    emit sgnStopRManip();
+    emit sgnStopRSMotor();
 }
 
 void RomiolSCNT::finishFunc(QString str)
@@ -3429,6 +3249,8 @@ bool RomiolSCNT::event(QEvent *event)
             ui->BTN_RIGHT_MANIP_BACK->  setShortcut(Qt::Key_Down);
             break;
         case Qt::Key_Escape:
+            // 弹窗存在：关闭并销毁
+            if (popup_) popup_->close();
             ui->GROUP_MICROSCOPE->setStyleSheet("background-color: none;");
             ui->GROUP_LEFT_MANIP->setStyleSheet("background-color: none;");
             ui->GROUP_RIGHT_MANIP->setStyleSheet("background-color: none");

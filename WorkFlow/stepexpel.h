@@ -2,9 +2,6 @@
 #define STEPEXPEL_H
 #include "workflow.h"
 #include "Controllers/controllers.h"
-#undef slots
-#include <Python.h>
-#define slots Q_SLOTS
 
 class StepExpel: public WorkFlow
 {
@@ -12,8 +9,6 @@ class StepExpel: public WorkFlow
 public:
     StepExpel();
     ~StepExpel();
-
-    bool ON;
 
 public slots:
     WORKSTEP run();

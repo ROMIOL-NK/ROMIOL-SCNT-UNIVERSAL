@@ -8,7 +8,6 @@ Somas::Somas()
 {
     isDetected = false;
     somas.clear();
-    total_num = 0;
 }
 void Somas::find(cv::Mat src, vector<Rect> rects, bool firstDetection)
 {
@@ -53,7 +52,6 @@ void Somas::find(cv::Mat src, vector<Rect> rects, bool firstDetection)
             soma.roi = rect;
             soma.set(contour);
             somas.push_back(soma);
-            total_num++;
         }
         isDetected = true;
         emit finishFind();
@@ -102,8 +100,7 @@ void Somas::find(cv::Mat src, vector<Rect> rects, bool firstDetection)
             somas.push_back(Soma(S, p, contour));
         }
     }
-    total_num = somas.size();
-    if(total_num>0)
+    if(somas.size()>0)
         isDetected = true;
     emit finishFind();
 }
@@ -111,5 +108,4 @@ void Somas::reset()
 {
     isDetected = false;
     somas.clear();
-    total_num = 0;
 }

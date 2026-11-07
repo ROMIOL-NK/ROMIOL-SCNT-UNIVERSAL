@@ -3,6 +3,9 @@
 
 #include "public.h"
 #include "Devices/manipulatormp285.h"
+#include "Devices/manipulatorscientifica.h"
+#include "Devices/manipulatorscientificamotion8.h"
+#include "Devices/manipulatorhuayue.h"
 #include "Devices/syringemotorgt.h"
 #include "Devices/syringemotorvince.h"
 #include "Devices/psensormik_p3000.h"

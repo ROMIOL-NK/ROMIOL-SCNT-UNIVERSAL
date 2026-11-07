@@ -8,7 +8,6 @@ class StepInjectSoma: public WorkFlow
     Q_OBJECT
 public:
     StepInjectSoma();
-    bool ON;
 public slots:
     WORKSTEP run();
 };

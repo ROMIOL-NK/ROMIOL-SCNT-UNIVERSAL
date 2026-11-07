@@ -3,12 +3,13 @@
 #include "public.h"
 #include "Objects/objects.h"
 #include "Components/components.h"
-#define DEAL_FAULT(msg)     {emit sgnFault(msg);isDealingFault = true;while(isDealingFault)QThread::msleep(10);}
+#define DEAL_FAULT(msg)     {emit sgnFault(msg);isDealingFault = true;while(isDealingFault)QThread::msleep(10);if(!isWorking)return nextStep;}
 class WorkFlow: public QObject
 {
     Q_OBJECT
 public:
     WorkFlow(){};
+    bool ON;
     bool isDealingFault;
 public slots:
     virtual WORKSTEP run()=0;    //运行当前步骤，返回下一步要执行步骤的编号
@@ -17,6 +18,7 @@ protected:
     bool moveInjWait(float x, float y, float z, float v);
     bool moveStageWait(float x, float y, float v);
     bool moveFocusWait(float z, float v);
+    bool holdBlowWait(float x, float v, bool b);
 signals:
     void finish();
     void sgnFault(QString);
@@ -26,6 +28,16 @@ signals:
     void moveStage(float, float, float);            //移动平台   x,y,vel
     void gotoArea(cv::Point2f);
     void moveFocus(float, bool, float);
+
+    void stopMoveHold();
+    void stopMoveInj();
+    void stopMoveStage();
+    void stopMoveFocus();
+    void stopHoldSyringe();
+    void stopInjSyringe();
+
+    void sgnStartPServo();
+    void sgnStopPServo();
 
     void setLManipSpeed(float);                     //设置左操作臂运动速度 (um/s)
     void setRManipSpeed(float);                     //设置右操作臂运动速度 (um/s)
@@ -37,7 +49,11 @@ signals:
     void funcWithdrawInj();
     void funcAdjHoldP(float);
     void funcHoldOocyte();                      //指派 functions 完成 holdOocyte 功能
+    void setHoldPressureTarget(float);
 
+    void moveHoldX(float, float, bool);
+    void moveHoldY(float, float, bool);
+    void moveHoldZ(float, float, bool);
     void moveInjX(float, float, bool);
     void moveInjY(float, float, bool);
     void moveInjZ(float, float, bool);

@@ -88,38 +88,91 @@ int StepPenetrateForSoma::get_center(cv::Mat img, int cy_x, int cy_y, int cy_r) 
 WORKSTEP StepPenetrateForSoma::run()
 {
     isWorking = true;
+    // emit setHoldPressureTarget(holdPenetrateP);
     //添加处理代码: 将卵细胞吸紧，刺破卵细胞，回撤一定距离
-    if((holder->pSensor->isConnected)&&(holder->pSensor->pressure>0.5*holdPressure))
-        emit funcAdjHoldP(holdPressure);
     QThread::msleep(1000);
     currentOocyte->find(CurrentGray);
     injectPipette->find(CurrentGray);
-    if(!currentOocyte->isDetected || !injectPipette->isDetected)
-        DEAL_FAULT("请手动检测卵母细胞|注射针");
-    //添加代码:获取刺入环节开始时的第一帧图像img1，用于获取ROI
-    Mat src = CurrentGray.clone();
-    int cy_x, cy_y, cy_r;
-    // cv::Mat dst1;
-    // cv::threshold(src, dst1, 0, 255, cv::THRESH_OTSU);
-    // std::vector<cv::Vec3f> circles;
-    // cv::HoughCircles(dst1, circles, cv::HOUGH_GRADIENT, 1, 5000, 100, 10, 10, 1000);
-    // cv::Vec3f circle = circles[0];
-    // cy_x = int(circle[0]);
-    // cy_y = int(circle[1]);
-    // cy_r = int(circle[2]);
-    cy_x = currentOocyte->center.x;
-    cy_y = currentOocyte->center.y;
-    cy_r = currentOocyte->radius;
-
-    if(injectPipette->tip.x<currentOocyte->xM+currentOocyte->radius)//注射针针尖在卵细胞左侧，先移到右侧
+    holdPipette->find(CurrentGray);
+    if(!currentOocyte->isDetected || !injectPipette->isDetected || !holdPipette->isDetected)
     {
-        moveInjWait((currentOocyte->xM-injectPipette->tip.x)*Pixel2Um+50, 0, 0, MANIP_VEL);
+        DEAL_FAULT("请手动检测卵母细胞|注射针|吸持针");
+        currentOocyte->find(CurrentGray);
+        injectPipette->find(CurrentGray);
+        holdPipette->find(CurrentGray);
     }
+    if(!currentOocyte->isDetected || !injectPipette->isDetected || !holdPipette->isDetected)
+    {
+        exceptionInfo = "注核穿刺前无法重新检测到卵母细胞、注射针或吸持针";
+        nextStep = EXCEPTION;
+        isWorking = false;
+        emit finish();
+        return nextStep;
+    }
+
+    // 跳过拨动后，由穿刺步骤将针尖直接移动到透明带右侧 50 um 的安全起点。
+    const float safeDistance = 50.0f;
+    const int viewMargin = 10;
+    float targetTipX = currentOocyte->xMZP + safeDistance/Pixel2Um;
+    float targetTipY = currentOocyte->centerZP.y;
+    if(targetTipX<viewMargin || targetTipX>WIDTH-viewMargin ||
+        targetTipY<viewMargin || targetTipY>HEIGHT-viewMargin)
+    {
+        exceptionInfo = "注核穿刺预定位目标超出当前视野";
+        nextStep = EXCEPTION;
+        isWorking = false;
+        emit finish();
+        return nextStep;
+    }
+
+    float preMoveX = (targetTipX-injectPipette->tip.x)*Pixel2Um;
+    float preMoveY = (targetTipY-injectPipette->tip.y)*Pixel2Um;
+    if(abs(preMoveX)>WIDTH*Pixel2Um || abs(preMoveY)>HEIGHT*Pixel2Um ||
+        !moveInjWait(preMoveX, 0, 0, MANIP_VEL) ||
+        !moveInjWait(0, preMoveY, 0, MANIP_VEL))
+    {
+        exceptionInfo = "注核穿刺预定位运动异常";
+        nextStep = EXCEPTION;
+        isWorking = false;
+        emit finish();
+        return nextStep;
+    }
+
+    // 原穿刺预定位逻辑保留；该条件可能使用旧坐标并把针尖继续推向右侧。
+    // if(injectPipette->tip.x<currentOocyte->xM+currentOocyte->radius)
+    //     moveInjWait((currentOocyte->xM-injectPipette->tip.x)*Pixel2Um+50, 0, 0, MANIP_VEL);
+
+    // 预定位后重新检测，后续穿刺限位必须使用移动后的针尖和细胞边界。
+    currentOocyte->find(CurrentGray);
+    injectPipette->find(CurrentGray);
+    holdPipette->find(CurrentGray);
+    if(!currentOocyte->isDetected || !injectPipette->isDetected || !holdPipette->isDetected)
+    {
+        exceptionInfo = "注核穿刺预定位后无法检测到卵母细胞、注射针或吸持针";
+        nextStep = EXCEPTION;
+        isWorking = false;
+        emit finish();
+        return nextStep;
+    }
+
+    int cy_x = currentOocyte->center.x;
+    int cy_y = currentOocyte->center.y;
+    int cy_r = currentOocyte->radius;
+
     //添加代码:设置注射针刺入速度
+    const float holdSafetyMargin = 0.0f;
     double x0Inj = injector->manipulator->getAbsX();
-    moveInjWait(0, (currentOocyte->center.y-injectPipette->tip.y)*Pixel2Um, 0, MANIP_VEL);
-    emit moveInjX(0, -60, true);
-    QThread::msleep(200);
+    float holdSafetyTipX = holdPipette->xM+holdSafetyMargin/Pixel2Um;
+    float availablePenetration = (injectPipette->tip.x-holdSafetyTipX)*Pixel2Um;
+    double holdSafetyAbsX = x0Inj-availablePenetration;
+    bool holdSafetyReached = availablePenetration<=0;
+    if(!holdSafetyReached)
+    {
+        emit moveInjX(0, -60, true);
+        int initialMoveDelay = int(1000*(availablePenetration-5.0f)/60.0f);
+        if(initialMoveDelay>200) initialMoveDelay = 200;
+        if(initialMoveDelay>0) QThread::msleep(initialMoveDelay);
+    }
 
     int puncture_threshold = 5;
     int stable_threshold = 20;
@@ -127,8 +180,13 @@ WORKSTEP StepPenetrateForSoma::run()
     int init = -1;
     int min_x = -1;
     ON = true;
-    while (ON)
+    while (ON && !holdSafetyReached)
     {
+        if(injector->manipulator->getAbsX()<=holdSafetyAbsX)
+        {
+            holdSafetyReached = true;
+            break;
+        }
         if(injector->manipulator->getAbsX()<x0Inj-(injectPipette->xm-currentOocyte->xMZP)*Pixel2Um-0.9*(currentOocyte->xMZP-currentOocyte->xmZP)*Pixel2Um)//扎透|0.9，停止
         {
             qDebug()<<"0.9 break";
@@ -137,6 +195,11 @@ WORKSTEP StepPenetrateForSoma::run()
         }
         //添加代码:获取当前图片img
         int now = get_center(CurrentGray.clone(), cy_x, cy_y, cy_r);
+        if(injector->manipulator->getAbsX()<=holdSafetyAbsX)
+        {
+            holdSafetyReached = true;
+            break;
+        }
         // qDebug()<<now<<", ";
         if (init == -1) {
             init = now;
@@ -148,12 +211,15 @@ WORKSTEP StepPenetrateForSoma::run()
             break;
     }
     emit moveInjX(0, 0, true);
+    if(holdSafetyReached)
+        qDebug()<<"hold pipette safety limit reached: "<<holdSafetyAbsX;
     QThread::sleep(1);
 
     //撤针距离重新计算
     double withdrawDis = (x0Inj-injector->manipulator->getAbsX())-(injectPipette->xm-currentOocyte->xM)*Pixel2Um-20;
     // double withdrawDis = 5;
-    moveInjWait(withdrawDis, 0, 0, MANIP_VEL);
+    if(withdrawDis>0)
+        moveInjWait(withdrawDis, 0, 0, 250);
     //------------------------------------------------------步骤完成---------------------------------------------------
     nextStep = INJECTSOMA;
     isWorking = false;
